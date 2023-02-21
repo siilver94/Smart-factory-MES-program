@@ -11,7 +11,6 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -39,7 +38,7 @@ namespace KB_Data_V2
 
         public int CurrentModelNum = -1;
         public int CurrentModelNum1 = -1;
-        
+
         string LastSavedBarcode2 = "";//가장 최근 저장된 임펠러 바코드
 
         DataGridView[] dgvES = new DataGridView[2];
@@ -222,31 +221,31 @@ namespace KB_Data_V2
                         //---------------↓ 2번라인 ↓---------------┐
                         int l2 = 2;
 
-                        dgv.Rows[0].Cells[l2].Value = "#1블로워 라벨";
-                        dgv.Rows[1].Cells[l2].Value = "#1밸런스 결과 판정";
-                        dgv.Rows[2].Cells[l2].Value = "#1밸런스 1차 각도";
-                        dgv.Rows[3].Cells[l2].Value = "#1밸런스 1차 밸런스량";
-                        dgv.Rows[4].Cells[l2].Value = "#1밸런스 2차 각도";
-                        dgv.Rows[5].Cells[l2].Value = "#1밸런스 2차 밸런스량";
+                        dgv.Rows[0].Cells[l2].Value = "블로워 라벨";
+                        dgv.Rows[1].Cells[l2].Value = "밸런스 결과 판정";
+                        dgv.Rows[2].Cells[l2].Value = "밸런스 1차 각도";
+                        dgv.Rows[3].Cells[l2].Value = "밸런스 1차 밸런스량";
+                        dgv.Rows[4].Cells[l2].Value = "밸런스 2차 각도";
+                        dgv.Rows[5].Cells[l2].Value = "밸런스 2차 밸런스량";
 
-                        dgv.Rows[6].Cells[l2].Value = "#2블로워 라벨";
-                        dgv.Rows[7].Cells[l2].Value = "#2밸런스 결과 판정";
-                        dgv.Rows[8].Cells[l2].Value = "#2밸런스 1차 각도";
-                        dgv.Rows[9].Cells[l2].Value = "#2밸런스 1차 밸런스량";
-                        dgv.Rows[10].Cells[l2].Value = "#2밸런스 2차 각도";
-                        dgv.Rows[11].Cells[l2].Value = "#2밸런스 2차 밸런스량";
+                        dgv.Rows[6].Cells[l2].Value = "블로워 라벨";
+                        dgv.Rows[7].Cells[l2].Value = "밸런스 결과 판정";
+                        dgv.Rows[8].Cells[l2].Value = "밸런스 1차 각도";
+                        dgv.Rows[9].Cells[l2].Value = "밸런스 1차 밸런스량";
+                        dgv.Rows[10].Cells[l2].Value = "밸런스 2차 각도";
+                        dgv.Rows[11].Cells[l2].Value = "밸런스 2차 밸런스량";
 
                         for (int i = 6; i < 12; i++)
                         {
                             dgv.Rows[i].Cells[l2].Style.BackColor = Color.Yellow;
                         }
 
-                        dgv.Rows[12].Cells[l2].Value = "#3블로워 라벨";
-                        dgv.Rows[13].Cells[l2].Value = "#3밸런스 결과 판정";
-                        dgv.Rows[14].Cells[l2].Value = "#3밸런스 1차 각도";
-                        dgv.Rows[15].Cells[l2].Value = "#3밸런스 1차 밸런스량";
-                        dgv.Rows[16].Cells[l2].Value = "#3밸런스 2차 각도";
-                        dgv.Rows[17].Cells[l2].Value = "#3밸런스 2차 밸런스량";
+                        dgv.Rows[12].Cells[l2].Value = "블로워 라벨";
+                        dgv.Rows[13].Cells[l2].Value = "밸런스 결과 판정";
+                        dgv.Rows[14].Cells[l2].Value = "밸런스 1차 각도";
+                        dgv.Rows[15].Cells[l2].Value = "밸런스 1차 밸런스량";
+                        dgv.Rows[16].Cells[l2].Value = "밸런스 2차 각도";
+                        dgv.Rows[17].Cells[l2].Value = "밸런스 2차 밸런스량";
 
 
 
@@ -260,47 +259,47 @@ namespace KB_Data_V2
 
                         int l3 = 4;
 
-                        dgv.Rows[0].Cells[l3].Value = "#1블로워 라벨";
-                        dgv.Rows[1].Cells[l3].Value = "#1특성 검사 저항 판정";
-                        dgv.Rows[2].Cells[l3].Value = "#1특성 저항 검사 측정값";
-                        dgv.Rows[3].Cells[l3].Value = "#1특성 검사 RPM 판정";
-                        dgv.Rows[4].Cells[l3].Value = "#1특성 검사 RPM 측정값";
-                        dgv.Rows[5].Cells[l3].Value = "#1특성 검사 전류 판정";
-                        dgv.Rows[6].Cells[l3].Value = "#1특성 검사 전류 측정값";
+                        dgv.Rows[0].Cells[l3].Value = "블로워 라벨";
+                        dgv.Rows[1].Cells[l3].Value = "특성 검사 저항 판정";
+                        dgv.Rows[2].Cells[l3].Value = "특성 저항 검사 측정값";
+                        dgv.Rows[3].Cells[l3].Value = "특성 검사 RPM 판정";
+                        dgv.Rows[4].Cells[l3].Value = "특성 검사 RPM 측정값";
+                        dgv.Rows[5].Cells[l3].Value = "특성 검사 전류 판정";
+                        dgv.Rows[6].Cells[l3].Value = "특성 검사 전류 측정값";
 
                         for (int i = 0; i < 7; i++)
                         {
                             dgv.Rows[i].Cells[l3].Style.BackColor = Color.Yellow;
                         }
 
-                        dgv.Rows[7].Cells[l3].Value = "#2블로워 라벨";
-                        dgv.Rows[8].Cells[l3].Value = "#2특성 검사 저항 판정";
-                        dgv.Rows[9].Cells[l3].Value = "#2특성 저항 검사 측정값";
-                        dgv.Rows[10].Cells[l3].Value = "#2특성 검사 RPM 판정";
-                        dgv.Rows[11].Cells[l3].Value = "#2특성 검사 RPM 측정값";
-                        dgv.Rows[12].Cells[l3].Value = "#2특성 검사 전류 판정";
-                        dgv.Rows[13].Cells[l3].Value = "#2특성 검사 전류 측정값";
+                        dgv.Rows[7].Cells[l3].Value = "블로워 라벨";
+                        dgv.Rows[8].Cells[l3].Value = "특성 검사 저항 판정";
+                        dgv.Rows[9].Cells[l3].Value = "특성 저항 검사 측정값";
+                        dgv.Rows[10].Cells[l3].Value = "특성 검사 RPM 판정";
+                        dgv.Rows[11].Cells[l3].Value = "특성 검사 RPM 측정값";
+                        dgv.Rows[12].Cells[l3].Value = "특성 검사 전류 판정";
+                        dgv.Rows[13].Cells[l3].Value = "특성 검사 전류 측정값";
 
-                        dgv.Rows[14].Cells[l3].Value = "#3블로워 라벨";
-                        dgv.Rows[15].Cells[l3].Value = "#3특성 검사 저항 판정";
-                        dgv.Rows[16].Cells[l3].Value = "#3특성 저항 검사 측정값";
-                        dgv.Rows[17].Cells[l3].Value = "#3특성 검사 RPM 판정";
-                        dgv.Rows[18].Cells[l3].Value = "#3특성 검사 RPM 측정값";
-                        dgv.Rows[19].Cells[l3].Value = "#3특성 검사 전류 판정";
-                        dgv.Rows[20].Cells[l3].Value = "#3특성 검사 전류 측정값";
+                        dgv.Rows[14].Cells[l3].Value = "블로워 라벨";
+                        dgv.Rows[15].Cells[l3].Value = "특성 검사 저항 판정";
+                        dgv.Rows[16].Cells[l3].Value = "특성 저항 검사 측정값";
+                        dgv.Rows[17].Cells[l3].Value = "특성 검사 RPM 판정";
+                        dgv.Rows[18].Cells[l3].Value = "특성 검사 RPM 측정값";
+                        dgv.Rows[19].Cells[l3].Value = "특성 검사 전류 판정";
+                        dgv.Rows[20].Cells[l3].Value = "특성 검사 전류 측정값";
 
                         for (int i = 14; i < 21; i++)
                         {
                             dgv.Rows[i].Cells[l3].Style.BackColor = Color.Yellow;
                         }
 
-                        dgv.Rows[21].Cells[l3].Value = "#4블로워 라벨";
-                        dgv.Rows[22].Cells[l3].Value = "#4특성 검사 저항 판정";
-                        dgv.Rows[23].Cells[l3].Value = "#4특성 저항 검사 측정값";
-                        dgv.Rows[24].Cells[l3].Value = "#4특성 검사 RPM 판정";
-                        dgv.Rows[25].Cells[l3].Value = "#4특성 검사 RPM 측정값";
-                        dgv.Rows[26].Cells[l3].Value = "#4특성 검사 전류 판정";
-                        dgv.Rows[27].Cells[l3].Value = "#4특성 검사 전류 측정값";
+                        dgv.Rows[21].Cells[l3].Value = "블로워 라벨";
+                        dgv.Rows[22].Cells[l3].Value = "특성 검사 저항 판정";
+                        dgv.Rows[23].Cells[l3].Value = "특성 저항 검사 측정값";
+                        dgv.Rows[24].Cells[l3].Value = "특성 검사 RPM 판정";
+                        dgv.Rows[25].Cells[l3].Value = "특성 검사 RPM 측정값";
+                        dgv.Rows[26].Cells[l3].Value = "특성 검사 전류 판정";
+                        dgv.Rows[27].Cells[l3].Value = "특성 검사 전류 측정값";
 
 
                         //---------------↑ 3번라인 ↑---------------┘
@@ -309,18 +308,18 @@ namespace KB_Data_V2
                         //---------------↓ 4번라인 ↓---------------┐
                         int l4 = 6;
 
-                        dgv.Rows[0].Cells[l4].Value = "#1블로워 라벨";
-                        dgv.Rows[1].Cells[l4].Value = "#1성능 검사 판정";
-                        dgv.Rows[2].Cells[l4].Value = "#1성능 검사 RPM 측정값";
-                        dgv.Rows[3].Cells[l4].Value = "#1성능 검사 소음 측정값";
-                        dgv.Rows[4].Cells[l4].Value = "#1성능 검사 진동 측정값";
+                        dgv.Rows[0].Cells[l4].Value = "블로워 라벨";
+                        dgv.Rows[1].Cells[l4].Value = "성능 검사 판정";
+                        dgv.Rows[2].Cells[l4].Value = "성능 검사 RPM 측정값";
+                        dgv.Rows[3].Cells[l4].Value = "성능 검사 소음 측정값";
+                        dgv.Rows[4].Cells[l4].Value = "성능 검사 진동 측정값";
 
 
-                        dgv.Rows[5].Cells[l4].Value = "#2블로워 라벨";
-                        dgv.Rows[6].Cells[l4].Value = "#2성능 검사 판정";
-                        dgv.Rows[7].Cells[l4].Value = "#2성능 검사 RPM 측정값";
-                        dgv.Rows[8].Cells[l4].Value = "#2성능 검사 소음 측정값";
-                        dgv.Rows[9].Cells[l4].Value = "#2성능 검사 진동 측정값";
+                        dgv.Rows[5].Cells[l4].Value = "블로워 라벨";
+                        dgv.Rows[6].Cells[l4].Value = "성능 검사 판정";
+                        dgv.Rows[7].Cells[l4].Value = "성능 검사 RPM 측정값";
+                        dgv.Rows[8].Cells[l4].Value = "성능 검사 소음 측정값";
+                        dgv.Rows[9].Cells[l4].Value = "성능 검사 진동 측정값";
 
                         for (int i = 5; i < 10; i++)
                         {
@@ -580,26 +579,55 @@ namespace KB_Data_V2
                         string[] ColumnsName = new string[] {
                             "A" , "B"
                         };
-                        int rows = 4;//초기 생성 Row수
+                        int rows = 16;//초기 생성 Row수
                         GridMaster.Init3(dgv, true, height, rows, ColumnsName);
                         //---------------↑ 생성 ↑---------------┘
 
                         //---------------↓ 사용자 데이터 추가 부분 ↓---------------┐
                         //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
                         //dgv.Rows[ 0 ].Cells[ 0 ].Value = "CORE HEIGHT 1";
-                        dgv.Rows[0].Cells[0].Value = "#60 베어링압입 결과 하중";
-                        dgv.Rows[1].Cells[0].Value = "밸런스 2차 각도";
-                        dgv.Rows[2].Cells[0].Value = "밸런스 2차 밸런스량";
-                        dgv.Rows[3].Cells[0].Value = "성능 검사 RPM 측정값";
-             
+                        dgv.Rows[0].Cells[0].Value = "#30 UPPER CASE 공급부 PCB 측정값 최대";
+                        dgv.Rows[1].Cells[0].Value = "#50 스페이서 측정값";
+                        dgv.Rows[2].Cells[0].Value = "#90 스페이서 측정값";
+                        dgv.Rows[3].Cells[0].Value = "#60 베어링압입 결과 거리";
+                        dgv.Rows[4].Cells[0].Value = "#60 베어링압입 결과 하중";
+                        dgv.Rows[5].Cells[0].Value = "#110 스토퍼 높이 측정값";
 
+                        dgv.Rows[6].Cells[0].Value = "밸런스 1차 각도";
+                        dgv.Rows[7].Cells[0].Value = "밸런스 1차 밸런스량";
+                        dgv.Rows[8].Cells[0].Value = "밸런스 2차 각도";
+                        dgv.Rows[9].Cells[0].Value = "밸런스 2차 밸런스량";
+
+                        dgv.Rows[10].Cells[0].Value = "특성 저항 검사 측정값";
+                        dgv.Rows[11].Cells[0].Value = "특성 검사 RPM 측정값";
+                        dgv.Rows[12].Cells[0].Value = "특성 검사 전류 측정값";
+
+                        dgv.Rows[13].Cells[0].Value = "성능 검사 RPM 측정값";
+                        dgv.Rows[14].Cells[0].Value = "성능 검사 소음 측정값";
+                        dgv.Rows[15].Cells[0].Value = "성능 검사 진동 측정값";
 
                         ///////////////##################################################################
 
-                        dgv.Rows[0].Cells[1].Value = "c18";
-                        dgv.Rows[1].Cells[1].Value = "c22";
-                        dgv.Rows[2].Cells[1].Value = "c23";
-                        dgv.Rows[3].Cells[1].Value = "c31";
+                        dgv.Rows[0].Cells[1].Value = "c14";
+                        dgv.Rows[1].Cells[1].Value = "c15";
+                        dgv.Rows[2].Cells[1].Value = "c16";
+                        dgv.Rows[3].Cells[1].Value = "c17";
+                        dgv.Rows[4].Cells[1].Value = "c18";
+                        dgv.Rows[5].Cells[1].Value = "c180";
+
+                        dgv.Rows[6].Cells[1].Value = "c20";
+                        dgv.Rows[7].Cells[1].Value = "c21";
+                        dgv.Rows[8].Cells[1].Value = "c22";
+                        dgv.Rows[9].Cells[1].Value = "c23";
+
+                        dgv.Rows[10].Cells[1].Value = "c25";
+                        dgv.Rows[11].Cells[1].Value = "c27";
+                        dgv.Rows[12].Cells[1].Value = "c29";
+
+                        dgv.Rows[13].Cells[1].Value = "c31";
+                        dgv.Rows[14].Cells[1].Value = "c32";
+                        dgv.Rows[15].Cells[1].Value = "c33";
+
 
                         //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
 
@@ -625,7 +653,8 @@ namespace KB_Data_V2
 
                         //---------------↑ 설정 ↑---------------┘
 
-                                                                   
+
+
                     }
                     catch (Exception)
                     {
@@ -800,7 +829,7 @@ namespace KB_Data_V2
 
                         for (int i = 0; i < rows; i++)
                         {
-                            dgv.Rows[i].Cells[0].Value = "D" + (i + 6000);
+                            dgv.Rows[i].Cells[0].Value = "D" + (i + 7000);
                         }
 
                         //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
@@ -841,17 +870,11 @@ namespace KB_Data_V2
                     try
                     {
                         //---------------↓ 기본 ↓---------------┐
-                        //DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
-                        //string DGV_name = dgv.Name;//적용
-                        //int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
-                        //int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "12"));//데이터가져옴
-                        //int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "12"));//데이터가져옴
-                        //GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
                         DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
                         string DGV_name = dgv.Name;//적용
-                        int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "20"));//데이터가져옴
-                        int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "5"));//데이터가져옴
-                        int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "5"));//데이터가져옴
+                        int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
+                        int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "12"));//데이터가져옴
+                        int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "12"));//데이터가져옴
                         GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
                         //---------------↑ 기본 ↑---------------┘
 
@@ -868,9 +891,8 @@ namespace KB_Data_V2
                         //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
                         //dgv.Rows[ 0 ].Cells[ 0 ].Value = "CORE HEIGHT 1";
 
-                        dgv.Columns[3].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
+                        dgv.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
 
-                        dgv.Columns[28].DisplayIndex = 0;
 
                         dgv.Columns[0].HeaderText = "블로워 라벨";
                         dgv.Columns[1].HeaderText = "임펠러 바코드";
@@ -878,523 +900,43 @@ namespace KB_Data_V2
                         dgv.Columns[3].HeaderText = "날짜";
                         dgv.Columns[4].HeaderText = "모델";
 
-                        dgv.Columns[5].HeaderText = "최종판정";
+                        dgv.Columns[5].HeaderText = "#C40 저항 검사 이상 완료";
 
-                        dgv.Columns[6].HeaderText = "#C30특성 검사 저항 판정";
-                        dgv.Columns[7].HeaderText = "#C30특성 저항 검사 측정값";
-                        dgv.Columns[8].HeaderText = "#C30저항 검사 이상 완료";
+                        dgv.Columns[6].HeaderText = "#30 UPPER CASE 공급부 PCB 측정값 최대";
+                        dgv.Columns[7].HeaderText = "#50 스페이서 측정값";
+                        dgv.Columns[8].HeaderText = "#90 스페이서 측정값";
+                        dgv.Columns[9].HeaderText = "#60 베어링압입 결과 거리";
+                        dgv.Columns[10].HeaderText = "#60 베어링압입 결과 하중";
+                        dgv.Columns[11].HeaderText = "#110 스토퍼 높이 측정값";
 
-                        dgv.Columns[9].HeaderText = "#30 UPPER CASE 공급부 PCB 측정값 최대";
-                        dgv.Columns[10].HeaderText = "#50 스페이서 측정값";
-                        dgv.Columns[11].HeaderText = "#90 스페이서 측정값";
-                        dgv.Columns[12].HeaderText = "#60 베어링압입 결과 거리";
-                        dgv.Columns[13].HeaderText = "#60 베어링압입 결과 하중";
-                        dgv.Columns[14].HeaderText = "#130 스토퍼 높이 측정값";
-
-                        dgv.Columns[15].HeaderText = "밸런스 결과 판정";
-                        dgv.Columns[16].HeaderText = "밸런스 1차 각도";
-                        dgv.Columns[17].HeaderText = "밸런스 1차 밸런스량";
-                        dgv.Columns[18].HeaderText = "밸런스 2차 각도";
-                        dgv.Columns[19].HeaderText = "밸런스 2차 밸런스량";
-                      //  dgv.Columns[19].HeaderText = "특성 검사 저항 판정";
-                       // dgv.Columns[20].HeaderText = "특성 저항 검사 측정값";
-
-                        //dgv.Columns[19].HeaderText = "특성 검사 전류 판정";
-                        //dgv.Columns[20].HeaderText = "특성 검사 전류 측정값";
-                        //dgv.Columns[21].HeaderText = "특성 검사 RPM 판정";
-                        //dgv.Columns[22].HeaderText = "특성 검사 RPM 측정값";
-                        //dgv.Columns[23].HeaderText = "성능 검사 판정";
-                        //dgv.Columns[24].HeaderText = "성능 검사 RPM 측정값";
-                        //dgv.Columns[25].HeaderText = "성능 검사 소음 측정값";
-                        //dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
-                        //dgv.Columns[27].HeaderText = "최종판정";
-
-                        dgv.Columns[20].HeaderText = "특성 검사 RPM 판정"; ;
-                        dgv.Columns[21].HeaderText = "특성 검사 RPM 측정값";
-                        dgv.Columns[22].HeaderText = "특성 검사 전류 판정";
-                        dgv.Columns[23].HeaderText = "특성 검사 전류 측정값";
-                        dgv.Columns[24].HeaderText = "성능 검사 판정";
-                        dgv.Columns[25].HeaderText = "성능 검사 RPM 측정값";
-                        dgv.Columns[26].HeaderText = "성능 검사 소음 측정값";
-                        dgv.Columns[27].HeaderText = "성능 검사 진동 측정값";
-
-                        dgv.Columns[28].HeaderText = "행 번호";
-
-                        // dgv.Columns[27].HeaderText = "최종판정";
+                        dgv.Columns[12].HeaderText = "밸런스 결과 판정";
+                        dgv.Columns[13].HeaderText = "밸런스 1차 각도";
+                        dgv.Columns[14].HeaderText = "밸런스 1차 밸런스량";
+                        dgv.Columns[15].HeaderText = "밸런스 2차 각도";
+                        dgv.Columns[16].HeaderText = "밸런스 2차 밸런스량";
+                        dgv.Columns[17].HeaderText = "특성 검사 저항 판정";
+                        dgv.Columns[18].HeaderText = "특성 저항 검사 측정값";
+                        dgv.Columns[19].HeaderText = "특성 검사 RPM 판정";
+                        dgv.Columns[20].HeaderText = "특성 검사 RPM 측정값";
+                        dgv.Columns[21].HeaderText = "특성 검사 전류 판정";
+                        dgv.Columns[22].HeaderText = "특성 검사 전류 측정값";
+                        dgv.Columns[23].HeaderText = "성능 검사 판정";
+                        dgv.Columns[24].HeaderText = "성능 검사 RPM 측정값";
+                        dgv.Columns[25].HeaderText = "성능 검사 소음 측정값";
+                        dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
+                        dgv.Columns[27].HeaderText = "최종판정";
 
 
                         //---------------↓ OKNG 색칠 ↓---------------┐
+
                         GridMaster.Color_Painting(dgv, 5);
-                        GridMaster.Color_Painting(dgv, 6);
-                        GridMaster.Color_Painting(dgv, 8);
-                        GridMaster.Color_Painting(dgv, 15);                       
-                        GridMaster.Color_Painting(dgv, 20);
-                        GridMaster.Color_Painting(dgv, 22);
-                        GridMaster.Color_Painting(dgv, 24);
-                        //---------------↑ OKNG 색칠 ↑---------------┘
-
-
-
-                        //---------------↓ 이력조회 파트별 조회 ↓---------------┐
-
-                        if (radioButton2.Checked)   //전(어퍼케이스 조립)
-                        {
-                            this.dgvH0.Columns[15].Visible = false;
-                            this.dgvH0.Columns[16].Visible = false;
-                            this.dgvH0.Columns[17].Visible = false;
-                            this.dgvH0.Columns[18].Visible = false;
-                            this.dgvH0.Columns[19].Visible = false;
-                            this.dgvH0.Columns[20].Visible = false;
-                            this.dgvH0.Columns[21].Visible = false;
-                            this.dgvH0.Columns[22].Visible = false;
-                            this.dgvH0.Columns[23].Visible = false;
-                            this.dgvH0.Columns[24].Visible = false;
-                            this.dgvH0.Columns[25].Visible = false;
-                            this.dgvH0.Columns[26].Visible = false;
-                            this.dgvH0.Columns[27].Visible = false;
-
-                        }
-
-                        else if (radioButton1.Checked)   //중(밸런스 검사)
-                        {
-                            this.dgvH0.Columns[6].Visible = false;
-                            this.dgvH0.Columns[7].Visible = false;
-                            this.dgvH0.Columns[8].Visible = false;
-                            this.dgvH0.Columns[9].Visible = false;
-                            this.dgvH0.Columns[10].Visible = false;
-                            this.dgvH0.Columns[11].Visible = false;
-                            this.dgvH0.Columns[12].Visible = false;
-                            this.dgvH0.Columns[13].Visible = false;
-                            this.dgvH0.Columns[14].Visible = false;
-
-                            this.dgvH0.Columns[20].Visible = false;
-                            this.dgvH0.Columns[21].Visible = false;
-                            this.dgvH0.Columns[22].Visible = false;
-                            this.dgvH0.Columns[23].Visible = false;
-                            this.dgvH0.Columns[24].Visible = false;
-                            this.dgvH0.Columns[25].Visible = false;
-                            this.dgvH0.Columns[26].Visible = false;
-                            this.dgvH0.Columns[27].Visible = false;
-
-                        }
-
-                        else if (radioButton3.Checked)   //후(성능 검사)
-                        {
-                            this.dgvH0.Columns[6].Visible = false;
-                            this.dgvH0.Columns[7].Visible = false;
-                            this.dgvH0.Columns[8].Visible = false;
-                            this.dgvH0.Columns[9].Visible = false;
-                            this.dgvH0.Columns[10].Visible = false;
-                            this.dgvH0.Columns[11].Visible = false;
-                            this.dgvH0.Columns[12].Visible = false;
-                            this.dgvH0.Columns[13].Visible = false;
-                            this.dgvH0.Columns[14].Visible = false;
-
-                            this.dgvH0.Columns[15].Visible = false;
-                            this.dgvH0.Columns[16].Visible = false;
-                            this.dgvH0.Columns[17].Visible = false;
-                            this.dgvH0.Columns[18].Visible = false;
-                            this.dgvH0.Columns[19].Visible = false;
-                        }
-
-                        //---------------↑ 이력조회 파트별 조회 ↑---------------┘
-
-
-
-                        //---------------↓ 정렬 ↓---------------┐
-                        GridMaster.CenterAlign(dgv);
-                        //GridMaster.LeftAlign( dgv );
-                        //GridMaster.Align( dgv , 0 , DataGridViewContentAlignment.MiddleLeft );//단일 Column 정렬
-                        //---------------↑ 정렬 ↑---------------┘
-
-                        //---------------↓ 설정 ↓---------------┐
-                        dgv.ReadOnly = true;//읽기전용
-                        //GridMaster.DisableSortColumn( dgv );//오름차순 내림차순 정렬 막기
-                        //dgv.Columns[ 0 ].ReadOnly = true;//읽기전용
-                        //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
-
-                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
-                        //dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
-                        //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
-                        //dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
-                        //dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
-
-                        //---------------↑ 설정 ↑---------------┘
-
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                    break;
-
-                    //초중종물 에서 초물
-                case "dgvH1":
-
-                    try
-                    {
-                        //---------------↓ 기본 ↓---------------┐
-                        //DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
-                        //string DGV_name = dgv.Name;//적용
-                        //int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
-                        //int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "12"));//데이터가져옴
-                        //int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "12"));//데이터가져옴
-                        //GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
-                        DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
-                        string DGV_name = dgv.Name;//적용
-                        int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
-                        int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "5"));//데이터가져옴
-                        int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "5"));//데이터가져옴
-                        GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
-                        //---------------↑ 기본 ↑---------------┘
-
-                        //---------------↓ 생성 ↓---------------┐
-                        string[] ColumnsName = new string[] {
-
-                        };
-                        int rows = 0;//초기 생성 Row수
-
-                        GridMaster.Init3(dgv, false, height, rows, ColumnsName);
-                        //---------------↑ 생성 ↑---------------┘
-
-                        //---------------↓ 사용자 데이터 추가 부분 ↓---------------┐
-                        //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
-                        //dgv.Rows[ 0 ].Cells[ 0 ].Value = "CORE HEIGHT 1";
-
-                        dgv.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
-                        
-                        dgv.Columns[0].HeaderText = "Index";
-                        dgv.Columns[1].HeaderText = "블로워 라벨";
-                        
-                        dgv.Columns[2].HeaderText = "임펠러 바코드";
-                        dgv.Columns[3].HeaderText = "어퍼 바코드";
-                        dgv.Columns[4].HeaderText = "날짜";
-                        dgv.Columns[5].HeaderText = "모델";
-                        
-                        dgv.Columns[28].DisplayIndex = 5;  //최종판정 앞으로 배치
-
-                        dgv.Columns[6].HeaderText = "#C30특성 검사 저항 판정";
-                        dgv.Columns[7].HeaderText = "#C30특성 저항 검사 측정값";
-                        dgv.Columns[8].HeaderText = "#C30저항 검사 이상 완료";
-
-                        dgv.Columns[9].HeaderText = "#30 UPPER CASE 공급부 PCB 측정값 최대";
-                        dgv.Columns[10].HeaderText = "#50 스페이서 측정값";
-                        dgv.Columns[11].HeaderText = "#90 스페이서 측정값";
-                        dgv.Columns[12].HeaderText = "#60 베어링압입 결과 거리";
-                        dgv.Columns[13].HeaderText = "#60 베어링압입 결과 하중";
-                        dgv.Columns[14].HeaderText = "#130 스토퍼 높이 측정값";
-
-                        dgv.Columns[15].HeaderText = "밸런스 결과 판정";
-                        dgv.Columns[16].HeaderText = "밸런스 1차 각도";
-                        dgv.Columns[17].HeaderText = "밸런스 1차 밸런스량";
-                        dgv.Columns[18].HeaderText = "밸런스 2차 각도";
-                        dgv.Columns[19].HeaderText = "밸런스 2차 밸런스량";
-                        //  dgv.Columns[19].HeaderText = "특성 검사 저항 판정";
-                        // dgv.Columns[20].HeaderText = "특성 저항 검사 측정값";
-
-                        //dgv.Columns[19].HeaderText = "특성 검사 전류 판정";
-                        //dgv.Columns[20].HeaderText = "특성 검사 전류 측정값";
-                        //dgv.Columns[21].HeaderText = "특성 검사 RPM 판정";
-                        //dgv.Columns[22].HeaderText = "특성 검사 RPM 측정값";
-                        //dgv.Columns[23].HeaderText = "성능 검사 판정";
-                        //dgv.Columns[24].HeaderText = "성능 검사 RPM 측정값";
-                        //dgv.Columns[25].HeaderText = "성능 검사 소음 측정값";
-                        //dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
-                        //dgv.Columns[27].HeaderText = "최종판정";
-
-                        dgv.Columns[20].HeaderText = "특성 검사 RPM 판정"; ;
-                        dgv.Columns[21].HeaderText = "특성 검사 RPM 측정값";
-                        dgv.Columns[22].HeaderText = "특성 검사 전류 판정";
-                        dgv.Columns[23].HeaderText = "특성 검사 전류 측정값";
-                        dgv.Columns[24].HeaderText = "성능 검사 판정";
-                        dgv.Columns[25].HeaderText = "성능 검사 RPM 측정값";
-                        dgv.Columns[26].HeaderText = "성능 검사 소음 측정값";
-                        dgv.Columns[27].HeaderText = "성능 검사 진동 측정값";
-                        dgv.Columns[28].HeaderText = "최종판정";
-
-                        
-
-                        //컬럼 가리기
-                        this.dgvH1.Columns[0].Visible = false;
-                        //this.dgvH1.Columns[29].Visible = false;
-
-                        //---------------↓ OKNG 색칠 ↓---------------┐
-
-                        GridMaster.Color_Painting(dgv, 6);
-                        GridMaster.Color_Painting(dgv, 13);
-                        GridMaster.Color_Painting(dgv, 15);
-                        GridMaster.Color_Painting(dgv, 18);
-                        GridMaster.Color_Painting(dgv, 20);
-                        GridMaster.Color_Painting(dgv, 22);
-                        GridMaster.Color_Painting(dgv, 24);
-                        GridMaster.Color_Painting(dgv, 28);
-
-                        //---------------↑ OKNG 색칠 ↑---------------┘
-
-
-
-                        //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
-
-                        //---------------↓ 정렬 ↓---------------┐
-                        GridMaster.CenterAlign(dgv);
-                        //GridMaster.LeftAlign( dgv );
-                        //GridMaster.Align( dgv , 0 , DataGridViewContentAlignment.MiddleLeft );//단일 Column 정렬
-                        //---------------↑ 정렬 ↑---------------┘
-
-                        //---------------↓ 설정 ↓---------------┐
-                        dgv.ReadOnly = true;//읽기전용
-                        //GridMaster.DisableSortColumn( dgv );//오름차순 내림차순 정렬 막기
-                        //dgv.Columns[ 0 ].ReadOnly = true;//읽기전용
-                        //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
-
-                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
-                        //dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
-                        //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
-                        //dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
-                        //dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
-
-                        //---------------↑ 설정 ↑---------------┘
-
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                    break;
-
-                //초중종물 에서 중물
-                case "dgvH2":
-
-                    try
-                    {
-                        //---------------↓ 기본 ↓---------------┐
-                        //DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
-                        //string DGV_name = dgv.Name;//적용
-                        //int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
-                        //int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "12"));//데이터가져옴
-                        //int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "12"));//데이터가져옴
-                        //GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
-                        DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
-                        string DGV_name = dgv.Name;//적용
-                        int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
-                        int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "5"));//데이터가져옴
-                        int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "5"));//데이터가져옴
-                        GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
-                        //---------------↑ 기본 ↑---------------┘
-
-                        //---------------↓ 생성 ↓---------------┐
-                        string[] ColumnsName = new string[] {
-
-                        };
-                        int rows = 0;//초기 생성 Row수
-
-                        GridMaster.Init3(dgv, false, height, rows, ColumnsName);
-                        //---------------↑ 생성 ↑---------------┘
-
-                        //---------------↓ 사용자 데이터 추가 부분 ↓---------------┐
-                        //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
-                        //dgv.Rows[ 0 ].Cells[ 0 ].Value = "CORE HEIGHT 1";
-
-                        dgv.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
-
-                        dgv.Columns[0].HeaderText = "Index";
-                        dgv.Columns[1].HeaderText = "블로워 라벨";
-
-                        dgv.Columns[2].HeaderText = "임펠러 바코드";
-                        dgv.Columns[3].HeaderText = "어퍼 바코드";
-                        dgv.Columns[4].HeaderText = "날짜";
-                        dgv.Columns[5].HeaderText = "모델";
-
-                        dgv.Columns[28].DisplayIndex = 5;  //최종판정 앞으로 배치
-
-                        dgv.Columns[6].HeaderText = "#C30특성 검사 저항 판정";
-                        dgv.Columns[7].HeaderText = "#C30특성 저항 검사 측정값";
-                        dgv.Columns[8].HeaderText = "#C30저항 검사 이상 완료";
-
-                        dgv.Columns[9].HeaderText = "#30 UPPER CASE 공급부 PCB 측정값 최대";
-                        dgv.Columns[10].HeaderText = "#50 스페이서 측정값";
-                        dgv.Columns[11].HeaderText = "#90 스페이서 측정값";
-                        dgv.Columns[12].HeaderText = "#60 베어링압입 결과 거리";
-                        dgv.Columns[13].HeaderText = "#60 베어링압입 결과 하중";
-                        dgv.Columns[14].HeaderText = "#130 스토퍼 높이 측정값";
-
-                        dgv.Columns[15].HeaderText = "밸런스 결과 판정";
-                        dgv.Columns[16].HeaderText = "밸런스 1차 각도";
-                        dgv.Columns[17].HeaderText = "밸런스 1차 밸런스량";
-                        dgv.Columns[18].HeaderText = "밸런스 2차 각도";
-                        dgv.Columns[19].HeaderText = "밸런스 2차 밸런스량";
-                        //  dgv.Columns[19].HeaderText = "특성 검사 저항 판정";
-                        // dgv.Columns[20].HeaderText = "특성 저항 검사 측정값";
-
-                        //dgv.Columns[19].HeaderText = "특성 검사 전류 판정";
-                        //dgv.Columns[20].HeaderText = "특성 검사 전류 측정값";
-                        //dgv.Columns[21].HeaderText = "특성 검사 RPM 판정";
-                        //dgv.Columns[22].HeaderText = "특성 검사 RPM 측정값";
-                        //dgv.Columns[23].HeaderText = "성능 검사 판정";
-                        //dgv.Columns[24].HeaderText = "성능 검사 RPM 측정값";
-                        //dgv.Columns[25].HeaderText = "성능 검사 소음 측정값";
-                        //dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
-                        //dgv.Columns[27].HeaderText = "최종판정";
-
-                        dgv.Columns[20].HeaderText = "특성 검사 RPM 판정"; ;
-                        dgv.Columns[21].HeaderText = "특성 검사 RPM 측정값";
-                        dgv.Columns[22].HeaderText = "특성 검사 전류 판정";
-                        dgv.Columns[23].HeaderText = "특성 검사 전류 측정값";
-                        dgv.Columns[24].HeaderText = "성능 검사 판정";
-                        dgv.Columns[25].HeaderText = "성능 검사 RPM 측정값";
-                        dgv.Columns[26].HeaderText = "성능 검사 소음 측정값";
-                        dgv.Columns[27].HeaderText = "성능 검사 진동 측정값";
-                        dgv.Columns[28].HeaderText = "최종판정";
-
-
-                        //컬럼 가리기
-                        this.dgvH2.Columns[0].Visible = false;
-
-                        //---------------↓ OKNG 색칠 ↓---------------┐
-
-                        GridMaster.Color_Painting(dgv, 6);
-                        GridMaster.Color_Painting(dgv, 13);
-                        GridMaster.Color_Painting(dgv, 15);
-                        GridMaster.Color_Painting(dgv, 18);
-                        GridMaster.Color_Painting(dgv, 20);
-                        GridMaster.Color_Painting(dgv, 22);
-                        GridMaster.Color_Painting(dgv, 24);
-                        GridMaster.Color_Painting(dgv, 28);
-
-                        //---------------↑ OKNG 색칠 ↑---------------┘
-
-
-
-                        //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
-
-                        //---------------↓ 정렬 ↓---------------┐
-                        GridMaster.CenterAlign(dgv);
-                        //GridMaster.LeftAlign( dgv );
-                        //GridMaster.Align( dgv , 0 , DataGridViewContentAlignment.MiddleLeft );//단일 Column 정렬
-                        //---------------↑ 정렬 ↑---------------┘
-
-                        //---------------↓ 설정 ↓---------------┐
-                        dgv.ReadOnly = true;//읽기전용
-                        //GridMaster.DisableSortColumn( dgv );//오름차순 내림차순 정렬 막기
-                        //dgv.Columns[ 0 ].ReadOnly = true;//읽기전용
-                        //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
-
-                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
-                        //dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
-                        //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
-                        //dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
-                        //dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
-
-                        //---------------↑ 설정 ↑---------------┘
-
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                    break;
-
-                //초중종물 에서 종물
-                case "dgvH3":
-
-                    try
-                    {
-                        //---------------↓ 기본 ↓---------------┐
-                        //DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
-                        //string DGV_name = dgv.Name;//적용
-                        //int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
-                        //int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "12"));//데이터가져옴
-                        //int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "12"));//데이터가져옴
-                        //GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
-                        DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
-                        string DGV_name = dgv.Name;//적용
-                        int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
-                        int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "5"));//데이터가져옴
-                        int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "5"));//데이터가져옴
-                        GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
-                        //---------------↑ 기본 ↑---------------┘
-
-                        //---------------↓ 생성 ↓---------------┐
-                        string[] ColumnsName = new string[] {
-
-                        };
-                        int rows = 0;//초기 생성 Row수
-
-                        GridMaster.Init3(dgv, false, height, rows, ColumnsName);
-                        //---------------↑ 생성 ↑---------------┘
-
-                        //---------------↓ 사용자 데이터 추가 부분 ↓---------------┐
-                        //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
-                        //dgv.Rows[ 0 ].Cells[ 0 ].Value = "CORE HEIGHT 1";
-
-                        dgv.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
-
-                        dgv.Columns[0].HeaderText = "Index";
-                        dgv.Columns[1].HeaderText = "블로워 라벨";
-
-                        dgv.Columns[2].HeaderText = "임펠러 바코드";
-                        dgv.Columns[3].HeaderText = "어퍼 바코드";
-                        dgv.Columns[4].HeaderText = "날짜";
-                        dgv.Columns[5].HeaderText = "모델";
-
-                        dgv.Columns[28].DisplayIndex = 5; //최종판정 앞으로 배치
-
-                        dgv.Columns[6].HeaderText = "#C30특성 검사 저항 판정";
-                        dgv.Columns[7].HeaderText = "#C30특성 저항 검사 측정값";
-                        dgv.Columns[8].HeaderText = "#C30저항 검사 이상 완료";
-
-                        dgv.Columns[9].HeaderText = "#30 UPPER CASE 공급부 PCB 측정값 최대";
-                        dgv.Columns[10].HeaderText = "#50 스페이서 측정값";
-                        dgv.Columns[11].HeaderText = "#90 스페이서 측정값";
-                        dgv.Columns[12].HeaderText = "#60 베어링압입 결과 거리";
-                        dgv.Columns[13].HeaderText = "#60 베어링압입 결과 하중";
-                        dgv.Columns[14].HeaderText = "#130 스토퍼 높이 측정값";
-
-                        dgv.Columns[15].HeaderText = "밸런스 결과 판정";
-                        dgv.Columns[16].HeaderText = "밸런스 1차 각도";
-                        dgv.Columns[17].HeaderText = "밸런스 1차 밸런스량";
-                        dgv.Columns[18].HeaderText = "밸런스 2차 각도";
-                        dgv.Columns[19].HeaderText = "밸런스 2차 밸런스량";
-                        //  dgv.Columns[19].HeaderText = "특성 검사 저항 판정";
-                        // dgv.Columns[20].HeaderText = "특성 저항 검사 측정값";
-
-                        //dgv.Columns[19].HeaderText = "특성 검사 전류 판정";
-                        //dgv.Columns[20].HeaderText = "특성 검사 전류 측정값";
-                        //dgv.Columns[21].HeaderText = "특성 검사 RPM 판정";
-                        //dgv.Columns[22].HeaderText = "특성 검사 RPM 측정값";
-                        //dgv.Columns[23].HeaderText = "성능 검사 판정";
-                        //dgv.Columns[24].HeaderText = "성능 검사 RPM 측정값";
-                        //dgv.Columns[25].HeaderText = "성능 검사 소음 측정값";
-                        //dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
-                        //dgv.Columns[27].HeaderText = "최종판정";
-
-                        dgv.Columns[20].HeaderText = "특성 검사 RPM 판정"; ;
-                        dgv.Columns[21].HeaderText = "특성 검사 RPM 측정값";
-                        dgv.Columns[22].HeaderText = "특성 검사 전류 판정";
-                        dgv.Columns[23].HeaderText = "특성 검사 전류 측정값";
-                        dgv.Columns[24].HeaderText = "성능 검사 판정";
-                        dgv.Columns[25].HeaderText = "성능 검사 RPM 측정값";
-                        dgv.Columns[26].HeaderText = "성능 검사 소음 측정값";
-                        dgv.Columns[27].HeaderText = "성능 검사 진동 측정값";
-                        dgv.Columns[28].HeaderText = "최종판정";
-
-
-                        //컬럼 가리기
-                        this.dgvH3.Columns[0].Visible = false;
-
-                        //---------------↓ OKNG 색칠 ↓---------------┐
-
-                        GridMaster.Color_Painting(dgv, 6);
-                        GridMaster.Color_Painting(dgv, 13);
-                        GridMaster.Color_Painting(dgv, 15);
-                        GridMaster.Color_Painting(dgv, 18);
-                        GridMaster.Color_Painting(dgv, 20);
-                        GridMaster.Color_Painting(dgv, 22);
-                        GridMaster.Color_Painting(dgv, 24);
-                        GridMaster.Color_Painting(dgv, 28);
+                        GridMaster.Color_Painting(dgv, 12);
+
+                        GridMaster.Color_Painting(dgv, 17);
+                        GridMaster.Color_Painting(dgv, 19);
+                        GridMaster.Color_Painting(dgv, 21);
+                        GridMaster.Color_Painting(dgv, 23);
+                        GridMaster.Color_Painting(dgv, 27);
 
                         //---------------↑ OKNG 색칠 ↑---------------┘
 
@@ -1863,7 +1405,7 @@ namespace KB_Data_V2
 
         private void dgvD0_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button.ToString().Equals("Right"))
+            if (e.Button.ToString().Equals("Middle"))
             {
                 DataGridView thisdgv = (DataGridView)sender;
                 dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
@@ -1918,7 +1460,7 @@ namespace KB_Data_V2
 
         private void dgvH0_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button.ToString().Equals("Right"))
+            if (e.Button.ToString().Equals("Middle"))
             {
                 DataGridView thisdgv = (DataGridView)sender;
                 dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
@@ -1929,7 +1471,7 @@ namespace KB_Data_V2
 
         private void dgvHN0_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button.ToString().Equals("Right"))
+            if (e.Button.ToString().Equals("Middle"))
             {
                 DataGridView thisdgv = (DataGridView)sender;
                 dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
@@ -2017,7 +1559,34 @@ namespace KB_Data_V2
         #endregion
 
 
-       
+        bool BarcodeCheck(string bcr, string columnsname, int okcnt_cutline)
+        {
+            DataSet ds = sql.ExecuteQuery("SELECT * FROM table1 WHERE `" + columnsname + "`='" + bcr + "' ;");
+            int okcnt = 0;
+
+
+            if (ds.Tables[0].Rows.Count > 0)//해당 바코드 찾았다.
+            {
+                int cnt = ds.Tables[0].Columns.Count;//컬럼 몇개니
+
+                for (int i = 0; i < cnt; i++)//그 컬럼 수 안에 OK수량 계산
+                {
+                    if (ds.Tables[0].Rows[0][i].ToString().Equals("NG"))//NG하나라도 있음 return false다
+                        return false;
+                    else if (ds.Tables[0].Rows[0][i].ToString().Equals("OK"))//OK 카운트해라.
+                        okcnt++;
+
+                }
+
+                if (okcnt >= okcnt_cutline)//OK 수량 커트라인에 합격 했나?
+                    return true;
+                else//수량 안맞으면 NG다
+                    return false;
+
+            }
+            else//그런 바코드 데이터 한개도 없다
+                return false;
+        }
 
         #region InputItem 관련
         private static DateTime Delay(int MS)
@@ -2089,19 +1658,11 @@ namespace KB_Data_V2
             LoadTxt();
             pass = textBox10.Text;
 
-            xtraTabControl1.SelectedTabPageIndex = 0;
-
             cpkdecision.Value = (decimal)double.Parse(RWdataFast.Load("cpk", 0));
-
-
-            //X-R 상한 하한 기준치 최대값 설정
-            this.numericUpDown21.Maximum = 10000;
-            this.numericUpDown22.Maximum = 10000;
-            this.numericUpDown23.Maximum = 10000;
 
 #if Release
             string plc1_ip = "192.168.13.10";
-            string plc2_ip = "192.168.13.110";  
+            string plc2_ip = "192.168.13.110";
             string printer_ip = "192.168.13.41";
             string pc = "192.168.13.173";
 
@@ -2128,9 +1689,6 @@ namespace KB_Data_V2
             //dgvInit( "dgvM2" );
 
             dgvInit( "dgvH0" );
-            dgvInit("dgvH1");
-            dgvInit("dgvH2");
-            dgvInit("dgvH3");
             dgvInit( "dgvHN0" );
 
             dgvInit( "dgvP0" );
@@ -2163,7 +1721,7 @@ namespace KB_Data_V2
             //---------------↑ PLC와 통신 ↑---------------┘
 
             //불량테스트 핸디
-            handyconv = new TCPClient_HandyConverter("192.168.13.53", 1470, 500);
+            handyconv = new TCPClient_HandyConverter("192.168.100.2", 1470, 500);
             handyconv.TalkingComm += handyconv_TalkingComm;
 
             LabelPrinter = new TCPClient_LabelPrinter(printer_ip,9100, 1000);
@@ -2196,35 +1754,6 @@ namespace KB_Data_V2
 
 #endif
 
-        }
-
-        bool BarcodeCheck(string bcr, string columnsname, int okcnt_cutline)
-        {
-            DataSet ds = sql.ExecuteQuery("SELECT * FROM table1 WHERE `" + columnsname + "`='" + bcr + "' ;");
-            int okcnt = 0;
-
-
-            if (ds.Tables[0].Rows.Count > 0)//해당 바코드 찾았다.
-            {
-                int cnt = ds.Tables[0].Columns.Count;//컬럼 몇개니
-
-                for (int i = 0; i < cnt; i++)//그 컬럼 수 안에 OK수량 계산
-                {
-                    if (ds.Tables[0].Rows[0][i].ToString().Equals("NG"))//NG하나라도 있음 return false다
-                        return false;
-                    else if (ds.Tables[0].Rows[0][i].ToString().Equals("OK"))//OK 카운트해라.
-                        okcnt++;
-
-                }
-
-                if (okcnt >= okcnt_cutline)//OK 수량 커트라인에 합격 했나?
-                    return true;
-                else//수량 안맞으면 NG다
-                    return false;
-
-            }
-            else//그런 바코드 데이터 한개도 없다
-                return false;
         }
 
         //cccccccccc
@@ -2420,11 +1949,11 @@ namespace KB_Data_V2
             if (name.Equals("Save1"))//32개바이트   //  D5010 라벨 부착부 Data 읽기 요구시 DB에 임펠러 / 어퍼 바코드 저장함.
             {
                 //Delay( 500 );
-               // MessageBox.Show("save1");
+                MessageBox.Show("save1");
                 string barcode2 = data2;  // 임펠라
                 string barcode3 = data3;  // 어퍼
-                //string barcode4 = data11;  // 특성 저항 판정
-                //string barcode5 = data12;  // 특성 저항 검사 측정값
+                string barcode4 = data7;  // 특성 저항 판정
+                string barcode5 = data8;  // 특성 저항 검사 측정값
 
 
                 //LastSavedBarcode2 = barcode2;
@@ -2456,15 +1985,15 @@ namespace KB_Data_V2
                       "Model", ModelNamelbl.Text,
 
                         "c1", decision_str[15],
+
                         "c14", data5,
                         "c15", data6,
                         "c16", data7,
                         "c17", data8,
                         "c18", data9,
-                        "c24", data11,
-                        "c25", data12,
 
-                       //"c27", data4,
+                        "c24", barcode4,
+                        "c25", barcode5,
 
                         "c180", data10
 
@@ -2475,7 +2004,7 @@ namespace KB_Data_V2
                         {
                             Log_K.WriteLog(log_lst, Mainpath, "DB데이터 없음 인서트 완료");
                             Log_K.WriteLog(log_lst, Mainpath, "임펠라바코드 / 어퍼바코드 / 결과 / 측정값 / #50스페이서측정 / #90스페이서측정 / 베어링 거리 / 베어링 하중 / 스토퍼 높이 / 특성 저항 판정 / 특성저항 검사 측정값");
-                            Log_K.WriteLog(log_lst, Mainpath, barcode2 + "/" + barcode3 + "/" + decision_str[15] + "/" + data5 + "/" + data6 + "/" + data7 + "/" + data8 + "/" + data9 + "/" + data10 + "/" + data11 + "/" + data12);
+                            Log_K.WriteLog(log_lst, Mainpath, barcode2 + "/" + barcode3 + "/" + decision_str[15] + "/" + data5 + "/" + data6 + "/" + data7 + "/" + data8 + "/" + data9 + "/" + data10 + "/" + barcode4 + "/" +barcode5);
                         }));
                     }
 
@@ -2489,26 +2018,16 @@ namespace KB_Data_V2
 
                       "Model", ModelNamelbl.Text,
 
-                       //"c1", decision_str[15],
-                       //"c14", data5,
-                       //"c15", data6,
-                       //"c16", data7,
-                       //"c17", data8,         
-                       // "c18", data9,
-                       // "c24", barcode4,
-                       // "c25", barcode5,
-                       // "c180", data10
-                       //-------------------
-                       "c1", decision_str[15],
+                        "c1", decision_str[15],
+
                         "c14", data5,
                         "c15", data6,
                         "c16", data7,
                         "c17", data8,
                         "c18", data9,
-                        "c24", data11,
-                        "c25", data12,
 
-                       // "c27", data4,
+                        "c24", barcode4,
+                        "c25", barcode5,
 
                         "c180", data10
 
@@ -2519,7 +2038,7 @@ namespace KB_Data_V2
                         {
                             Log_K.WriteLog(log_lst, Mainpath, "DB데이터 있음 업데이트 완료");
                             Log_K.WriteLog(log_lst, Mainpath, "임펠라바코드 / 어퍼바코드 / 결과 / 측정값 / #50스페이서측정 / #90스페이서측정 / 베어링 거리 / 베어링 하중 / 스토퍼 높이 / 특성 저항 판정 / 특성저항 검사 측정값");
-                            Log_K.WriteLog(log_lst, Mainpath, barcode2 + "/" + barcode3 + "/" + decision_str[15] + "/" + data5 + "/" + data6 + "/" + data7 + "/" + data8 + "/" + data9 + "/" + data10 + "/" + data11 + "/" + data12);
+                            Log_K.WriteLog(log_lst, Mainpath, barcode2 + "/" + barcode3 + "/" + decision_str[15] + "/" + data5 + "/" + data6 + "/" + data7 + "/" + data8 + "/" + data9 + "/" + data10 + "/" + barcode4 + "/" + barcode5);
                         }));
 
                     }
@@ -2970,13 +2489,7 @@ namespace KB_Data_V2
                 try
                 {
                     int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                    string i = data4;
-                    //추가 저항 검사, 판정값 db에서 받아서 값 저장
-                    string c24 = sql.ExecuteQuery_Select_Row1Col1("SELECT c24 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                    string c25 = sql.ExecuteQuery_Select_Row1Col1("SELECT c25 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                    // string c257 = SQLiteCMD_K.SelectCount_InsRow("table1", "c24", barcode1);
-                    data3 = c24;
-                    data4 = c25;
+
 
                     if (rows == 0)
                     {
@@ -2986,11 +2499,8 @@ namespace KB_Data_V2
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
 
-                       "c24", data3,
-                     "c25", data4,
-
-                      
-
+                      "c24", data3,
+                      "c25", data4,
                       "c26", data5,
                       "c27", data6,
                       "c28", data7,
@@ -3005,15 +2515,10 @@ namespace KB_Data_V2
                     else
                     {
                         string cmd = SQLCMD.MakeUpdateCmdSentence_where_equals(sql.table, "barcode1", barcode1, "",
-                      "Datetime", Dtime.Now(Dtime.StringType.ForDatum),                     
+                      "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
-
-                       "c24", data3,
-                       "c25", data4,
-
-                      "c24", c24,
-                      "c25", c25,
-
+                      "c24", data3,
+                      "c25", data4,
                       "c26", data5,
                       "c27", data6,
                       "c28", data7,
@@ -3024,7 +2529,6 @@ namespace KB_Data_V2
 
                     }
 
-                   
 
                     this.Invoke(new dele(() =>
                     {
@@ -3044,23 +2548,7 @@ namespace KB_Data_V2
                         GridMaster.Color_Painting(dgvD0, line);
 
                     }));
-                    //if (data7 != "" && data8 != "")
-                    //{
-                    ////    plc2.MCWrite(8021, Convert.ToInt32(data3));// 특성 검사 저항 판정
-                       // plc2.MCWrite(8022, Convert.ToInt32(data4));// 특성 검사 저항 측정값
-                   // }
-                   // else
-                    //{
-                       // plc2.MCWrite(8021, 0);// 특성 검사 저항 판정
-                       // plc2.MCWrite(8022, 0);// 특성 검사 저항 측정값
-                    //}
 
-                    
-                       // plc2.MCWrite(8021, Convert.ToInt32(data3));// 특성 검사 저항 판정
-                        //plc2.MCWrite(8022, Convert.ToInt32(data4));// 특성 검사 저항 측정값
-                   
-                    
-                    
 
                 }
                 catch (Exception exc)
@@ -3069,36 +2557,9 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터1 저장  ERROR");
                 }
 
-                //판정값 1과 2로 바꾸기
-                int data3dec;
-                if (data3 == "OK")
-                    data3dec = 1;
-
-                else
-                    data3dec = 2;
-                plc2.MCWrite(8021, data3dec);// 특성 검사 저항 판정
-
-
-                if (data4 != "")
-                {
-
-                    // 더블워드여서 데이터 2개로 놔눠서 전송
-                    double data4d = Convert.ToDouble(data4) * 100000;
-                    string fdata4 = data4d.ToString().Substring(0, 2);
-                    string bdata4 = data4d.ToString().Substring(2, 4);
-
-                    //소수점을 두개로 놔누어서 전송
-                    plc2.MCWrite(8022, Convert.ToInt32(fdata4));
-                    plc2.MCWrite(8023, Convert.ToInt32(bdata4));
-                }
-                else
-                {
-                    plc2.MCWrite(8022, 0);
-                    plc2.MCWrite(8023, 0);
-                }
 
                 plc2.MCWrite(8020, 1);//저장했습니다.
-                
+
 
 
                 //this.Invoke( new dele( ( ) =>
@@ -3117,17 +2578,12 @@ namespace KB_Data_V2
             {
                 Delay(500);
                 string barcode1 = data2;
-                string barcode2 = data6;
+
 
                 try
                 {
                     int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                    //추가 저항 검사, 판정값 db에서 받아서 값 저장
-                    string c24 = sql.ExecuteQuery_Select_Row1Col1("SELECT c24 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                    string c25 = sql.ExecuteQuery_Select_Row1Col1("SELECT c25 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                    // string c257 = SQLiteCMD_K.SelectCount_InsRow("table1", "c24", barcode1);
-                    data3 = c24;
-                    data4 = c25;
+
 
                     if (rows == 0)
                     {
@@ -3137,13 +2593,10 @@ namespace KB_Data_V2
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
 
-                     // "c24", data3,
-                      //"c25", data4,
+                      "c24", data3,
+                      "c25", data4,
                       "c26", data5,
-                     "c27", data6,
-                    // "c27", data4,
-                    //"c27",  barcode2,
-
+                      "c27", data6,
                       "c28", data7,
                       "c29", data8
 
@@ -3158,11 +2611,10 @@ namespace KB_Data_V2
                         string cmd = SQLCMD.MakeUpdateCmdSentence_where_equals(sql.table, "barcode1", barcode1, "",
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
-                     // "c24", data3,
-                     // "c25", data4,
+                      "c24", data3,
+                      "c25", data4,
                       "c26", data5,
                       "c27", data6,
-                     // "c27", data4,
                       "c28", data7,
                       "c29", data8
 
@@ -3171,7 +2623,6 @@ namespace KB_Data_V2
 
                     }
 
-                    
 
                     this.Invoke(new dele(() =>
                     {
@@ -3200,38 +2651,9 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터2 저장 ERROR");
                 }
 
-              
-
-                //판정값 1과 2로 바꾸기
-                int data3dec;
-                if (data3 == "OK")
-                    data3dec = 1;
-
-                else
-                    data3dec = 2;
-                plc2.MCWrite(8031, data3dec);// 특성 검사 저항 판정
-                
-
-                if (data4 != "")
-                {
-
-                    // 더블워드여서 데이터 2개로 놔눠서 전송
-                    double data4d = Convert.ToDouble(data4) * 100000;
-                    string fdata4 = data4d.ToString().Substring(0, 2);
-                    string bdata4 = data4d.ToString().Substring(2, 4);
-
-                    //소수점을 두개로 놔누어서 전송
-                    plc2.MCWrite(8032, Convert.ToInt32(fdata4));
-                    plc2.MCWrite(8033, Convert.ToInt32(bdata4));
-                }
-                else
-                {
-                    plc2.MCWrite(8032, 0);
-                    plc2.MCWrite(8033, 0);
-                }
 
                 plc2.MCWrite(8030, 1);//저장했습니다.
-                
+
 
             }
 
@@ -3244,13 +2666,6 @@ namespace KB_Data_V2
                 try
                 {
                     int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                    //추가 저항 검사, 판정값 db에서 받아서 값 저장
-                    string c24 = sql.ExecuteQuery_Select_Row1Col1("SELECT c24 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                    string c25 = sql.ExecuteQuery_Select_Row1Col1("SELECT c25 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                    // string c257 = SQLiteCMD_K.SelectCount_InsRow("table1", "c24", barcode1);
-                    data3 = c24;
-                    data4 = c25;
-
 
 
                     if (rows == 0)
@@ -3261,11 +2676,10 @@ namespace KB_Data_V2
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
 
-                     // "c24", data3,
-                      //"c25", data4,
+                      "c24", data3,
+                      "c25", data4,
                       "c26", data5,
                       "c27", data6,
-                     // "c27", data4,
                       "c28", data7,
                       "c29", data8
 
@@ -3280,11 +2694,10 @@ namespace KB_Data_V2
                         string cmd = SQLCMD.MakeUpdateCmdSentence_where_equals(sql.table, "barcode1", barcode1, "",
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
-                     // "c24", data3,
-                     // "c25", data4,
+                      "c24", data3,
+                      "c25", data4,
                       "c26", data5,
                       "c27", data6,
-                     // "c27", data4,
                       "c28", data7,
                       "c29", data8
 
@@ -3292,7 +2705,7 @@ namespace KB_Data_V2
                         sql.ExecuteNonQuery(cmd);
 
                     }
-                   
+
 
                     this.Invoke(new dele(() =>
                     {
@@ -3321,38 +2734,12 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터13 저장 ERROR");
 
                 }
-            
-
-                //판정값 1과 2로 바꾸기
-                int data3dec;
-                if (data3 == "OK")
-                    data3dec = 1;
-
-                else
-                    data3dec = 2;
-                plc2.MCWrite(8041, data3dec);// 특성 검사 저항 판정
 
 
-                if (data4 != "")
-                {
 
-                    // 더블워드여서 데이터 2개로 놔눠서 전송
-                    double data4d = Convert.ToDouble(data4) * 100000;
-                    string fdata4 = data4d.ToString().Substring(0, 2);
-                    string bdata4 = data4d.ToString().Substring(2, 4);
-
-                    //소수점을 두개로 놔누어서 전송
-                    plc2.MCWrite(8042, Convert.ToInt32(fdata4));
-                    plc2.MCWrite(8043, Convert.ToInt32(bdata4));
-                }
-                else
-                {
-                    plc2.MCWrite(8042, 0);
-                    plc2.MCWrite(8043, 0);
-                }
 
                 plc2.MCWrite(8040, 1);//저장했습니다.
-                
+
 
             }
 
@@ -3365,13 +2752,6 @@ namespace KB_Data_V2
                 try
                 {
                     int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                    //추가 저항 검사, 판정값 db에서 받아서 값 저장
-                    string c24 = sql.ExecuteQuery_Select_Row1Col1("SELECT c24 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                    string c25 = sql.ExecuteQuery_Select_Row1Col1("SELECT c25 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                    // string c257 = SQLiteCMD_K.SelectCount_InsRow("table1", "c24", barcode1);
-                    data3 = c24;
-                    data4 = c25;
-
 
 
                     if (rows == 0)
@@ -3382,11 +2762,10 @@ namespace KB_Data_V2
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
 
-                     // "c24", data3,
-                     // "c25", data4,
+                      "c24", data3,
+                      "c25", data4,
                       "c26", data5,
                       "c27", data6,
-                      //"c27", data4,
                       "c28", data7,
                       "c29", data8
 
@@ -3401,11 +2780,10 @@ namespace KB_Data_V2
                         string cmd = SQLCMD.MakeUpdateCmdSentence_where_equals(sql.table, "barcode1", barcode1, "",
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
-                     // "c24", data3,
-                     // "c25", data4,
+                      "c24", data3,
+                      "c25", data4,
                       "c26", data5,
                       "c27", data6,
-                      //"c27", data4,
                       "c28", data7,
                       "c29", data8
 
@@ -3414,7 +2792,6 @@ namespace KB_Data_V2
 
                     }
 
-     
 
                     this.Invoke(new dele(() =>
                     {
@@ -3443,38 +2820,8 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터4 저장 ERROR");
                 }
 
-              
-
-                //판정값 1과 2로 바꾸기
-                int data3dec;
-                if (data3 == "OK")
-                    data3dec = 1;
-
-                else
-                    data3dec = 2;
-                plc2.MCWrite(8051, data3dec);// 특성 검사 저항 판정
-
-
-                if (data4 != "")
-                {
-
-                    // 더블워드여서 데이터 2개로 놔눠서 전송
-                    double data4d = Convert.ToDouble(data4) * 100000;
-                    string fdata4 = data4d.ToString().Substring(0, 2);
-                    string bdata4 = data4d.ToString().Substring(2, 4);
-
-                    //소수점을 두개로 놔누어서 전송
-                    plc2.MCWrite(8052, Convert.ToInt32(fdata4));
-                    plc2.MCWrite(8053, Convert.ToInt32(bdata4));
-                }
-                else
-                {
-                    plc2.MCWrite(8052, 0);
-                    plc2.MCWrite(8053, 0);
-                }
-
                 plc2.MCWrite(8050, 1);//저장했습니다.
-                
+
 
             }
 
@@ -3711,7 +3058,6 @@ namespace KB_Data_V2
 
             }
 
-            //최종판정 위치 변경으로 인해 최종판정 DB저장은 전부 하지만 원래처럼 8100번지에 오케이 유무는 안날림
             if (name.Equals("BarcodeCheck4"))//32개바이트
             {
                 Delay(500);
@@ -3722,28 +3068,26 @@ namespace KB_Data_V2
                     string barcode1 = data2;
                     string res = "";
 
-                    //최종판정 위치 변경 후 삭제
-                    //try
-                    //{
-                    //    bool decision = BarcodeCheck(barcode1, "barcode1", 6);
-                    //    if (decision)
-                    //    {
-                    //        plc2.MCWrite(8100, 1);
-                    //        res = "OK";
-                    //    }
-                    //    else
-                    //    {
-                    //        plc2.MCWrite(8100, 2);
-                    //        res = "NG";
-                    //
-                    //    }
-                    //
-                    //
-                    //}
-                    //catch (Exception)
-                    //{
-                    //
-                    //}
+                    try
+                    {
+                        bool decision = BarcodeCheck(barcode1, "barcode1", 6);
+                        if (decision)
+                        {
+                            plc2.MCWrite(8100, 1);
+                            res = "OK";
+                        }
+                        else
+                        {
+                            plc2.MCWrite(8100, 2);
+                            res = "NG";
+
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+
+                    }
 
 
                     //---------------↓ 최종판정 DB에저장 ↓---------------┐
@@ -3791,11 +3135,8 @@ namespace KB_Data_V2
                         //bool decision = BarcodeCheck( barcode1, "barcode1", 6 );
                         //if ( decision )
                         //{
-
-                        //최종판정 위치 변경 후 삭제
-                        //plc2.MCWrite(8100, 1);
-                        //res = "OK";
-
+                        plc2.MCWrite(8100, 1);
+                        res = "OK";
                         //}
                         //else
                         //{
@@ -3846,70 +3187,6 @@ namespace KB_Data_V2
                     //---------------↑ 최종판정 DB에저장 ↑---------------┘
                 }
 
-
-            }
-
-            //최종 바코드만 체크
-            if (name.Equals("BarcodeCheck5"))//32개바이트
-            {
-                Delay(500);
-                //#I60 완성 로더 바코드 DATA 요구                최종판정바코드
-
-                if (!LastCheck.Checked)
-                {
-                    string barcode1 = data2;
-                    string res = "";
-
-                    try
-                    {
-                        bool decision = BarcodeCheck(barcode1, "barcode1", 6);
-                        if (decision)
-                        {
-                            plc2.MCWrite(8100, 1);
-                            res = "OK";
-                        }
-                        else
-                        {
-                            plc2.MCWrite(8100, 2);
-                            res = "NG";
-
-                        }
-
-
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                }
-
-                else
-                {
-                    string barcode1 = data2;
-                    string res = "";
-
-                    try
-                    {
-                        //bool decision = BarcodeCheck( barcode1, "barcode1", 6 );
-                        //if ( decision )
-                        //{
-                        plc2.MCWrite(8100, 1);
-                        res = "OK";
-                        //}
-                        //else
-                        //{
-                        //    plc2.MCWrite( 8100, 1 );
-                        //    res = "OK";
-
-                        //}
-
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-                }
 
             }
 
@@ -3964,7 +3241,7 @@ namespace KB_Data_V2
                     dgvES[1].Rows.Clear();
                     dgvInit("dgvH0");
 
-                    xtraTabControl1.SelectedTabPageIndex = 10;
+                    xtraTabControl1.SelectedTabPageIndex = 11;
                     es_barcode.Text = bcr;
 
                     int colcnt = dgvH0.Columns.Count;
@@ -4274,8 +3551,6 @@ namespace KB_Data_V2
                  "Model",
 
                  "c1",
-                 "c24",
-                 "c25",
 
                  "c14",
                  "c15",
@@ -4324,22 +3599,21 @@ namespace KB_Data_V2
         {
             dgvH0.Columns.Clear();
 
-           
 
             //특정 바코드 검색시
             if (NameSearchcheck.Checked)
             {
                 string selected_bcr = "";
 
-               //if (radio_bcr1.Checked)
-               //    selected_bcr = "barcode1";
-               //else if (radio_bcr2.Checked)
-               //    selected_bcr = "barcode2";
-               //else if (radio_bcr3.Checked)
-               //    selected_bcr = "barcode3";
-               //else if (radio_bcr4.Checked)
-               //    selected_bcr = "barcode4";
-               
+                if (radio_bcr1.Checked)
+                    selected_bcr = "barcode1";
+                else if (radio_bcr2.Checked)
+                    selected_bcr = "barcode2";
+                else if (radio_bcr3.Checked)
+                    selected_bcr = "barcode3";
+                //else if (radio_bcr4.Checked)
+                //    selected_bcr = "barcode4";
+
 
                 string cmd = SQLiteCMD_K.Select_Equal("table1", selected_bcr, NameSearchTB.Text,
 
@@ -4350,11 +3624,7 @@ namespace KB_Data_V2
                   "Datetime",
                                   "Model",
 
-                 "Decision",
-                 "c24",
-                 "c25",
                  "c1",
-
                  "c14",
                  "c15",
                  "c16",
@@ -4367,7 +3637,8 @@ namespace KB_Data_V2
                  "c21",
                  "c22",
                  "c23",
-                 
+                 "c24",
+                 "c25",
                  "c26",
                  "c27",
                  "c28",
@@ -4377,7 +3648,6 @@ namespace KB_Data_V2
                  "c31",
                  "c32",
                  "c33",
-                 "colIndex"
                  //"c34",
                  //"c35",
                  //"c36",
@@ -4391,72 +3661,23 @@ namespace KB_Data_V2
 
                  //"barcode4",
 
-                 //"Decision"
+                 "Decision"
 
                         );
 
                 sql.Select(dgvH0, cmd, false);
             }
-
-            //마스터 제품 검색
-            else if (MNameSearchcheck.Checked)
-            {
-
-
-                //string cmd = "SELECT * FROM table1 WHERE barcode1 LIKE 'L%'; ";
-                //"barcode3",
-                //
-                //"Datetime",
-                //"Model",
-                //
-                //"Decision",
-                //"c24",
-                //"c25",
-                //"c1",
-                //
-                //"c14",
-                //"c15",
-                //"c16",
-                //"c17",
-                //"c18",
-                //"c180",
-                //
-                //"c19",
-                //"c20",
-                //"c21",
-                //"c22",
-                //"c23",
-                //
-                //"c26",
-                //"c27",
-                //"c28",
-                //"c29",
-                //"c30",
-                //
-                //"c31",
-                //"c32",
-                //"c33"+
-                // " FROM table1 WHERE barcode1 LIKE 'L%';";
-
-
-                //sql.Select(dgvH0, cmd, false);
-
-            }
-
             else//기간검색시
             {
                 string cmd = SQLiteCMD_K.Select_Datetime("table1", "Datetime", Dtime.GetDateTime_string(Date0, Time0), Dtime.GetDateTime_string(Date1, Time1), "",
-                    
-                 "barcode1",
-                 "barcode2",
-                 "barcode3",
 
-                 "Datetime",
-                 "Model",
+                    "barcode1",
+                    "barcode2",
+                    "barcode3",
 
-                 "Decision",
-                 "c24",
-                 "c25",
+                  "Datetime",
+                                  "Model",
+
                  "c1",
 
                  "c14",
@@ -4471,7 +3692,8 @@ namespace KB_Data_V2
                  "c21",
                  "c22",
                  "c23",
-                
+                 "c24",
+                 "c25",
                  "c26",
                  "c27",
                  "c28",
@@ -4481,7 +3703,6 @@ namespace KB_Data_V2
                  "c31",
                  "c32",
                  "c33",
-                 "colIndex"
                  //"c34",
                  //"c35",
                  //"c36",
@@ -4495,7 +3716,7 @@ namespace KB_Data_V2
 
                  //"barcode4",
 
-                //"Decision"
+                 "Decision"
 
                   );
 
@@ -4515,9 +3736,9 @@ namespace KB_Data_V2
 
                 for (int i = 0; i < allcnt; i++)
                 {
-                    if (dgvH0.Rows[i].Cells[5].Value.Equals("OK"))
+                    if (dgvH0.Rows[i].Cells[27].Value.Equals("OK"))
                         okcnt++;
-                    if (dgvH0.Rows[i].Cells[5].Value.Equals("NG"))
+                    if (dgvH0.Rows[i].Cells[27].Value.Equals("NG"))
                         ngcnt++;
                 }
 
@@ -4782,15 +4003,12 @@ namespace KB_Data_V2
             string result =
             //"^XA^PW827^LL0213^FO64,0^GFA,04096,04096,00032,:Z64:eJztlE1u1DAUx5/lFm9gvKpggRKOwSJqZjEH6I5rdDkL1JgLwIUQGCHEtheoMOoFXFWoFk1j3rMdx0Mzs2FJ3oySsX/z/D78twEWW+xfjb35tZ4G3pu/uPT+dx603g+vdt09mk4DTgO3w1uaGtLgMw28Krn3PYg0Fdby3hZYDDUOW5tSsRRjKHh9WWPCx32MFV6iDNCpzpBPjBVBWWIPnabARNhDWnNKgNvgxIOLSJXxfkpPMz8mBvXYhovMpeLk3zpybXPSmVcxNe8afL4VthMUUOYCGqyGwtsKB47bgVksiY+BYIsNCuElpm9GznIBDiTybuQ3PXOAu5W5hdqHTRcKmOY3Dl2RnyfMDO4f/sUbroArfhu4wbAF1yQAhhz4nY38xch13H/kGgS1kTl2b+D1xLsoicQ1s+zWwsux/Rp85qvIecHZyOnXk8RvCm4Kvorx+U9X+JPkvqCiYvw7w6woueGkT+RYP/JbG/mYP1hO4u964lg/9U/ovuCC1No5EKF/1H+JfOwfbAUdl84C7Y8O+0c8708TlIW8yvsr1cXEK0nyQYk3IRnbMVurC5b1IT/QYcEdcVE/7TtXq1ZmLn6Qlqlt+DrlZ8/Z2QmcTPrkQdioSIOvVqXZLGSUjqYH1ISESbPFAaXTxYc4M54bWdwQdHr5wIa4WJorLgCSr+jTTLwZeL5ugg9JOB3sOizQeiis9S7fP4L+2O5eUMfl/RXFoktOq+fzLsvLbMygfci/Z+6/Xasfuf/Ptj5awwbWG/wcbTaPuVltxXt27a3va/99jjdyxb4iH/bwCvm12tqq4fO8Qn91bld7uDyN/vu4+Bj959f3A3eTv5rj9lD8+0/Eg387Xx8zKf4eDoHv9wdzuH788kP9AyM9+vvhIN/6fpbrp2CeXTF1dnXZsG+P+WKLLbbYYrP2B2qJ5/0=:21A^FO400,80^GFA,00512,00512,00008,:Z64:eJzF0LENwzAMBEASKlwmG2SFbOCV7M5dDGQxb5AVNILUsRDyEV80kAEChM0Vkig+RX5VUxvO2CmQQ6MPtPDtXGfAvd/AB9sFOHhcqaXKBiZUTVYUt4QWtvXZTd1+p2uLhIVKtc3VMIWg6rIPyukSavH/UVNmDLwy5xtz9vHTPlQ3YkjEkCnyK3zMr32c+zn39d/6AGMCf8I=:35BF^FO256,0^GFA,00768,00768,00012,:Z64:eJzVz7ENwjAQBVAjFzQoNwKLoGStFBEYUVBmFQaIZI+SDZzSFYcj5f5dmACueoV9979z/zpBeTA+Gt9e+oQnfcIRJo74cM4xibtxnMVXeizige5woVDEC4VeTlUP4pnCRY/t3CIC8xvR6mz2396C+roTtcz+3V3jNRty2sy2S0dP9LXdKXMyxmGfJXKdXNSU1I3SndxPzgddmEeB:C941" +
 
-            "^XA^PW827^LL0213^FO64,0^GFA,05120,05120,00040,:Z64:eJztlTFvI0UUx99ktR4pSB6QiKhg+1R0NMhrvoGRsI4Ci/sIQTppUyDPJBENBfkIWNCcQkFFy2100l2ZKzjR7ukK6G6iOykTvLeP/9ucBLu21ylokPbJ9lrPv/3vf968Nybqo48+/uexczvsPebVpFrJvMXMldv+jAQc5+3soJ2IBOO/2ulfF62EZn56Z8Whqg5amZTZ0SkXradUZYtjL1pW0m8T7U1xxVs/mrft/SicqfDxoag73OrIfJe27JVRVeP4HZayzJG6IvpgoF2DS4IWzohBT1RZV9/z8TDKm1yuxVoi3ITUFzPozYgOB6rJWWeCrHoZKPIUBegZ6B0Oo2YFvsaTUS57HUgfkDmAvySD1YFqcoHSIMsIJZkCL+jJmoshNTjlyQbZFD+neEJ7+dTRVGo4kFX9q3wFcZCy+REZ3OOgx6mTTW9wOicuSTEXifi7osypV5kk2pziCivkwjjoVVCMSuuEK9sck0UDGhdP9Oc0wwX1K1r9Z9xN/7EzTnuUEvX0ab3eRZPTbzjt9IE5hD99d039/uHgrzAl9NIcaw7DDRxpFz/Z+42mbir9195fqNRYJd88y3orSlf7RecYN69rTn91lVF29Iqy1f7TucxHhGJB77JiZ0/EIyVD49p6KCjeCcXTyczNvkEN4edRs++jIpUOxR6n0gy2sKceX8m8qBqc8pbH6FZPc9LZ3Y/G2fdjuof8H6G5IaE+W6BZSh+nhX2Q0yHyL4omV9aTa3NVwh+9/2T6i8OcwHgTI5b2g14UoIcZsGhmzDENW1wqR5Vil3iMMumQQn5Mq5HIgCtxRjv38dq/vwYSH3JqKFaCd0V9YESVWXP0NkLJHOibVXeGTCt65s9tnObXY/TMeBsXvem/rVGf9347t/7/Y03oW7iT2Nlf3AbrYyV2j39Y7O/vHp8dny12z751m7jk/KW3qX7Mz7hM+CLfxJmTZeCRueBLrtIu7vyyrOZ6O3cSykr0lt1ccuS5tPrx79evbfplh95PgQP0Hl6HES6bOZxkHv7Or8N8pLu4kBait+zWS9gnBfxBL+30xyERPXCjzro89Sa/8Tey3fUzRfrg4vlyua1+JrcMf8ydzz0KBn8geC5Xo5+79rfWu+G66lf749OH2N+u+sVqEtM7n8WffDqdvBvH401cH3300Ucf/038DXNIH7w=:9A88^FO300,80^GFA,00512,00512,00008,:Z64:eJzF0LENwzAMBEASKlwmG2SFbOCV7M5dDGQxb5AVNILUsRDyEV80kAEChM0Vkig+RX5VUxvO2CmQQ6MPtPDtXGfAvd/AB9sFOHhcqaXKBiZUTVYUt4QWtvXZTd1+p2uLhIVKtc3VMIWg6rIPyukSavH/UVNmDLwy5xtz9vHTPlQ3YkjEkCnyK3zMr32c+zn39d/6AGMCf8I=:35BF" + //400,
+            "^XA^PW827^LL0213^FO64,0^GFA,05120,05120,00040,:Z64:eJztlTFvI0UUx99ktR4pSB6QiKhg+1R0NMhrvoGRsI4Ci/sIQTppUyDPJBENBfkIWNCcQkFFy2100l2ZKzjR7ukK6G6iOykTvLeP/9ucBLu21ylokPbJ9lrPv/3vf968Nybqo48+/uexczvsPebVpFrJvMXMldv+jAQc5+3soJ2IBOO/2ulfF62EZn56Z8Whqg5amZTZ0SkXradUZYtjL1pW0m8T7U1xxVs/mrft/SicqfDxoag73OrIfJe27JVRVeP4HZayzJG6IvpgoF2DS4IWzohBT1RZV9/z8TDKm1yuxVoi3ITUFzPozYgOB6rJWWeCrHoZKPIUBegZ6B0Oo2YFvsaTUS57HUgfkDmAvySD1YFqcoHSIMsIJZkCL+jJmoshNTjlyQbZFD+neEJ7+dTRVGo4kFX9q3wFcZCy+REZ3OOgx6mTTW9wOicuSTEXifi7osypV5kk2pziCivkwjjoVVCMSuuEK9sck0UDGhdP9Oc0wwX1K1r9Z9xN/7EzTnuUEvX0ab3eRZPTbzjt9IE5hD99d039/uHgrzAl9NIcaw7DDRxpFz/Z+42mbir9195fqNRYJd88y3orSlf7RecYN69rTn91lVF29Iqy1f7TucxHhGJB77JiZ0/EIyVD49p6KCjeCcXTyczNvkEN4edRs++jIpUOxR6n0gy2sKceX8m8qBqc8pbH6FZPc9LZ3Y/G2fdjuof8H6G5IaE+W6BZSh+nhX2Q0yHyL4omV9aTa3NVwh+9/2T6i8OcwHgTI5b2g14UoIcZsGhmzDENW1wqR5Vil3iMMumQQn5Mq5HIgCtxRjv38dq/vwYSH3JqKFaCd0V9YESVWXP0NkLJHOibVXeGTCt65s9tnObXY/TMeBsXvem/rVGf9347t/7/Y03oW7iT2Nlf3AbrYyV2j39Y7O/vHp8dny12z751m7jk/KW3qX7Mz7hM+CLfxJmTZeCRueBLrtIu7vyyrOZ6O3cSykr0lt1ccuS5tPrx79evbfplh95PgQP0Hl6HES6bOZxkHv7Or8N8pLu4kBait+zWS9gnBfxBL+30xyERPXCjzro89Sa/8Tey3fUzRfrg4vlyua1+JrcMf8ydzz0KBn8geC5Xo5+79rfWu+G66lf749OH2N+u+sVqEtM7n8WffDqdvBvH401cH3300Ucf/038DXNIH7w=:9A88^FO400,80^GFA,00512,00512,00008,:Z64:eJzF0LENwzAMBEASKlwmG2SFbOCV7M5dDGQxb5AVNILUsRDyEV80kAEChM0Vkig+RX5VUxvO2CmQQ6MPtPDtXGfAvd/AB9sFOHhcqaXKBiZUTVYUt4QWtvXZTd1+p2uLhIVKtc3VMIWg6rIPyukSavH/UVNmDLwy5xtz9vHTPlQ3YkjEkCnyK3zMr32c+zn39d/6AGMCf8I=:35BF" + //400,
 
             "^FT68,197^A0N,33,33^FH\\^FD" + cap3 + "^FS" +
             "^FT68,126^A0N,33,33^FH\\^FD" + cap1 + "^FS" +
-
-            //"^FT550,25^A0N,23,24^FH\\^FD" + day_english + " " + count + "^FS" +  //1219 수정전
-            "^FT400,25^A0N,23,24^FH\\^FD" + day_english + " " + count + "^FS" + //수정 RLSA
-            //"^FT550,53^A0N,23,24^FH\\^FD" + barcode + "^FS" + //1219 수정전
-            "^FT400,53^A0N,23,24^FH\\^FD" + barcode + "^FS" + //수정 // 바코드
+            "^FT550,25^A0N,23,24^FH\\^FD" + day_english + " " + count + "^FS" +
+            "^FT550,53^A0N,23,24^FH\\^FD" + barcode + "^FS" +
             /*
             "^FT550,175^A0N,23,24^FH\\^FD" + day_english + " " + count + "^FS" +
             "^FT550,203^A0N,23,24^FH\\^FD" + barcode + "^FS" +
@@ -4798,12 +4016,8 @@ namespace KB_Data_V2
             //"^FT671,203^A0N,23,24^FH\\^FD" + barcode + "^FS" +
             "^FT67,159^A0N,25,24^FH\\^FD" + cap2 + "^FS" +
             "^FT275,83^A0N,17,16^FH\\^FDMADE IN KOREA^FS" +
-            "^FT308,57^A0N,37,36^FH\\^FDKBAT^FS" + //KBAT 로고
-
-           
-
-           // "^BY128,128^FT550,202^BXN,8,200,0,0,1,~" + //1219 수정전
-            "^BY128,128^FT400,202^BXN,8,200,0,0,1,~" + // 데이터매트릭스 바코드  수정
+            "^FT308,57^A0N,37,36^FH\\^FDKBAT^FS" +
+            "^BY128,128^FT550,202^BXN,8,200,0,0,1,~" +
             //"^BY128,128^FT712,149^BXN,8,200,0,0,1,~" +
             //"^BY128,128^FT812,149^BXN,8,200,0,0,1,~" +
             "^FH\\^FD" + barcode + "^FS" +
@@ -4873,7 +4087,6 @@ namespace KB_Data_V2
             "^FT138,138^A0N,22,26^FH\\^FD" + Cap2 + "^FS" +
             "^FO123,2^GB0,209,7^FS" +
             "^BY128,128^FT366,145^BXN,8,200,0,0,1,~" +  //  FT 366 클수록 오른쪽 작을수록 왼쪽
-            
             "^FH\\^FD" + barcode + "^FS" +
             "^PQ1,0,1,Y^XZ";
 
@@ -5091,17 +4304,16 @@ namespace KB_Data_V2
         {
             if (dgvP0.Rows[9].Cells[1].Value == null || dgvP0.Rows[9].Cells[1].Value.ToString().Length == 0)
             {
-                dgvP0.Rows[9].Cells[1].Value = PrintDate0.Value.ToShortDateString();
+                //dgvP0.Rows[9].Cells[1].Value = PrintDate0.Value.ToShortDateString();
                 
                 //작업자 실수로, 날짜 적용버튼 누르면 무조건 오늘으로 설정
-              //dgvP0.Rows[9].Cells[1].Value = DateTime.Now.ToString("yyyy-MM-dd");
+              dgvP0.Rows[9].Cells[1].Value = DateTime.Now.ToString("yyyy-MM-dd");
 
             }
             else if (POPUP.YesOrNo("INFO", "날짜 정보를 변경할까요?"))
             {
-                 dgvP0.Rows[9].Cells[1].Value = PrintDate0.Value.ToShortDateString();
-                //작업자 실수로, 날짜 적용버튼 누르면 무조건 오늘으로 설정
-                // dgvP0.Rows[9].Cells[1].Value = DateTime.Now.ToString("yyyy-MM-dd");
+                // dgvP0.Rows[9].Cells[1].Value = PrintDate0.Value.ToShortDateString();
+                dgvP0.Rows[9].Cells[1].Value = DateTime.Now.ToString("yyyy-MM-dd");
 
             }
         }
@@ -5384,7 +4596,7 @@ namespace KB_Data_V2
 
         //x-r 엑셀 파일이 주간과 야간 데이터를 비교하게 만들어져있음, 그래서 주/야구분이 필요
         //이 함수로 어떤 컬럼 하나의 하루치 데이터의 평균값을 구함 주간 평균 하나, 야간 평균 하나
-        public bool X_Rdata(bool Daily, string model, DateTime StartDateTime, DateTime EndDateTime, string db_column, out double row, out double datum) // row 를 int -> double 로 형변환함
+        public bool X_Rdata(bool Daily, string model, DateTime StartDateTime, DateTime EndDateTime, string db_column, out int row, out double datum)
         {
             row = 0;
             datum = 0;
@@ -5394,31 +4606,20 @@ namespace KB_Data_V2
 
             if (Daily)
             {
-
-                //X-R 변경하기 전 쿼리. [총갯수][평균] 을 출력함
-                //string query =
-                //    "SELECT COUNT(*) , AVG(first1." + db_column + ") FROM (SELECT `" + db_column + "` FROM table1 WHERE `Model`='" + model + "' AND `Datetime` > '"
-                //    + StartDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Datetime` < '"
-                //    + EndDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Decision`='OK') AS first1;";
-                //
-
-
                 //주간
-                //X-R 수정 후 값이 0이 아닌 것중에 랜덤하게 1개 출력 하는 쿼리
-                string query =
-                    "SELECT " + db_column + " FROM (SELECT `" + db_column + "` FROM table1 WHERE `Model`='" + model + "' AND `Datetime` > '"
-                    + StartDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Datetime` < '"
-                    + EndDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `"+ db_column + "`!= 0) AS first1 ORDER BY RAND() LIMIT 1;";
 
-                
+                string query =
+                    "SELECT COUNT(*) , AVG(first1." + db_column + ") FROM (SELECT `" + db_column + "` FROM table1 WHERE `Model`='" + model + "' AND `Datetime` > '"
+                    + StartDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Datetime` < '"
+                    + EndDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Decision`='OK') AS first1;";
 
                 DataSet ds = sql.ExecuteQuery(query);
                 if (ds.Tables.Count != 0 && ds.Tables[0].Rows.Count != 0)
                 {
                     try
                     {
-                        row = double.Parse(ds.Tables[0].Rows[0][0].ToString());
-                        datum = double.Parse(ds.Tables[0].Rows[0][0].ToString());
+                        row = int.Parse(ds.Tables[0].Rows[0][0].ToString());
+                        datum = double.Parse(ds.Tables[0].Rows[0][1].ToString());
                     }
                     catch (Exception)
                     {
@@ -5431,10 +4632,9 @@ namespace KB_Data_V2
             }
             else
             {
-                
+                //야간
                 DateTime EndDateTime1 = EndDateTime.AddDays(1);
 
-                //X-R 변경하기 전 쿼리. [총갯수][평균] 을 출력함
                 //string query =
                 //    "SELECT COUNT(*) , AVG(first1.data) FROM (SELECT `data` FROM table1 WHERE `Model`='" + model + "' AND `Datetime` > '"
                 //    + StartDateTime.ToString( "yyyy-MM-dd HH:mm:ss" ) + "' AND `Datetime` < '"
@@ -5442,13 +4642,10 @@ namespace KB_Data_V2
                 //    + db_column + "' AND `Inspection`='"
                 //    + inspection + "') AS first1;";
 
-
-                //야간
-                //X-R 수정 후 값이 0이 아닌 것중에 랜덤하게 1개 출력 하는 쿼리
                 string query =
-                    "SELECT " + db_column + " FROM (SELECT `" + db_column + "` FROM table1 WHERE `Model`='" + model + "' AND `Datetime` > '"
+                    "SELECT COUNT(*) , AVG(first1." + db_column + ") FROM (SELECT `" + db_column + "` FROM table1 WHERE `Model`='" + model + "' AND `Datetime` > '"
                     + StartDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Datetime` < '"
-                    + EndDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `" + db_column + "`!= 0) AS first1 ORDER BY RAND() LIMIT 1;";
+                    + EndDateTime1.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Decision`='OK') AS first1;";
 
 
 
@@ -5457,8 +4654,8 @@ namespace KB_Data_V2
                 {
                     try
                     {
-                        row = double.Parse(ds.Tables[0].Rows[0][0].ToString());
-                        datum = double.Parse(ds.Tables[0].Rows[0][0].ToString());
+                        row = int.Parse(ds.Tables[0].Rows[0][0].ToString());
+                        datum = double.Parse(ds.Tables[0].Rows[0][1].ToString());
                     }
                     catch (Exception)
                     {
@@ -5470,11 +4667,10 @@ namespace KB_Data_V2
 
             }
 
-           if (row == 0)
-               return false;
-           else
-               return true;
-                     
+            if (row == 0)
+                return false;
+            else
+                return true;
         }
 
 
@@ -5484,6 +4680,7 @@ namespace KB_Data_V2
             {
                 return;
             }
+
             try
             {
                 Process[] p = Process.GetProcessesByName("EXCEL");
@@ -5513,9 +4710,6 @@ namespace KB_Data_V2
 
                 DateTime start0 = new DateTime(Date0.Value.Year, Date0.Value.Month, Date0.Value.Day);
                 DateTime end0 = new DateTime(Date1.Value.Year, Date1.Value.Month, Date1.Value.Day);
-                Console.WriteLine(start0);
-                Console.WriteLine(end0);
-
 
                 int cnt = 0;
                 int ValueCount = 0;
@@ -5536,73 +4730,38 @@ namespace KB_Data_V2
                 {
                     cnt++;
 
-                    double row0 = 0;
+                    int row0 = 0;
                     double datum0 = 0;
 
-                    double row1 = 0;
+                    int row1 = 0;
                     double datum1 = 0;
-
-                    double row2 = 0;
-                    double datum2 = 0;
-
-                    double row3 = 0;
-                    double datum3 = 0;
-
-                    double row4 = 0;
-                    double datum4 = 0;
 
                     DateTime ins0 = new DateTime(start0.Year, start0.Month, start0.Day, daynight0.Time.Hour, daynight0.Time.Minute, daynight0.Time.Second);
                     DateTime ins1 = new DateTime(start0.Year, start0.Month, start0.Day, daynight1.Time.Hour, daynight1.Time.Minute, daynight1.Time.Second);
                     DateTime ins2 = new DateTime(start0.Year, start0.Month, start0.Day, daynight2.Time.Hour, daynight2.Time.Minute, daynight2.Time.Second);
                     DateTime ins3 = new DateTime(start0.Year, start0.Month, start0.Day, daynight3.Time.Hour, daynight3.Time.Minute, daynight3.Time.Second);
 
-                    //Console.WriteLine(ins0);
-                    //Console.WriteLine(ins1);
-                    //Console.WriteLine(ins2);
-                    //Console.WriteLine(ins3);
 
                     bool s1 = X_Rdata(true, ModelNamelbl.Text, ins0, ins1, selected_columns_name, out row0, out datum0);
-                    //bool s2 = X_Rdata(false, ModelNamelbl.Text, ins2, ins3, selected_columns_name, out row1, out datum1); 야간
+                    bool s2 = X_Rdata(false, ModelNamelbl.Text, ins2, ins3, selected_columns_name, out row1, out datum1);
 
-                    bool s2 = X_Rdata(true, ModelNamelbl.Text, ins0, ins1, selected_columns_name, out row1, out datum1);
-                    bool s3 = X_Rdata(true, ModelNamelbl.Text, ins0, ins1, selected_columns_name, out row2, out datum2);
-                    bool s4 = X_Rdata(true, ModelNamelbl.Text, ins0, ins1, selected_columns_name, out row3, out datum3);
-                    bool s5 = X_Rdata(true, ModelNamelbl.Text, ins0, ins1, selected_columns_name, out row4, out datum4);
-
-                    //Console.WriteLine(s1);
-                    //Console.WriteLine(s2);
-
-                    //x-r 수정후 값 1개만 출력하면 되니 생략
-                    //if (s1 || s2)
-                    //{
-                    //    x_rdataclass[ValueCount].datetime = start0.ToShortDateString(); 
-                    //    x_rdataclass[ValueCount].s1_data = datum0;       //x1 주간 평균
-                    //    x_rdataclass[ValueCount].s2_data = datum1;       //x2 야간 평균
-                    //    x_rdataclass[ValueCount].s1 = row0;              //x3
-                    //    x_rdataclass[ValueCount].s2 = row1;              //x4
-                    //
-                    //    ValueCount++;
-                    //
-                    //    Console.WriteLine( " - " + cnt + " - " );
-                    //    Console.WriteLine( start0.ToShortDateString( ) );
-                    //    Console.WriteLine( row0 );
-                    //    Console.WriteLine( row1 );
-                    //    Console.WriteLine( datum0 );
-                    //    Console.WriteLine( datum1 );
-                    //
-                    //}
-
-                    //날짜와, 쿼리문에서 랜덤하게 가져온 값을 저장
-                    if (s1 || s2 || s3 || s4 || s5)
+                    if (s1 || s2)
                     {
                         x_rdataclass[ValueCount].datetime = start0.ToShortDateString();
                         x_rdataclass[ValueCount].s1_data = datum0;
                         x_rdataclass[ValueCount].s2_data = datum1;
-                        x_rdataclass[ValueCount].s3_data = datum2;
-                        x_rdataclass[ValueCount].s4_data = datum3;
-                        x_rdataclass[ValueCount].s5_data = datum4;
+                        x_rdataclass[ValueCount].s1 = row0;
+                        x_rdataclass[ValueCount].s2 = row1;
 
                         ValueCount++;
+
+                        //Console.WriteLine( " - " + cnt + " - " );
+                        //Console.WriteLine( start0.ToShortDateString( ) );
+                        //Console.WriteLine( row0 );
+                        //Console.WriteLine( row1 );
+                        //Console.WriteLine( datum0 );
+                        //Console.WriteLine( datum1 );
+
                     }
 
                     start0 = start0.AddDays(1);
@@ -5614,7 +4773,7 @@ namespace KB_Data_V2
                 }
 
 
-                string path = @"D:\Database\etc\sample.xls";
+                string path = @"D:\Database\etc\sample.xlsx";
 
                 Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
                 app.Visible = false;
@@ -5626,17 +4785,11 @@ namespace KB_Data_V2
 
                 for (int i = 0; i < ValueCount; i++)
                 {
-                    //34,35,36,37줄에 랜덤하게 쿼리로 가져온 값 출력
                     ws.Cells[33, 3 + i].Value = x_rdataclass[i].datetime;
-                    ws.Cells[34, 3 + i].Value = x_rdataclass[i].s1_data.ToString("N2");       //x1
-                    ws.Cells[35, 3 + i].Value = x_rdataclass[i].s2_data.ToString("N2");       //x2
-                    ws.Cells[36, 3 + i].Value = x_rdataclass[i].s3_data.ToString("N2");       //x3
-                    ws.Cells[37, 3 + i].Value = x_rdataclass[i].s4_data.ToString("N2");       //x4
-                    ws.Cells[38, 3 + i].Value = x_rdataclass[i].s5_data.ToString("N2");       //x5
-
-                    //ws.Cells[35, 3 + i].Value = x_rdataclass[i].s2_data.ToString("N2");
-                    //ws.Cells[36, 3 + i].Value = x_rdataclass[i].s1;
-                    //ws.Cells[37, 3 + i].Value = x_rdataclass[i].s2;
+                    ws.Cells[34, 3 + i].Value = x_rdataclass[i].s1_data.ToString("N2");
+                    ws.Cells[35, 3 + i].Value = x_rdataclass[i].s2_data.ToString("N2");
+                    ws.Cells[36, 3 + i].Value = x_rdataclass[i].s1;
+                    ws.Cells[37, 3 + i].Value = x_rdataclass[i].s2;
                 }
 
                 ws.Cells[5, 3].Value = ModelNamelbl.Text;
@@ -5684,7 +4837,7 @@ namespace KB_Data_V2
                 {
                     cpk.Text = "";
                 }
-                x_r_savePATH = @"D:\Database\etc\temp\" + Dtime.Now(Dtime.StringType.ForFile) + ".xls";
+                x_r_savePATH = @"D:\Database\etc\temp\" + Dtime.Now(Dtime.StringType.ForFile) + ".xlsx";
 
                 wkb.SaveAs(x_r_savePATH);
 
@@ -5747,280 +4900,5 @@ namespace KB_Data_V2
             System.Diagnostics.Process.Start("explorer.exe", @"D:\Database\SavedData\");
         }
 
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-            dgvH0.Columns.Clear();
-
-            string cmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '2022-12-20 08:00:00' AND '2022-12-26 20:00:00' ORDER BY DATETIME ASC LIMIT 3; ";
-
-            sql.Select(dgvH0, cmd, false);
-
-            dgvInit("dgvH0");
-
-            xtraTabControl1.SelectedTabPageIndex = 2;
-
-        }
-
-        // 초중종물 버튼
-        private void simpleButton4_Click(object sender, EventArgs e)
-        {
-            dgvH1.Columns.Clear();
-            dgvH2.Columns.Clear();
-            dgvH3.Columns.Clear();
-
-           // radio_a.
-
-            xtraTabControl1.SelectedTabPageIndex = 14;
-        }
-
-        private void simpleButton11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //초중종물 조회 버튼
-        private void simpleButton29_Click(object sender, EventArgs e)
-        {
-            ////주간
-            if (radio_m.Checked)
-            {
-                //초물
-                string FirstTime = Date00.Value.ToShortDateString();
-                string FirstTime1 = FirstTime.Substring(2, 8); //연도 앞 두자리 자르기
-
-                //기존 쿼리
-                //string Fcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FirstTime1 + " 08:00:00' AND '" + FirstTime1 + " 11:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
-
-                //기존 쿼리에서 최종판정이 OK 인것으로만 출력되게 변경. 이하 모두 변경
-                string Fcmd = "SELECT * FROM (SELECT * FROM table1 WHERE `Datetime` > '" + FirstTime1 + " 08:00:00' AND `Datetime` < '" + FirstTime1 + " 11:59:59' AND `Decision`='OK') AS first1 ORDER BY DATETIME ASC LIMIT 3;";
-
-                sql.Select(dgvH1, Fcmd, false);
-
-                dgvInit("dgvH1");
-
-                //중물
-                string MiddleTime = Date00.Value.ToShortDateString();
-                string MiddleTime1 = MiddleTime.Substring(2, 8); //연도 앞 두자리 자르기
-
-                //기존
-                //string Mcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + MiddleTime1 + " 12:00:00' AND '" + MiddleTime1 + " 16:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
-
-                //변경
-                string Mcmd = "SELECT * FROM (SELECT * FROM table1 WHERE `Datetime` > '" + MiddleTime1 + " 12:00:00' AND `Datetime` < '" + MiddleTime1 + " 16:59:59' AND `Decision`='OK') AS first1 ORDER BY DATETIME ASC LIMIT 3;";
-
-                sql.Select(dgvH2, Mcmd, false);
-
-                dgvInit("dgvH2");
-
-                //종물
-                string LastTime = Date00.Value.ToShortDateString();
-                string LastTime1 = LastTime.Substring(2, 8); //연도 앞 두자리 자르기
-
-                //기존
-                //string Lcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + LastTime1 + " 17:00:00' AND '" + LastTime1 + " 23:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
-
-                //변경
-                string Lcmd = "SELECT * FROM (SELECT * FROM table1 WHERE `Datetime` > '" + LastTime1 + " 17:00:00' AND `Datetime` < '" + LastTime1 + " 23:59:59' AND `Decision`='OK') AS first1 ORDER BY DATETIME ASC LIMIT 3;";
-
-                sql.Select(dgvH3, Lcmd, false);
-
-                dgvInit("dgvH3");
-            }
-
-
-            ////야간
-            else if (radio_n.Checked)
-            {
-                //초물
-                string FirstTime = Date00.Value.ToShortDateString();
-                string FirstTime1 = FirstTime.Substring(2, 8); //연도 앞 두자리 자르기
-
-                //기존
-                //string Fcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FirstTime1 + " 20:00:00' AND '" + FirstTime1 + " 23:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
-
-                //변경
-                string Fcmd = "SELECT * FROM (SELECT * FROM table1 WHERE `Datetime` > '" + FirstTime1 + " 20:00:00' AND `Datetime` < '" + FirstTime1 + " 23:59:59' AND `Decision`='OK') AS first1 ORDER BY DATETIME ASC LIMIT 3;";
-
-                sql.Select(dgvH1, Fcmd, false);
-
-                dgvInit("dgvH1");
-
-                //중물
-                string MiddleTime = Date00.Value.ToShortDateString();
-                string MiddleTime1 = MiddleTime.Substring(2, 8); //연도 앞 두자리 자르기
-
-                //기존
-                //string Mcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + MiddleTime1 + " 00:00:00' AND '" + MiddleTime1 + " 04:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
-
-                //변경
-                string Mcmd = "SELECT * FROM (SELECT * FROM table1 WHERE `Datetime` > '" + MiddleTime1 + " 00:00:00' AND `Datetime` < '" + MiddleTime1 + " 04:59:59' AND `Decision`='OK') AS first1 ORDER BY DATETIME ASC LIMIT 3;";
-
-                sql.Select(dgvH2, Mcmd, false);
-
-                dgvInit("dgvH2");
-
-                //종물
-                string LastTime = Date00.Value.ToShortDateString();
-                string LastTime1 = LastTime.Substring(2, 8); //연도 앞 두자리 자르기
-
-                //기존
-                //string Lcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + LastTime1 + " 05:00:00' AND '" + LastTime1 + " 07:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
-
-                //변경
-                string Lcmd = "SELECT * FROM (SELECT * FROM table1 WHERE `Datetime` > '" + LastTime1 + " 05:00:00' AND `Datetime` < '" + LastTime1 + " 07:59:59' AND `Decision`='OK') AS first1 ORDER BY DATETIME ASC LIMIT 3;";
-
-                sql.Select(dgvH3, Lcmd, false);
-
-                dgvInit("dgvH3");
-            }
-
-
-            ////전체
-            else if (radio_a.Checked)
-            {
-
-                //초물
-                string FirstTime = Date00.Value.ToShortDateString();
-                string FirstTime1 = FirstTime.Substring(2, 8); //연도 앞 두자리 자르기
-
-                string Fcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FirstTime1 + " 08:00:00' AND '" + FirstTime1 + " 11:59:59' ORDER BY DATETIME ASC LIMIT 3;";
-                string Mmcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FirstTime1 + " 12:00:00' AND '" + FirstTime1 + " 16:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
-
-                
-
-                string dd = Fcmd + Mmcmd;
-                sql.Select(dgvH1, dd, false);
-
-
-                dgvInit("dgvH1");
-
-                //중물
-                string MiddleTime = Date00.Value.ToShortDateString();
-                string MiddleTime1 = MiddleTime.Substring(2, 8); //연도 앞 두자리 자르기
-
-                string Mcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + MiddleTime1 + " 12:00:00' AND '" + MiddleTime1 + " 16:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
-
-                sql.Select(dgvH2, Mcmd, false);
-
-                dgvInit("dgvH2");
-
-                //종물
-                string LastTime = Date00.Value.ToShortDateString();
-                string LastTime1 = LastTime.Substring(2, 8); //연도 앞 두자리 자르기
-
-                string Lcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + LastTime1 + " 17:00:00' AND '" + LastTime1 + " 23:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
-
-                sql.Select(dgvH3, Lcmd, false);
-
-                dgvInit("dgvH3");
-
-
-
-               ////초물
-               //string FfirstTime = Date00.Value.ToShortDateString();
-               //string FfirstTime1 = FfirstTime.Substring(2, 8); //연도 앞 두자리 자르기
-               //
-               //string Ffcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FfirstTime1 + " 20:00:00' AND '" + FfirstTime1 + " 23:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
-               //
-               //sql.Select(dgvH1, Ffcmd, false);
-               //
-               //dgvInit("dgvH1");
-               //
-               ////중물
-               //string MmiddleTime = Date00.Value.ToShortDateString();
-               //string MmiddleTime1 = MmiddleTime.Substring(2, 8); //연도 앞 두자리 자르기
-               //
-               //string Mmcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + MmiddleTime1 + " 00:00:00' AND '" + MmiddleTime1 + " 04:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
-               //
-               //sql.Select(dgvH2, Mmcmd, false);
-               //
-               //dgvInit("dgvH2");
-               //
-               ////종물
-               //string LlastTime = Date00.Value.ToShortDateString();
-               //string LlastTime1 = LlastTime.Substring(2, 8); //연도 앞 두자리 자르기
-               //
-               //string Llcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + LlastTime1 + " 05:00:00' AND '" + LlastTime1 + " 07:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
-               //
-               //sql.Select(dgvH3, Llcmd, false);
-               //
-               //dgvInit("dgvH3");
-
-
-            }
-
-
-
-
-        }
-
-        private void simpleButton31_Click(object sender, EventArgs e)
-        {
-
-            Date00.Value = DateTime.Now;
-          
-        }
-
-        //초중종물 초물 UI마스터
-        private void dgvH1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button.ToString().Equals("Right"))
-            {
-                DataGridView thisdgv = (DataGridView)sender;
-                dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
-                dgvmanager.Init += OnInit;
-                dgvmanager.Show();
-            }
-        }
-
-       
-        //초중종물 중물 UI마스터
-        private void dgvH2_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button.ToString().Equals("Right"))
-            {
-                DataGridView thisdgv = (DataGridView)sender;
-                dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
-                dgvmanager.Init += OnInit;
-                dgvmanager.Show();
-            }
-        }
-
-
-        //초중종물 종물 UI마스터
-        private void dgvH3_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button.ToString().Equals("Right"))
-            {
-                DataGridView thisdgv = (DataGridView)sender;
-                dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
-                dgvmanager.Init += OnInit;
-                dgvmanager.Show();
-            }
-        }
-
-        private void labelControl3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvH0_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            // 원하는 칼럼에 자동 번호 매기기
-            this.dgvH0.Rows[e.RowIndex].Cells[28].Value = (e.RowIndex + 1).ToString();
-        }
-
-        //이력조회에서 헤더 재 정렬시 색칠하기.
-        private void dgvH0_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            GridMaster.Color_Painting(dgvH0, 5);
-            GridMaster.Color_Painting(dgvH0, 6);
-            GridMaster.Color_Painting(dgvH0, 8);
-            GridMaster.Color_Painting(dgvH0, 15);
-            GridMaster.Color_Painting(dgvH0, 20);
-            GridMaster.Color_Painting(dgvH0, 22);
-            GridMaster.Color_Painting(dgvH0, 24);
-        }
     }
 }
