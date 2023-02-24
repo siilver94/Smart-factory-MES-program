@@ -38,7 +38,7 @@ namespace KB_Data_V2
 
         public int CurrentModelNum = -1;
         public int CurrentModelNum1 = -1;
-
+        
         string LastSavedBarcode2 = "";//가장 최근 저장된 임펠러 바코드
 
         DataGridView[] dgvES = new DataGridView[2];
@@ -829,7 +829,7 @@ namespace KB_Data_V2
 
                         for (int i = 0; i < rows; i++)
                         {
-                            dgv.Rows[i].Cells[0].Value = "D" + (i + 7000);
+                            dgv.Rows[i].Cells[0].Value = "D" + (i + 6000);
                         }
 
                         //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
@@ -900,31 +900,33 @@ namespace KB_Data_V2
                         dgv.Columns[3].HeaderText = "날짜";
                         dgv.Columns[4].HeaderText = "모델";
 
-                        dgv.Columns[5].HeaderText = "#C40 저항 검사 이상 완료";
+                        dgv.Columns[5].HeaderText = "#C30특성 검사 저항 판정";
+                        dgv.Columns[6].HeaderText = "#C30특성 저항 검사 측정값";
+                        dgv.Columns[7].HeaderText = "#C30저항 검사 이상 완료";
 
-                        dgv.Columns[6].HeaderText = "#30 UPPER CASE 공급부 PCB 측정값 최대";
-                        dgv.Columns[7].HeaderText = "#50 스페이서 측정값";
-                        dgv.Columns[8].HeaderText = "#90 스페이서 측정값";
-                        dgv.Columns[9].HeaderText = "#60 베어링압입 결과 거리";
-                        dgv.Columns[10].HeaderText = "#60 베어링압입 결과 하중";
-                        dgv.Columns[11].HeaderText = "#110 스토퍼 높이 측정값";
+                        dgv.Columns[8].HeaderText = "#30 UPPER CASE 공급부 PCB 측정값 최대";
+                        dgv.Columns[9].HeaderText = "#50 스페이서 측정값";
+                        dgv.Columns[10].HeaderText = "#90 스페이서 측정값";
+                        dgv.Columns[11].HeaderText = "#60 베어링압입 결과 거리";
+                        dgv.Columns[12].HeaderText = "#60 베어링압입 결과 하중";
+                        dgv.Columns[13].HeaderText = "#110 스토퍼 높이 측정값";
 
-                        dgv.Columns[12].HeaderText = "밸런스 결과 판정";
-                        dgv.Columns[13].HeaderText = "밸런스 1차 각도";
-                        dgv.Columns[14].HeaderText = "밸런스 1차 밸런스량";
-                        dgv.Columns[15].HeaderText = "밸런스 2차 각도";
-                        dgv.Columns[16].HeaderText = "밸런스 2차 밸런스량";
-                        dgv.Columns[17].HeaderText = "특성 검사 저항 판정";
-                        dgv.Columns[18].HeaderText = "특성 저항 검사 측정값";
-                        dgv.Columns[19].HeaderText = "특성 검사 RPM 판정";
-                        dgv.Columns[20].HeaderText = "특성 검사 RPM 측정값";
-                        dgv.Columns[21].HeaderText = "특성 검사 전류 판정";
-                        dgv.Columns[22].HeaderText = "특성 검사 전류 측정값";
-                        dgv.Columns[23].HeaderText = "성능 검사 판정";
-                        dgv.Columns[24].HeaderText = "성능 검사 RPM 측정값";
-                        dgv.Columns[25].HeaderText = "성능 검사 소음 측정값";
-                        dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
-                        dgv.Columns[27].HeaderText = "최종판정";
+                        dgv.Columns[14].HeaderText = "밸런스 결과 판정";
+                        dgv.Columns[15].HeaderText = "밸런스 1차 각도";
+                        dgv.Columns[16].HeaderText = "밸런스 1차 밸런스량";
+                        dgv.Columns[17].HeaderText = "밸런스 2차 각도";
+                        dgv.Columns[18].HeaderText = "밸런스 2차 밸런스량";
+                        dgv.Columns[19].HeaderText = "특성 검사 저항 판정";
+                        dgv.Columns[20].HeaderText = "특성 저항 검사 측정값";
+                        dgv.Columns[21].HeaderText = "특성 검사 RPM 판정";
+                        dgv.Columns[22].HeaderText = "특성 검사 RPM 측정값";
+                        dgv.Columns[23].HeaderText = "특성 검사 전류 판정";
+                        dgv.Columns[24].HeaderText = "특성 검사 전류 측정값";
+                        dgv.Columns[25].HeaderText = "성능 검사 판정";
+                        dgv.Columns[26].HeaderText = "성능 검사 RPM 측정값";
+                        dgv.Columns[27].HeaderText = "성능 검사 소음 측정값";
+                        dgv.Columns[28].HeaderText = "성능 검사 진동 측정값";
+                        dgv.Columns[29].HeaderText = "최종판정";
 
 
                         //---------------↓ OKNG 색칠 ↓---------------┐
@@ -1949,11 +1951,11 @@ namespace KB_Data_V2
             if (name.Equals("Save1"))//32개바이트   //  D5010 라벨 부착부 Data 읽기 요구시 DB에 임펠러 / 어퍼 바코드 저장함.
             {
                 //Delay( 500 );
-                MessageBox.Show("save1");
+               // MessageBox.Show("save1");
                 string barcode2 = data2;  // 임펠라
                 string barcode3 = data3;  // 어퍼
-                string barcode4 = data7;  // 특성 저항 판정
-                string barcode5 = data8;  // 특성 저항 검사 측정값
+                //string barcode4 = data11;  // 특성 저항 판정
+                //string barcode5 = data12;  // 특성 저항 검사 측정값
 
 
                 //LastSavedBarcode2 = barcode2;
@@ -1985,15 +1987,15 @@ namespace KB_Data_V2
                       "Model", ModelNamelbl.Text,
 
                         "c1", decision_str[15],
-
                         "c14", data5,
                         "c15", data6,
                         "c16", data7,
                         "c17", data8,
                         "c18", data9,
+                        "c24", data11,
+                        "c25", data12,
 
-                        "c24", barcode4,
-                        "c25", barcode5,
+                        "c27", data4,
 
                         "c180", data10
 
@@ -2004,7 +2006,7 @@ namespace KB_Data_V2
                         {
                             Log_K.WriteLog(log_lst, Mainpath, "DB데이터 없음 인서트 완료");
                             Log_K.WriteLog(log_lst, Mainpath, "임펠라바코드 / 어퍼바코드 / 결과 / 측정값 / #50스페이서측정 / #90스페이서측정 / 베어링 거리 / 베어링 하중 / 스토퍼 높이 / 특성 저항 판정 / 특성저항 검사 측정값");
-                            Log_K.WriteLog(log_lst, Mainpath, barcode2 + "/" + barcode3 + "/" + decision_str[15] + "/" + data5 + "/" + data6 + "/" + data7 + "/" + data8 + "/" + data9 + "/" + data10 + "/" + barcode4 + "/" +barcode5);
+                            Log_K.WriteLog(log_lst, Mainpath, barcode2 + "/" + barcode3 + "/" + decision_str[15] + "/" + data5 + "/" + data6 + "/" + data7 + "/" + data8 + "/" + data9 + "/" + data10 + "/" + data11 + "/" + data12);
                         }));
                     }
 
@@ -2018,16 +2020,26 @@ namespace KB_Data_V2
 
                       "Model", ModelNamelbl.Text,
 
-                        "c1", decision_str[15],
-
+                       //"c1", decision_str[15],
+                       //"c14", data5,
+                       //"c15", data6,
+                       //"c16", data7,
+                       //"c17", data8,         
+                       // "c18", data9,
+                       // "c24", barcode4,
+                       // "c25", barcode5,
+                       // "c180", data10
+                       //-------------------
+                       "c1", decision_str[15],
                         "c14", data5,
                         "c15", data6,
                         "c16", data7,
                         "c17", data8,
                         "c18", data9,
+                        "c24", data11,
+                        "c25", data12,
 
-                        "c24", barcode4,
-                        "c25", barcode5,
+                        "c27", data4,
 
                         "c180", data10
 
@@ -2038,7 +2050,7 @@ namespace KB_Data_V2
                         {
                             Log_K.WriteLog(log_lst, Mainpath, "DB데이터 있음 업데이트 완료");
                             Log_K.WriteLog(log_lst, Mainpath, "임펠라바코드 / 어퍼바코드 / 결과 / 측정값 / #50스페이서측정 / #90스페이서측정 / 베어링 거리 / 베어링 하중 / 스토퍼 높이 / 특성 저항 판정 / 특성저항 검사 측정값");
-                            Log_K.WriteLog(log_lst, Mainpath, barcode2 + "/" + barcode3 + "/" + decision_str[15] + "/" + data5 + "/" + data6 + "/" + data7 + "/" + data8 + "/" + data9 + "/" + data10 + "/" + barcode4 + "/" + barcode5);
+                            Log_K.WriteLog(log_lst, Mainpath, barcode2 + "/" + barcode3 + "/" + decision_str[15] + "/" + data5 + "/" + data6 + "/" + data7 + "/" + data8 + "/" + data9 + "/" + data10 + "/" + data11 + "/" + data12);
                         }));
 
                     }
@@ -2489,7 +2501,13 @@ namespace KB_Data_V2
                 try
                 {
                     int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-
+                   
+                    //추가 저항 검사, 판정값 db에서 받아서 값 저장
+                    string c24 = sql.ExecuteQuery_Select_Row1Col1("SELECT c24 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
+                    string c25 = sql.ExecuteQuery_Select_Row1Col1("SELECT c25 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
+                    // string c257 = SQLiteCMD_K.SelectCount_InsRow("table1", "c24", barcode1);
+                    data3 = c24;
+                    data4 = c25;
 
                     if (rows == 0)
                     {
@@ -2499,8 +2517,11 @@ namespace KB_Data_V2
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
 
-                      "c24", data3,
-                      "c25", data4,
+                       "c24", data3,
+                     "c25", data4,
+
+                      
+
                       "c26", data5,
                       "c27", data6,
                       "c28", data7,
@@ -2515,10 +2536,15 @@ namespace KB_Data_V2
                     else
                     {
                         string cmd = SQLCMD.MakeUpdateCmdSentence_where_equals(sql.table, "barcode1", barcode1, "",
-                      "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
+                      "Datetime", Dtime.Now(Dtime.StringType.ForDatum),                     
                       "Model", ModelNamelbl.Text,
-                      "c24", data3,
-                      "c25", data4,
+
+                       "c24", data3,
+                       "c25", data4,
+
+                      "c24", c24,
+                      "c25", c25,
+
                       "c26", data5,
                       "c27", data6,
                       "c28", data7,
@@ -2529,6 +2555,7 @@ namespace KB_Data_V2
 
                     }
 
+                   
 
                     this.Invoke(new dele(() =>
                     {
@@ -2548,7 +2575,23 @@ namespace KB_Data_V2
                         GridMaster.Color_Painting(dgvD0, line);
 
                     }));
+                    //if (data7 != "" && data8 != "")
+                    //{
+                    ////    plc2.MCWrite(8021, Convert.ToInt32(data3));// 특성 검사 저항 판정
+                       // plc2.MCWrite(8022, Convert.ToInt32(data4));// 특성 검사 저항 측정값
+                   // }
+                   // else
+                    //{
+                       // plc2.MCWrite(8021, 0);// 특성 검사 저항 판정
+                       // plc2.MCWrite(8022, 0);// 특성 검사 저항 측정값
+                    //}
 
+                    
+                       // plc2.MCWrite(8021, Convert.ToInt32(data3));// 특성 검사 저항 판정
+                        //plc2.MCWrite(8022, Convert.ToInt32(data4));// 특성 검사 저항 측정값
+                   
+                    
+                    
 
                 }
                 catch (Exception exc)
@@ -2557,9 +2600,31 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터1 저장  ERROR");
                 }
 
+                //판정값 1과 2로 바꾸기
+
+                int data3dec;
+                if (data3 == "OK")
+                    data3dec = 1;
+
+                else
+                    data3dec = 2;
+
+             
+                // 더블워드여서 데이터 2개로 놔눠서 전송
+                double data4d = Convert.ToDouble(data4) * 100000;
+                string fdata4 = data4d.ToString().Substring(0, 2);
+                string bdata4 = data4d.ToString().Substring(2, 4);
+
+
+
+                plc2.MCWrite(8021, data3dec);// 특성 검사 저항 판정
+              
+                //소수점을 두개로 놔누어서 전송
+                plc2.MCWrite(8022, Convert.ToInt32(fdata4));
+                plc2.MCWrite(8023, Convert.ToInt32(bdata4));
 
                 plc2.MCWrite(8020, 1);//저장했습니다.
-
+                
 
 
                 //this.Invoke( new dele( ( ) =>
@@ -2583,6 +2648,15 @@ namespace KB_Data_V2
                 try
                 {
                     int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
+                   
+
+                    //추가 저항 검사, 판정값 db에서 받아서 값 저장
+                    string c24 = sql.ExecuteQuery_Select_Row1Col1("SELECT c24 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
+                    string c25 = sql.ExecuteQuery_Select_Row1Col1("SELECT c25 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
+                    // string c257 = SQLiteCMD_K.SelectCount_InsRow("table1", "c24", barcode1);
+                    data3 = c24;
+                    data4 = c25;
+
 
 
                     if (rows == 0)
@@ -2623,6 +2697,7 @@ namespace KB_Data_V2
 
                     }
 
+                    
 
                     this.Invoke(new dele(() =>
                     {
@@ -2651,6 +2726,30 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터2 저장 ERROR");
                 }
 
+                //판정값 1과 2로 바꾸기
+
+                int data3dec;
+                if (data3 == "OK")
+                    data3dec = 1;
+
+                else
+                    data3dec = 2;
+
+
+                // 더블워드여서 데이터 2개로 놔눠서 전송
+                double data4d = Convert.ToDouble(data4) * 100000;
+                string fdata4 = data4d.ToString().Substring(0, 2);
+                string bdata4 = data4d.ToString().Substring(2, 4);
+
+
+
+                plc2.MCWrite(8031, data3dec);// 특성 검사 저항 판정
+
+                //소수점을 두개로 놔누어서 전송
+                plc2.MCWrite(8032, Convert.ToInt32(fdata4));
+                plc2.MCWrite(8033, Convert.ToInt32(bdata4));
+
+               
 
                 plc2.MCWrite(8030, 1);//저장했습니다.
 
@@ -2666,7 +2765,14 @@ namespace KB_Data_V2
                 try
                 {
                     int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
+                    
 
+                    //추가 저항 검사, 판정값 db에서 받아서 값 저장
+                    string c24 = sql.ExecuteQuery_Select_Row1Col1("SELECT c24 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
+                    string c25 = sql.ExecuteQuery_Select_Row1Col1("SELECT c25 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
+                    // string c257 = SQLiteCMD_K.SelectCount_InsRow("table1", "c24", barcode1);
+                    data3 = c24;
+                    data4 = c25;
 
                     if (rows == 0)
                     {
@@ -2705,7 +2811,7 @@ namespace KB_Data_V2
                         sql.ExecuteNonQuery(cmd);
 
                     }
-
+                   
 
                     this.Invoke(new dele(() =>
                     {
@@ -2735,7 +2841,30 @@ namespace KB_Data_V2
 
                 }
 
+                //판정값 1과 2로 바꾸기
 
+                int data3dec;
+                if (data3 == "OK")
+                    data3dec = 1;
+
+                else
+                    data3dec = 2;
+
+
+                // 더블워드여서 데이터 2개로 놔눠서 전송
+                double data4d = Convert.ToDouble(data4) * 100000;
+                string fdata4 = data4d.ToString().Substring(0, 2);
+                string bdata4 = data4d.ToString().Substring(2, 4);
+
+
+
+                plc2.MCWrite(8041, data3dec);// 특성 검사 저항 판정
+
+                //소수점을 두개로 놔누어서 전송
+                plc2.MCWrite(8042, Convert.ToInt32(fdata4));
+                plc2.MCWrite(8043, Convert.ToInt32(bdata4));
+
+              
 
 
                 plc2.MCWrite(8040, 1);//저장했습니다.
@@ -2752,7 +2881,14 @@ namespace KB_Data_V2
                 try
                 {
                     int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
+                   
 
+                    //추가 저항 검사, 판정값 db에서 받아서 값 저장
+                    string c24 = sql.ExecuteQuery_Select_Row1Col1("SELECT c24 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
+                    string c25 = sql.ExecuteQuery_Select_Row1Col1("SELECT c25 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
+                    // string c257 = SQLiteCMD_K.SelectCount_InsRow("table1", "c24", barcode1);
+                    data3 = c24;
+                    data4 = c25;
 
                     if (rows == 0)
                     {
@@ -2792,6 +2928,7 @@ namespace KB_Data_V2
 
                     }
 
+     
 
                     this.Invoke(new dele(() =>
                     {
@@ -2819,6 +2956,30 @@ namespace KB_Data_V2
                     InputItem(dgvD1, barcode1 + " / 특성데이터4 저장 [7] - ERROR", "NG");
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터4 저장 ERROR");
                 }
+
+                //판정값 1과 2로 바꾸기
+
+                int data3dec;
+                if (data3 == "OK")
+                    data3dec = 1;
+
+                else
+                    data3dec = 2;
+
+
+                // 더블워드여서 데이터 2개로 놔눠서 전송
+                double data4d = Convert.ToDouble(data4) * 100000;
+                string fdata4 = data4d.ToString().Substring(0, 2);
+                string bdata4 = data4d.ToString().Substring(2, 4);
+
+
+
+                plc2.MCWrite(8051, data3dec);// 특성 검사 저항 판정
+
+                //소수점을 두개로 놔누어서 전송
+                plc2.MCWrite(8052, Convert.ToInt32(fdata4));
+                plc2.MCWrite(8053, Convert.ToInt32(bdata4));
+                
 
                 plc2.MCWrite(8050, 1);//저장했습니다.
 
@@ -3070,7 +3231,7 @@ namespace KB_Data_V2
 
                     try
                     {
-                        bool decision = BarcodeCheck(barcode1, "barcode1", 6);
+                        bool decision = BarcodeCheck(barcode1, "barcode1", 5);
                         if (decision)
                         {
                             plc2.MCWrite(8100, 1);
@@ -3551,6 +3712,8 @@ namespace KB_Data_V2
                  "Model",
 
                  "c1",
+                 "c24",
+                 "c25",
 
                  "c14",
                  "c15",
@@ -3624,7 +3787,11 @@ namespace KB_Data_V2
                   "Datetime",
                                   "Model",
 
+                 
+                 "c24",
+                 "c25",
                  "c1",
+
                  "c14",
                  "c15",
                  "c16",
@@ -3637,8 +3804,7 @@ namespace KB_Data_V2
                  "c21",
                  "c22",
                  "c23",
-                 "c24",
-                 "c25",
+                 
                  "c26",
                  "c27",
                  "c28",
@@ -3678,6 +3844,9 @@ namespace KB_Data_V2
                   "Datetime",
                                   "Model",
 
+                 
+                  "c24",
+                 "c25",
                  "c1",
 
                  "c14",
@@ -3692,8 +3861,7 @@ namespace KB_Data_V2
                  "c21",
                  "c22",
                  "c23",
-                 "c24",
-                 "c25",
+                
                  "c26",
                  "c27",
                  "c28",
