@@ -2601,27 +2601,32 @@ namespace KB_Data_V2
                 }
 
                 //판정값 1과 2로 바꾸기
-
                 int data3dec;
                 if (data3 == "OK")
                     data3dec = 1;
 
                 else
                     data3dec = 2;
-
-             
-                // 더블워드여서 데이터 2개로 놔눠서 전송
-                double data4d = Convert.ToDouble(data4) * 100000;
-                string fdata4 = data4d.ToString().Substring(0, 2);
-                string bdata4 = data4d.ToString().Substring(2, 4);
-
-
-
                 plc2.MCWrite(8021, data3dec);// 특성 검사 저항 판정
-              
-                //소수점을 두개로 놔누어서 전송
-                plc2.MCWrite(8022, Convert.ToInt32(fdata4));
-                plc2.MCWrite(8023, Convert.ToInt32(bdata4));
+
+
+                if (data4 != "")
+                {
+
+                    // 더블워드여서 데이터 2개로 놔눠서 전송
+                    double data4d = Convert.ToDouble(data4) * 100000;
+                    string fdata4 = data4d.ToString().Substring(0, 2);
+                    string bdata4 = data4d.ToString().Substring(2, 4);
+
+                    //소수점을 두개로 놔누어서 전송
+                    plc2.MCWrite(8022, Convert.ToInt32(fdata4));
+                    plc2.MCWrite(8023, Convert.ToInt32(bdata4));
+                }
+                else
+                {
+                    plc2.MCWrite(8022, 0);
+                    plc2.MCWrite(8023, 0);
+                }
 
                 plc2.MCWrite(8020, 1);//저장했습니다.
                 
@@ -2726,33 +2731,37 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터2 저장 ERROR");
                 }
 
-                //판정값 1과 2로 바꾸기
 
+                //판정값 1과 2로 바꾸기
                 int data3dec;
                 if (data3 == "OK")
                     data3dec = 1;
 
                 else
                     data3dec = 2;
-
-
-                // 더블워드여서 데이터 2개로 놔눠서 전송
-                double data4d = Convert.ToDouble(data4) * 100000;
-                string fdata4 = data4d.ToString().Substring(0, 2);
-                string bdata4 = data4d.ToString().Substring(2, 4);
-
-
-
                 plc2.MCWrite(8031, data3dec);// 특성 검사 저항 판정
 
-                //소수점을 두개로 놔누어서 전송
-                plc2.MCWrite(8032, Convert.ToInt32(fdata4));
-                plc2.MCWrite(8033, Convert.ToInt32(bdata4));
 
-               
+                if (data4 != "")
+                {
+
+                    // 더블워드여서 데이터 2개로 놔눠서 전송
+                    double data4d = Convert.ToDouble(data4) * 100000;
+                    string fdata4 = data4d.ToString().Substring(0, 2);
+                    string bdata4 = data4d.ToString().Substring(2, 4);
+
+                    //소수점을 두개로 놔누어서 전송
+                    plc2.MCWrite(8032, Convert.ToInt32(fdata4));
+                    plc2.MCWrite(8033, Convert.ToInt32(bdata4));
+                }
+                else
+                {
+                    plc2.MCWrite(8032, 0);
+                    plc2.MCWrite(8033, 0);
+                }
 
                 plc2.MCWrite(8030, 1);//저장했습니다.
-
+                
 
             }
 
@@ -2841,34 +2850,37 @@ namespace KB_Data_V2
 
                 }
 
-                //판정값 1과 2로 바꾸기
 
+                //판정값 1과 2로 바꾸기
                 int data3dec;
                 if (data3 == "OK")
                     data3dec = 1;
 
                 else
                     data3dec = 2;
-
-
-                // 더블워드여서 데이터 2개로 놔눠서 전송
-                double data4d = Convert.ToDouble(data4) * 100000;
-                string fdata4 = data4d.ToString().Substring(0, 2);
-                string bdata4 = data4d.ToString().Substring(2, 4);
-
-
-
                 plc2.MCWrite(8041, data3dec);// 특성 검사 저항 판정
 
-                //소수점을 두개로 놔누어서 전송
-                plc2.MCWrite(8042, Convert.ToInt32(fdata4));
-                plc2.MCWrite(8043, Convert.ToInt32(bdata4));
 
-              
+                if (data4 != "")
+                {
 
+                    // 더블워드여서 데이터 2개로 놔눠서 전송
+                    double data4d = Convert.ToDouble(data4) * 100000;
+                    string fdata4 = data4d.ToString().Substring(0, 2);
+                    string bdata4 = data4d.ToString().Substring(2, 4);
+
+                    //소수점을 두개로 놔누어서 전송
+                    plc2.MCWrite(8042, Convert.ToInt32(fdata4));
+                    plc2.MCWrite(8043, Convert.ToInt32(bdata4));
+                }
+                else
+                {
+                    plc2.MCWrite(8042, 0);
+                    plc2.MCWrite(8043, 0);
+                }
 
                 plc2.MCWrite(8040, 1);//저장했습니다.
-
+                
 
             }
 
@@ -2956,33 +2968,39 @@ namespace KB_Data_V2
                     InputItem(dgvD1, barcode1 + " / 특성데이터4 저장 [7] - ERROR", "NG");
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터4 저장 ERROR");
                 }
+                
+
 
                 //판정값 1과 2로 바꾸기
-
                 int data3dec;
                 if (data3 == "OK")
                     data3dec = 1;
 
                 else
                     data3dec = 2;
+                plc2.MCWrite(8021, data3dec);// 특성 검사 저항 판정
 
 
-                // 더블워드여서 데이터 2개로 놔눠서 전송
-                double data4d = Convert.ToDouble(data4) * 100000;
-                string fdata4 = data4d.ToString().Substring(0, 2);
-                string bdata4 = data4d.ToString().Substring(2, 4);
+                if (data4 != "")
+                {
 
+                    // 더블워드여서 데이터 2개로 놔눠서 전송
+                    double data4d = Convert.ToDouble(data4) * 100000;
+                    string fdata4 = data4d.ToString().Substring(0, 2);
+                    string bdata4 = data4d.ToString().Substring(2, 4);
 
-
-                plc2.MCWrite(8051, data3dec);// 특성 검사 저항 판정
-
-                //소수점을 두개로 놔누어서 전송
-                plc2.MCWrite(8052, Convert.ToInt32(fdata4));
-                plc2.MCWrite(8053, Convert.ToInt32(bdata4));
-                
+                    //소수점을 두개로 놔누어서 전송
+                    plc2.MCWrite(8052, Convert.ToInt32(fdata4));
+                    plc2.MCWrite(8053, Convert.ToInt32(bdata4));
+                }
+                else
+                {
+                    plc2.MCWrite(8052, 0);
+                    plc2.MCWrite(8053, 0);
+                }
 
                 plc2.MCWrite(8050, 1);//저장했습니다.
-
+                
 
             }
 
