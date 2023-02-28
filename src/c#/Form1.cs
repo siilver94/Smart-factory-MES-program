@@ -918,15 +918,26 @@ namespace KB_Data_V2
                         dgv.Columns[18].HeaderText = "밸런스 2차 밸런스량";
                         dgv.Columns[19].HeaderText = "특성 검사 저항 판정";
                         dgv.Columns[20].HeaderText = "특성 저항 검사 측정값";
-                        dgv.Columns[21].HeaderText = "특성 검사 RPM 판정";
-                        dgv.Columns[22].HeaderText = "특성 검사 RPM 측정값";
-                        dgv.Columns[23].HeaderText = "특성 검사 전류 판정";
-                        dgv.Columns[24].HeaderText = "특성 검사 전류 측정값";
+
+                        //dgv.Columns[19].HeaderText = "특성 검사 전류 판정";
+                        //dgv.Columns[20].HeaderText = "특성 검사 전류 측정값";
+                        //dgv.Columns[21].HeaderText = "특성 검사 RPM 판정";
+                        //dgv.Columns[22].HeaderText = "특성 검사 RPM 측정값";
+                        //dgv.Columns[23].HeaderText = "성능 검사 판정";
+                        //dgv.Columns[24].HeaderText = "성능 검사 RPM 측정값";
+                        //dgv.Columns[25].HeaderText = "성능 검사 소음 측정값";
+                        //dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
+                        //dgv.Columns[27].HeaderText = "최종판정";
+
+                        dgv.Columns[21].HeaderText = "특성 검사 전류 판정";
+                        dgv.Columns[22].HeaderText = "특성 검사 전류 측정값";
+                        dgv.Columns[23].HeaderText = "특성 검사 RPM 판정";
+                        dgv.Columns[24].HeaderText = "특성 검사 RPM 측정값";
                         dgv.Columns[25].HeaderText = "성능 검사 판정";
                         dgv.Columns[26].HeaderText = "성능 검사 RPM 측정값";
                         dgv.Columns[27].HeaderText = "성능 검사 소음 측정값";
                         dgv.Columns[28].HeaderText = "성능 검사 진동 측정값";
-                        dgv.Columns[29].HeaderText = "최종판정";
+                         dgv.Columns[29].HeaderText = "최종판정";
 
 
                         //---------------↓ OKNG 색칠 ↓---------------┐
@@ -1723,7 +1734,7 @@ namespace KB_Data_V2
             //---------------↑ PLC와 통신 ↑---------------┘
 
             //불량테스트 핸디
-            handyconv = new TCPClient_HandyConverter("192.168.100.2", 1470, 500);
+            handyconv = new TCPClient_HandyConverter("192.168.13.53", 1470, 500);
             handyconv.TalkingComm += handyconv_TalkingComm;
 
             LabelPrinter = new TCPClient_LabelPrinter(printer_ip,9100, 1000);
@@ -2501,7 +2512,7 @@ namespace KB_Data_V2
                 try
                 {
                     int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                   
+                    string i = data4;
                     //추가 저항 검사, 판정값 db에서 받아서 값 저장
                     string c24 = sql.ExecuteQuery_Select_Row1Col1("SELECT c24 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
                     string c25 = sql.ExecuteQuery_Select_Row1Col1("SELECT c25 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
@@ -2648,21 +2659,17 @@ namespace KB_Data_V2
             {
                 Delay(500);
                 string barcode1 = data2;
-
+                string barcode2 = data6;
 
                 try
                 {
                     int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                   
-
                     //추가 저항 검사, 판정값 db에서 받아서 값 저장
                     string c24 = sql.ExecuteQuery_Select_Row1Col1("SELECT c24 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
                     string c25 = sql.ExecuteQuery_Select_Row1Col1("SELECT c25 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
                     // string c257 = SQLiteCMD_K.SelectCount_InsRow("table1", "c24", barcode1);
                     data3 = c24;
                     data4 = c25;
-
-
 
                     if (rows == 0)
                     {
@@ -2672,10 +2679,13 @@ namespace KB_Data_V2
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
 
-                      "c24", data3,
-                      "c25", data4,
+                     // "c24", data3,
+                      //"c25", data4,
                       "c26", data5,
-                      "c27", data6,
+                     "c27", data6,
+                    // "c27", data4,
+                    //"c27",  barcode2,
+
                       "c28", data7,
                       "c29", data8
 
@@ -2690,10 +2700,11 @@ namespace KB_Data_V2
                         string cmd = SQLCMD.MakeUpdateCmdSentence_where_equals(sql.table, "barcode1", barcode1, "",
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
-                      "c24", data3,
-                      "c25", data4,
+                     // "c24", data3,
+                     // "c25", data4,
                       "c26", data5,
                       "c27", data6,
+                     // "c27", data4,
                       "c28", data7,
                       "c29", data8
 
@@ -2731,6 +2742,7 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터2 저장 ERROR");
                 }
 
+              
 
                 //판정값 1과 2로 바꾸기
                 int data3dec;
@@ -2740,7 +2752,7 @@ namespace KB_Data_V2
                 else
                     data3dec = 2;
                 plc2.MCWrite(8031, data3dec);// 특성 검사 저항 판정
-
+                
 
                 if (data4 != "")
                 {
@@ -2774,14 +2786,14 @@ namespace KB_Data_V2
                 try
                 {
                     int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                    
-
                     //추가 저항 검사, 판정값 db에서 받아서 값 저장
                     string c24 = sql.ExecuteQuery_Select_Row1Col1("SELECT c24 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
                     string c25 = sql.ExecuteQuery_Select_Row1Col1("SELECT c25 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
                     // string c257 = SQLiteCMD_K.SelectCount_InsRow("table1", "c24", barcode1);
                     data3 = c24;
                     data4 = c25;
+
+
 
                     if (rows == 0)
                     {
@@ -2791,10 +2803,11 @@ namespace KB_Data_V2
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
 
-                      "c24", data3,
-                      "c25", data4,
+                     // "c24", data3,
+                      //"c25", data4,
                       "c26", data5,
                       "c27", data6,
+                     // "c27", data4,
                       "c28", data7,
                       "c29", data8
 
@@ -2809,10 +2822,11 @@ namespace KB_Data_V2
                         string cmd = SQLCMD.MakeUpdateCmdSentence_where_equals(sql.table, "barcode1", barcode1, "",
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
-                      "c24", data3,
-                      "c25", data4,
+                     // "c24", data3,
+                     // "c25", data4,
                       "c26", data5,
                       "c27", data6,
+                     // "c27", data4,
                       "c28", data7,
                       "c29", data8
 
@@ -2849,7 +2863,7 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터13 저장 ERROR");
 
                 }
-
+            
 
                 //판정값 1과 2로 바꾸기
                 int data3dec;
@@ -2893,14 +2907,14 @@ namespace KB_Data_V2
                 try
                 {
                     int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-                   
-
                     //추가 저항 검사, 판정값 db에서 받아서 값 저장
                     string c24 = sql.ExecuteQuery_Select_Row1Col1("SELECT c24 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
                     string c25 = sql.ExecuteQuery_Select_Row1Col1("SELECT c25 FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
                     // string c257 = SQLiteCMD_K.SelectCount_InsRow("table1", "c24", barcode1);
                     data3 = c24;
                     data4 = c25;
+
+
 
                     if (rows == 0)
                     {
@@ -2910,10 +2924,11 @@ namespace KB_Data_V2
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
 
-                      "c24", data3,
-                      "c25", data4,
+                     // "c24", data3,
+                     // "c25", data4,
                       "c26", data5,
                       "c27", data6,
+                      //"c27", data4,
                       "c28", data7,
                       "c29", data8
 
@@ -2928,10 +2943,11 @@ namespace KB_Data_V2
                         string cmd = SQLCMD.MakeUpdateCmdSentence_where_equals(sql.table, "barcode1", barcode1, "",
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
-                      "c24", data3,
-                      "c25", data4,
+                     // "c24", data3,
+                     // "c25", data4,
                       "c26", data5,
                       "c27", data6,
+                      //"c27", data4,
                       "c28", data7,
                       "c29", data8
 
@@ -2968,8 +2984,8 @@ namespace KB_Data_V2
                     InputItem(dgvD1, barcode1 + " / 특성데이터4 저장 [7] - ERROR", "NG");
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터4 저장 ERROR");
                 }
-                
 
+              
 
                 //판정값 1과 2로 바꾸기
                 int data3dec;
@@ -2978,7 +2994,7 @@ namespace KB_Data_V2
 
                 else
                     data3dec = 2;
-                plc2.MCWrite(8021, data3dec);// 특성 검사 저항 판정
+                plc2.MCWrite(8051, data3dec);// 특성 검사 저항 판정
 
 
                 if (data4 != "")
