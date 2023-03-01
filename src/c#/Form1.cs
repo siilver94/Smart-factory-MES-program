@@ -909,15 +909,15 @@ namespace KB_Data_V2
                         dgv.Columns[10].HeaderText = "#90 스페이서 측정값";
                         dgv.Columns[11].HeaderText = "#60 베어링압입 결과 거리";
                         dgv.Columns[12].HeaderText = "#60 베어링압입 결과 하중";
-                        dgv.Columns[13].HeaderText = "#110 스토퍼 높이 측정값";
+                        dgv.Columns[13].HeaderText = "#130 스토퍼 높이 측정값";
 
                         dgv.Columns[14].HeaderText = "밸런스 결과 판정";
                         dgv.Columns[15].HeaderText = "밸런스 1차 각도";
                         dgv.Columns[16].HeaderText = "밸런스 1차 밸런스량";
                         dgv.Columns[17].HeaderText = "밸런스 2차 각도";
                         dgv.Columns[18].HeaderText = "밸런스 2차 밸런스량";
-                        dgv.Columns[19].HeaderText = "특성 검사 저항 판정";
-                        dgv.Columns[20].HeaderText = "특성 저항 검사 측정값";
+                      //  dgv.Columns[19].HeaderText = "특성 검사 저항 판정";
+                       // dgv.Columns[20].HeaderText = "특성 저항 검사 측정값";
 
                         //dgv.Columns[19].HeaderText = "특성 검사 전류 판정";
                         //dgv.Columns[20].HeaderText = "특성 검사 전류 측정값";
@@ -929,23 +929,22 @@ namespace KB_Data_V2
                         //dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
                         //dgv.Columns[27].HeaderText = "최종판정";
 
+                        dgv.Columns[19].HeaderText = "특성 검사 RPM 판정"; ;
+                        dgv.Columns[20].HeaderText = "특성 검사 RPM 측정값";
                         dgv.Columns[21].HeaderText = "특성 검사 전류 판정";
                         dgv.Columns[22].HeaderText = "특성 검사 전류 측정값";
-                        dgv.Columns[23].HeaderText = "특성 검사 RPM 판정";
-                        dgv.Columns[24].HeaderText = "특성 검사 RPM 측정값";
-                        dgv.Columns[25].HeaderText = "성능 검사 판정";
-                        dgv.Columns[26].HeaderText = "성능 검사 RPM 측정값";
-                        dgv.Columns[27].HeaderText = "성능 검사 소음 측정값";
-                        dgv.Columns[28].HeaderText = "성능 검사 진동 측정값";
-                         dgv.Columns[29].HeaderText = "최종판정";
+                        dgv.Columns[23].HeaderText = "성능 검사 판정";
+                        dgv.Columns[24].HeaderText = "성능 검사 RPM 측정값";
+                        dgv.Columns[25].HeaderText = "성능 검사 소음 측정값";
+                        dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
+                        dgv.Columns[27].HeaderText = "최종판정";
 
 
                         //---------------↓ OKNG 색칠 ↓---------------┐
 
                         GridMaster.Color_Painting(dgv, 5);
-                        GridMaster.Color_Painting(dgv, 12);
-
-                        GridMaster.Color_Painting(dgv, 17);
+                        GridMaster.Color_Painting(dgv, 7);
+                        GridMaster.Color_Painting(dgv, 14);                       
                         GridMaster.Color_Painting(dgv, 19);
                         GridMaster.Color_Painting(dgv, 21);
                         GridMaster.Color_Painting(dgv, 23);
@@ -3265,7 +3264,7 @@ namespace KB_Data_V2
 
                     try
                     {
-                        bool decision = BarcodeCheck(barcode1, "barcode1", 5);
+                        bool decision = BarcodeCheck(barcode1, "barcode1", 6);
                         if (decision)
                         {
                             plc2.MCWrite(8100, 1);
@@ -3277,6 +3276,7 @@ namespace KB_Data_V2
                             res = "NG";
 
                         }
+
 
                     }
                     catch (Exception)
@@ -4210,6 +4210,7 @@ namespace KB_Data_V2
             "^FT68,197^A0N,33,33^FH\\^FD" + cap3 + "^FS" +
             "^FT68,126^A0N,33,33^FH\\^FD" + cap1 + "^FS" +
             "^FT550,25^A0N,23,24^FH\\^FD" + day_english + " " + count + "^FS" +
+
             "^FT550,53^A0N,23,24^FH\\^FD" + barcode + "^FS" +
             /*
             "^FT550,175^A0N,23,24^FH\\^FD" + day_english + " " + count + "^FS" +
