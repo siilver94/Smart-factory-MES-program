@@ -3436,7 +3436,7 @@ namespace KB_Data_V2
                     dgvES[1].Rows.Clear();
                     dgvInit("dgvH0");
 
-                    xtraTabControl1.SelectedTabPageIndex = 11;
+                    xtraTabControl1.SelectedTabPageIndex = 10;
                     es_barcode.Text = bcr;
 
                     int colcnt = dgvH0.Columns.Count;
