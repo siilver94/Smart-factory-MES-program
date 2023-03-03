@@ -870,11 +870,17 @@ namespace KB_Data_V2
                     try
                     {
                         //---------------↓ 기본 ↓---------------┐
+                        //DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
+                        //string DGV_name = dgv.Name;//적용
+                        //int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
+                        //int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "12"));//데이터가져옴
+                        //int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "12"));//데이터가져옴
+                        //GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
                         DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
                         string DGV_name = dgv.Name;//적용
-                        int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
-                        int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "12"));//데이터가져옴
-                        int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "12"));//데이터가져옴
+                        int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "20"));//데이터가져옴
+                        int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "5"));//데이터가져옴
+                        int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "5"));//데이터가져옴
                         GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
                         //---------------↑ 기본 ↑---------------┘
 
@@ -1674,7 +1680,7 @@ namespace KB_Data_V2
 
 #if Release
             string plc1_ip = "192.168.13.10";
-            string plc2_ip = "192.168.13.110";
+            string plc2_ip = "192.168.13.110";  
             string printer_ip = "192.168.13.41";
             string pc = "192.168.13.173";
 
@@ -4205,13 +4211,15 @@ namespace KB_Data_V2
             string result =
             //"^XA^PW827^LL0213^FO64,0^GFA,04096,04096,00032,:Z64:eJztlE1u1DAUx5/lFm9gvKpggRKOwSJqZjEH6I5rdDkL1JgLwIUQGCHEtheoMOoFXFWoFk1j3rMdx0Mzs2FJ3oySsX/z/D78twEWW+xfjb35tZ4G3pu/uPT+dx603g+vdt09mk4DTgO3w1uaGtLgMw28Krn3PYg0Fdby3hZYDDUOW5tSsRRjKHh9WWPCx32MFV6iDNCpzpBPjBVBWWIPnabARNhDWnNKgNvgxIOLSJXxfkpPMz8mBvXYhovMpeLk3zpybXPSmVcxNe8afL4VthMUUOYCGqyGwtsKB47bgVksiY+BYIsNCuElpm9GznIBDiTybuQ3PXOAu5W5hdqHTRcKmOY3Dl2RnyfMDO4f/sUbroArfhu4wbAF1yQAhhz4nY38xch13H/kGgS1kTl2b+D1xLsoicQ1s+zWwsux/Rp85qvIecHZyOnXk8RvCm4Kvorx+U9X+JPkvqCiYvw7w6woueGkT+RYP/JbG/mYP1hO4u964lg/9U/ovuCC1No5EKF/1H+JfOwfbAUdl84C7Y8O+0c8708TlIW8yvsr1cXEK0nyQYk3IRnbMVurC5b1IT/QYcEdcVE/7TtXq1ZmLn6Qlqlt+DrlZ8/Z2QmcTPrkQdioSIOvVqXZLGSUjqYH1ISESbPFAaXTxYc4M54bWdwQdHr5wIa4WJorLgCSr+jTTLwZeL5ugg9JOB3sOizQeiis9S7fP4L+2O5eUMfl/RXFoktOq+fzLsvLbMygfci/Z+6/Xasfuf/Ptj5awwbWG/wcbTaPuVltxXt27a3va/99jjdyxb4iH/bwCvm12tqq4fO8Qn91bld7uDyN/vu4+Bj959f3A3eTv5rj9lD8+0/Eg387Xx8zKf4eDoHv9wdzuH788kP9AyM9+vvhIN/6fpbrp2CeXTF1dnXZsG+P+WKLLbbYYrP2B2qJ5/0=:21A^FO400,80^GFA,00512,00512,00008,:Z64:eJzF0LENwzAMBEASKlwmG2SFbOCV7M5dDGQxb5AVNILUsRDyEV80kAEChM0Vkig+RX5VUxvO2CmQQ6MPtPDtXGfAvd/AB9sFOHhcqaXKBiZUTVYUt4QWtvXZTd1+p2uLhIVKtc3VMIWg6rIPyukSavH/UVNmDLwy5xtz9vHTPlQ3YkjEkCnyK3zMr32c+zn39d/6AGMCf8I=:35BF^FO256,0^GFA,00768,00768,00012,:Z64:eJzVz7ENwjAQBVAjFzQoNwKLoGStFBEYUVBmFQaIZI+SDZzSFYcj5f5dmACueoV9979z/zpBeTA+Gt9e+oQnfcIRJo74cM4xibtxnMVXeizige5woVDEC4VeTlUP4pnCRY/t3CIC8xvR6mz2396C+roTtcz+3V3jNRty2sy2S0dP9LXdKXMyxmGfJXKdXNSU1I3SndxPzgddmEeB:C941" +
 
-            "^XA^PW827^LL0213^FO64,0^GFA,05120,05120,00040,:Z64:eJztlTFvI0UUx99ktR4pSB6QiKhg+1R0NMhrvoGRsI4Ci/sIQTppUyDPJBENBfkIWNCcQkFFy2100l2ZKzjR7ukK6G6iOykTvLeP/9ucBLu21ylokPbJ9lrPv/3vf968Nybqo48+/uexczvsPebVpFrJvMXMldv+jAQc5+3soJ2IBOO/2ulfF62EZn56Z8Whqg5amZTZ0SkXradUZYtjL1pW0m8T7U1xxVs/mrft/SicqfDxoag73OrIfJe27JVRVeP4HZayzJG6IvpgoF2DS4IWzohBT1RZV9/z8TDKm1yuxVoi3ITUFzPozYgOB6rJWWeCrHoZKPIUBegZ6B0Oo2YFvsaTUS57HUgfkDmAvySD1YFqcoHSIMsIJZkCL+jJmoshNTjlyQbZFD+neEJ7+dTRVGo4kFX9q3wFcZCy+REZ3OOgx6mTTW9wOicuSTEXifi7osypV5kk2pziCivkwjjoVVCMSuuEK9sck0UDGhdP9Oc0wwX1K1r9Z9xN/7EzTnuUEvX0ab3eRZPTbzjt9IE5hD99d039/uHgrzAl9NIcaw7DDRxpFz/Z+42mbir9195fqNRYJd88y3orSlf7RecYN69rTn91lVF29Iqy1f7TucxHhGJB77JiZ0/EIyVD49p6KCjeCcXTyczNvkEN4edRs++jIpUOxR6n0gy2sKceX8m8qBqc8pbH6FZPc9LZ3Y/G2fdjuof8H6G5IaE+W6BZSh+nhX2Q0yHyL4omV9aTa3NVwh+9/2T6i8OcwHgTI5b2g14UoIcZsGhmzDENW1wqR5Vil3iMMumQQn5Mq5HIgCtxRjv38dq/vwYSH3JqKFaCd0V9YESVWXP0NkLJHOibVXeGTCt65s9tnObXY/TMeBsXvem/rVGf9347t/7/Y03oW7iT2Nlf3AbrYyV2j39Y7O/vHp8dny12z751m7jk/KW3qX7Mz7hM+CLfxJmTZeCRueBLrtIu7vyyrOZ6O3cSykr0lt1ccuS5tPrx79evbfplh95PgQP0Hl6HES6bOZxkHv7Or8N8pLu4kBait+zWS9gnBfxBL+30xyERPXCjzro89Sa/8Tey3fUzRfrg4vlyua1+JrcMf8ydzz0KBn8geC5Xo5+79rfWu+G66lf749OH2N+u+sVqEtM7n8WffDqdvBvH401cH3300Ucf/038DXNIH7w=:9A88^FO400,80^GFA,00512,00512,00008,:Z64:eJzF0LENwzAMBEASKlwmG2SFbOCV7M5dDGQxb5AVNILUsRDyEV80kAEChM0Vkig+RX5VUxvO2CmQQ6MPtPDtXGfAvd/AB9sFOHhcqaXKBiZUTVYUt4QWtvXZTd1+p2uLhIVKtc3VMIWg6rIPyukSavH/UVNmDLwy5xtz9vHTPlQ3YkjEkCnyK3zMr32c+zn39d/6AGMCf8I=:35BF" + //400,
+            "^XA^PW827^LL0213^FO64,0^GFA,05120,05120,00040,:Z64:eJztlTFvI0UUx99ktR4pSB6QiKhg+1R0NMhrvoGRsI4Ci/sIQTppUyDPJBENBfkIWNCcQkFFy2100l2ZKzjR7ukK6G6iOykTvLeP/9ucBLu21ylokPbJ9lrPv/3vf968Nybqo48+/uexczvsPebVpFrJvMXMldv+jAQc5+3soJ2IBOO/2ulfF62EZn56Z8Whqg5amZTZ0SkXradUZYtjL1pW0m8T7U1xxVs/mrft/SicqfDxoag73OrIfJe27JVRVeP4HZayzJG6IvpgoF2DS4IWzohBT1RZV9/z8TDKm1yuxVoi3ITUFzPozYgOB6rJWWeCrHoZKPIUBegZ6B0Oo2YFvsaTUS57HUgfkDmAvySD1YFqcoHSIMsIJZkCL+jJmoshNTjlyQbZFD+neEJ7+dTRVGo4kFX9q3wFcZCy+REZ3OOgx6mTTW9wOicuSTEXifi7osypV5kk2pziCivkwjjoVVCMSuuEK9sck0UDGhdP9Oc0wwX1K1r9Z9xN/7EzTnuUEvX0ab3eRZPTbzjt9IE5hD99d039/uHgrzAl9NIcaw7DDRxpFz/Z+42mbir9195fqNRYJd88y3orSlf7RecYN69rTn91lVF29Iqy1f7TucxHhGJB77JiZ0/EIyVD49p6KCjeCcXTyczNvkEN4edRs++jIpUOxR6n0gy2sKceX8m8qBqc8pbH6FZPc9LZ3Y/G2fdjuof8H6G5IaE+W6BZSh+nhX2Q0yHyL4omV9aTa3NVwh+9/2T6i8OcwHgTI5b2g14UoIcZsGhmzDENW1wqR5Vil3iMMumQQn5Mq5HIgCtxRjv38dq/vwYSH3JqKFaCd0V9YESVWXP0NkLJHOibVXeGTCt65s9tnObXY/TMeBsXvem/rVGf9347t/7/Y03oW7iT2Nlf3AbrYyV2j39Y7O/vHp8dny12z751m7jk/KW3qX7Mz7hM+CLfxJmTZeCRueBLrtIu7vyyrOZ6O3cSykr0lt1ccuS5tPrx79evbfplh95PgQP0Hl6HES6bOZxkHv7Or8N8pLu4kBait+zWS9gnBfxBL+30xyERPXCjzro89Sa/8Tey3fUzRfrg4vlyua1+JrcMf8ydzz0KBn8geC5Xo5+79rfWu+G66lf749OH2N+u+sVqEtM7n8WffDqdvBvH401cH3300Ucf/038DXNIH7w=:9A88^FO300,80^GFA,00512,00512,00008,:Z64:eJzF0LENwzAMBEASKlwmG2SFbOCV7M5dDGQxb5AVNILUsRDyEV80kAEChM0Vkig+RX5VUxvO2CmQQ6MPtPDtXGfAvd/AB9sFOHhcqaXKBiZUTVYUt4QWtvXZTd1+p2uLhIVKtc3VMIWg6rIPyukSavH/UVNmDLwy5xtz9vHTPlQ3YkjEkCnyK3zMr32c+zn39d/6AGMCf8I=:35BF" + //400,
 
             "^FT68,197^A0N,33,33^FH\\^FD" + cap3 + "^FS" +
             "^FT68,126^A0N,33,33^FH\\^FD" + cap1 + "^FS" +
-            "^FT550,25^A0N,23,24^FH\\^FD" + day_english + " " + count + "^FS" +
 
-            "^FT550,53^A0N,23,24^FH\\^FD" + barcode + "^FS" +
+            //"^FT550,25^A0N,23,24^FH\\^FD" + day_english + " " + count + "^FS" +  //1219 수정전
+            "^FT400,25^A0N,23,24^FH\\^FD" + day_english + " " + count + "^FS" + //수정 RLSA
+            //"^FT550,53^A0N,23,24^FH\\^FD" + barcode + "^FS" + //1219 수정전
+            "^FT400,53^A0N,23,24^FH\\^FD" + barcode + "^FS" + //수정 // 바코드
             /*
             "^FT550,175^A0N,23,24^FH\\^FD" + day_english + " " + count + "^FS" +
             "^FT550,203^A0N,23,24^FH\\^FD" + barcode + "^FS" +
@@ -4219,8 +4227,12 @@ namespace KB_Data_V2
             //"^FT671,203^A0N,23,24^FH\\^FD" + barcode + "^FS" +
             "^FT67,159^A0N,25,24^FH\\^FD" + cap2 + "^FS" +
             "^FT275,83^A0N,17,16^FH\\^FDMADE IN KOREA^FS" +
-            "^FT308,57^A0N,37,36^FH\\^FDKBAT^FS" +
-            "^BY128,128^FT550,202^BXN,8,200,0,0,1,~" +
+            "^FT308,57^A0N,37,36^FH\\^FDKBAT^FS" + //KBAT 로고
+
+           
+
+           // "^BY128,128^FT550,202^BXN,8,200,0,0,1,~" + //1219 수정전
+            "^BY128,128^FT400,202^BXN,8,200,0,0,1,~" + // 데이터매트릭스 바코드  수정
             //"^BY128,128^FT712,149^BXN,8,200,0,0,1,~" +
             //"^BY128,128^FT812,149^BXN,8,200,0,0,1,~" +
             "^FH\\^FD" + barcode + "^FS" +
@@ -4290,6 +4302,7 @@ namespace KB_Data_V2
             "^FT138,138^A0N,22,26^FH\\^FD" + Cap2 + "^FS" +
             "^FO123,2^GB0,209,7^FS" +
             "^BY128,128^FT366,145^BXN,8,200,0,0,1,~" +  //  FT 366 클수록 오른쪽 작을수록 왼쪽
+            
             "^FH\\^FD" + barcode + "^FS" +
             "^PQ1,0,1,Y^XZ";
 
@@ -4976,7 +4989,7 @@ namespace KB_Data_V2
                 }
 
 
-                string path = @"D:\Database\etc\sample.xlsx";
+                string path = @"D:\Database\etc\sample.xls";
 
                 Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
                 app.Visible = false;
@@ -5040,7 +5053,7 @@ namespace KB_Data_V2
                 {
                     cpk.Text = "";
                 }
-                x_r_savePATH = @"D:\Database\etc\temp\" + Dtime.Now(Dtime.StringType.ForFile) + ".xlsx";
+                x_r_savePATH = @"D:\Database\etc\temp\" + Dtime.Now(Dtime.StringType.ForFile) + ".xls";
 
                 wkb.SaveAs(x_r_savePATH);
 
@@ -5103,5 +5116,19 @@ namespace KB_Data_V2
             System.Diagnostics.Process.Start("explorer.exe", @"D:\Database\SavedData\");
         }
 
+        // 초중종물 버튼
+        private void button14_Click(object sender, EventArgs e)
+        {
+            dgvH0.Columns.Clear();
+        
+            string cmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '2022-12-20 08:00:00' AND '2022-12-26 20:00:00' ORDER BY DATETIME ASC LIMIT 3; ";
+        
+            sql.Select(dgvH0, cmd, false);
+        
+            dgvInit("dgvH0");
+        
+            xtraTabControl1.SelectedTabPageIndex = 2;
+        
+        }
     }
 }
