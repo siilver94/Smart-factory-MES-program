@@ -2011,7 +2011,7 @@ namespace KB_Data_V2
                         "c24", data11,
                         "c25", data12,
 
-                        "c27", data4,
+                       //"c27", data4,
 
                         "c180", data10
 
@@ -2055,7 +2055,7 @@ namespace KB_Data_V2
                         "c24", data11,
                         "c25", data12,
 
-                        "c27", data4,
+                       // "c27", data4,
 
                         "c180", data10
 
@@ -4520,16 +4520,17 @@ namespace KB_Data_V2
         {
             if (dgvP0.Rows[9].Cells[1].Value == null || dgvP0.Rows[9].Cells[1].Value.ToString().Length == 0)
             {
-                //dgvP0.Rows[9].Cells[1].Value = PrintDate0.Value.ToShortDateString();
+                dgvP0.Rows[9].Cells[1].Value = PrintDate0.Value.ToShortDateString();
                 
                 //작업자 실수로, 날짜 적용버튼 누르면 무조건 오늘으로 설정
-              dgvP0.Rows[9].Cells[1].Value = DateTime.Now.ToString("yyyy-MM-dd");
+              //dgvP0.Rows[9].Cells[1].Value = DateTime.Now.ToString("yyyy-MM-dd");
 
             }
             else if (POPUP.YesOrNo("INFO", "날짜 정보를 변경할까요?"))
             {
-                // dgvP0.Rows[9].Cells[1].Value = PrintDate0.Value.ToShortDateString();
-                dgvP0.Rows[9].Cells[1].Value = DateTime.Now.ToString("yyyy-MM-dd");
+                 dgvP0.Rows[9].Cells[1].Value = PrintDate0.Value.ToShortDateString();
+                //작업자 실수로, 날짜 적용버튼 누르면 무조건 오늘으로 설정
+                // dgvP0.Rows[9].Cells[1].Value = DateTime.Now.ToString("yyyy-MM-dd");
 
             }
         }
