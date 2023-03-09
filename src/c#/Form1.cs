@@ -906,22 +906,24 @@ namespace KB_Data_V2
                         dgv.Columns[3].HeaderText = "날짜";
                         dgv.Columns[4].HeaderText = "모델";
 
-                        dgv.Columns[5].HeaderText = "#C30특성 검사 저항 판정";
-                        dgv.Columns[6].HeaderText = "#C30특성 저항 검사 측정값";
-                        dgv.Columns[7].HeaderText = "#C30저항 검사 이상 완료";
+                        dgv.Columns[5].HeaderText = "최종판정";
 
-                        dgv.Columns[8].HeaderText = "#30 UPPER CASE 공급부 PCB 측정값 최대";
-                        dgv.Columns[9].HeaderText = "#50 스페이서 측정값";
-                        dgv.Columns[10].HeaderText = "#90 스페이서 측정값";
-                        dgv.Columns[11].HeaderText = "#60 베어링압입 결과 거리";
-                        dgv.Columns[12].HeaderText = "#60 베어링압입 결과 하중";
-                        dgv.Columns[13].HeaderText = "#130 스토퍼 높이 측정값";
+                        dgv.Columns[6].HeaderText = "#C30특성 검사 저항 판정";
+                        dgv.Columns[7].HeaderText = "#C30특성 저항 검사 측정값";
+                        dgv.Columns[8].HeaderText = "#C30저항 검사 이상 완료";
 
-                        dgv.Columns[14].HeaderText = "밸런스 결과 판정";
-                        dgv.Columns[15].HeaderText = "밸런스 1차 각도";
-                        dgv.Columns[16].HeaderText = "밸런스 1차 밸런스량";
-                        dgv.Columns[17].HeaderText = "밸런스 2차 각도";
-                        dgv.Columns[18].HeaderText = "밸런스 2차 밸런스량";
+                        dgv.Columns[9].HeaderText = "#30 UPPER CASE 공급부 PCB 측정값 최대";
+                        dgv.Columns[10].HeaderText = "#50 스페이서 측정값";
+                        dgv.Columns[11].HeaderText = "#90 스페이서 측정값";
+                        dgv.Columns[12].HeaderText = "#60 베어링압입 결과 거리";
+                        dgv.Columns[13].HeaderText = "#60 베어링압입 결과 하중";
+                        dgv.Columns[14].HeaderText = "#130 스토퍼 높이 측정값";
+
+                        dgv.Columns[15].HeaderText = "밸런스 결과 판정";
+                        dgv.Columns[16].HeaderText = "밸런스 1차 각도";
+                        dgv.Columns[17].HeaderText = "밸런스 1차 밸런스량";
+                        dgv.Columns[18].HeaderText = "밸런스 2차 각도";
+                        dgv.Columns[19].HeaderText = "밸런스 2차 밸런스량";
                       //  dgv.Columns[19].HeaderText = "특성 검사 저항 판정";
                        // dgv.Columns[20].HeaderText = "특성 저항 검사 측정값";
 
@@ -935,26 +937,420 @@ namespace KB_Data_V2
                         //dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
                         //dgv.Columns[27].HeaderText = "최종판정";
 
-                        dgv.Columns[19].HeaderText = "특성 검사 RPM 판정"; ;
-                        dgv.Columns[20].HeaderText = "특성 검사 RPM 측정값";
-                        dgv.Columns[21].HeaderText = "특성 검사 전류 판정";
-                        dgv.Columns[22].HeaderText = "특성 검사 전류 측정값";
-                        dgv.Columns[23].HeaderText = "성능 검사 판정";
-                        dgv.Columns[24].HeaderText = "성능 검사 RPM 측정값";
-                        dgv.Columns[25].HeaderText = "성능 검사 소음 측정값";
-                        dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
-                        dgv.Columns[27].HeaderText = "최종판정";
+                        dgv.Columns[20].HeaderText = "특성 검사 RPM 판정"; ;
+                        dgv.Columns[21].HeaderText = "특성 검사 RPM 측정값";
+                        dgv.Columns[22].HeaderText = "특성 검사 전류 판정";
+                        dgv.Columns[23].HeaderText = "특성 검사 전류 측정값";
+                        dgv.Columns[24].HeaderText = "성능 검사 판정";
+                        dgv.Columns[25].HeaderText = "성능 검사 RPM 측정값";
+                        dgv.Columns[26].HeaderText = "성능 검사 소음 측정값";
+                        dgv.Columns[27].HeaderText = "성능 검사 진동 측정값";
+
+                        // dgv.Columns[27].HeaderText = "최종판정";
 
 
                         //---------------↓ OKNG 색칠 ↓---------------┐
-
                         GridMaster.Color_Painting(dgv, 5);
-                        GridMaster.Color_Painting(dgv, 7);
-                        GridMaster.Color_Painting(dgv, 14);                       
-                        GridMaster.Color_Painting(dgv, 19);
-                        GridMaster.Color_Painting(dgv, 21);
-                        GridMaster.Color_Painting(dgv, 23);
-                        GridMaster.Color_Painting(dgv, 27);
+                        GridMaster.Color_Painting(dgv, 6);
+                        GridMaster.Color_Painting(dgv, 8);
+                        GridMaster.Color_Painting(dgv, 15);                       
+                        GridMaster.Color_Painting(dgv, 20);
+                        GridMaster.Color_Painting(dgv, 22);
+                        GridMaster.Color_Painting(dgv, 24);
+                        
+
+                        //---------------↑ OKNG 색칠 ↑---------------┘
+
+
+
+                        //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
+
+                        //---------------↓ 정렬 ↓---------------┐
+                        GridMaster.CenterAlign(dgv);
+                        //GridMaster.LeftAlign( dgv );
+                        //GridMaster.Align( dgv , 0 , DataGridViewContentAlignment.MiddleLeft );//단일 Column 정렬
+                        //---------------↑ 정렬 ↑---------------┘
+
+                        //---------------↓ 설정 ↓---------------┐
+                        dgv.ReadOnly = true;//읽기전용
+                        //GridMaster.DisableSortColumn( dgv );//오름차순 내림차순 정렬 막기
+                        //dgv.Columns[ 0 ].ReadOnly = true;//읽기전용
+                        //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
+
+                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
+                        //dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
+                        //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
+                        //dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
+                        //dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
+
+                        //---------------↑ 설정 ↑---------------┘
+
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    break;
+
+                    //초중종물 에서 초물
+                case "dgvH1":
+
+                    try
+                    {
+                        //---------------↓ 기본 ↓---------------┐
+                        //DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
+                        //string DGV_name = dgv.Name;//적용
+                        //int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
+                        //int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "12"));//데이터가져옴
+                        //int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "12"));//데이터가져옴
+                        //GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
+                        DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
+                        string DGV_name = dgv.Name;//적용
+                        int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
+                        int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "5"));//데이터가져옴
+                        int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "5"));//데이터가져옴
+                        GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
+                        //---------------↑ 기본 ↑---------------┘
+
+                        //---------------↓ 생성 ↓---------------┐
+                        string[] ColumnsName = new string[] {
+
+                        };
+                        int rows = 0;//초기 생성 Row수
+
+                        GridMaster.Init3(dgv, false, height, rows, ColumnsName);
+                        //---------------↑ 생성 ↑---------------┘
+
+                        //---------------↓ 사용자 데이터 추가 부분 ↓---------------┐
+                        //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
+                        //dgv.Rows[ 0 ].Cells[ 0 ].Value = "CORE HEIGHT 1";
+
+                        dgv.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
+                        
+                        dgv.Columns[0].HeaderText = "Index";
+                        dgv.Columns[1].HeaderText = "블로워 라벨";
+                        
+                        dgv.Columns[2].HeaderText = "임펠러 바코드";
+                        dgv.Columns[3].HeaderText = "어퍼 바코드";
+                        dgv.Columns[4].HeaderText = "날짜";
+                        dgv.Columns[5].HeaderText = "모델";
+
+                        dgv.Columns[6].HeaderText = "#C30특성 검사 저항 판정";
+                        dgv.Columns[7].HeaderText = "#C30특성 저항 검사 측정값";
+                        dgv.Columns[8].HeaderText = "#C30저항 검사 이상 완료";
+
+                        dgv.Columns[9].HeaderText = "#30 UPPER CASE 공급부 PCB 측정값 최대";
+                        dgv.Columns[10].HeaderText = "#50 스페이서 측정값";
+                        dgv.Columns[11].HeaderText = "#90 스페이서 측정값";
+                        dgv.Columns[12].HeaderText = "#60 베어링압입 결과 거리";
+                        dgv.Columns[13].HeaderText = "#60 베어링압입 결과 하중";
+                        dgv.Columns[14].HeaderText = "#130 스토퍼 높이 측정값";
+
+                        dgv.Columns[15].HeaderText = "밸런스 결과 판정";
+                        dgv.Columns[16].HeaderText = "밸런스 1차 각도";
+                        dgv.Columns[17].HeaderText = "밸런스 1차 밸런스량";
+                        dgv.Columns[18].HeaderText = "밸런스 2차 각도";
+                        dgv.Columns[19].HeaderText = "밸런스 2차 밸런스량";
+                        //  dgv.Columns[19].HeaderText = "특성 검사 저항 판정";
+                        // dgv.Columns[20].HeaderText = "특성 저항 검사 측정값";
+
+                        //dgv.Columns[19].HeaderText = "특성 검사 전류 판정";
+                        //dgv.Columns[20].HeaderText = "특성 검사 전류 측정값";
+                        //dgv.Columns[21].HeaderText = "특성 검사 RPM 판정";
+                        //dgv.Columns[22].HeaderText = "특성 검사 RPM 측정값";
+                        //dgv.Columns[23].HeaderText = "성능 검사 판정";
+                        //dgv.Columns[24].HeaderText = "성능 검사 RPM 측정값";
+                        //dgv.Columns[25].HeaderText = "성능 검사 소음 측정값";
+                        //dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
+                        //dgv.Columns[27].HeaderText = "최종판정";
+
+                        dgv.Columns[20].HeaderText = "특성 검사 RPM 판정"; ;
+                        dgv.Columns[21].HeaderText = "특성 검사 RPM 측정값";
+                        dgv.Columns[22].HeaderText = "특성 검사 전류 판정";
+                        dgv.Columns[23].HeaderText = "특성 검사 전류 측정값";
+                        dgv.Columns[24].HeaderText = "성능 검사 판정";
+                        dgv.Columns[25].HeaderText = "성능 검사 RPM 측정값";
+                        dgv.Columns[26].HeaderText = "성능 검사 소음 측정값";
+                        dgv.Columns[27].HeaderText = "성능 검사 진동 측정값";
+                        dgv.Columns[28].HeaderText = "최종판정";
+
+
+                        //컬럼 가리기
+                        this.dgvH1.Columns[0].Visible = false;
+
+                        //---------------↓ OKNG 색칠 ↓---------------┐
+
+                        GridMaster.Color_Painting(dgv, 6);
+                        GridMaster.Color_Painting(dgv, 13);
+                        GridMaster.Color_Painting(dgv, 15);
+                        GridMaster.Color_Painting(dgv, 18);
+                        GridMaster.Color_Painting(dgv, 20);
+                        GridMaster.Color_Painting(dgv, 22);
+                        GridMaster.Color_Painting(dgv, 24);
+                        GridMaster.Color_Painting(dgv, 28);
+
+                        //---------------↑ OKNG 색칠 ↑---------------┘
+
+
+
+                        //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
+
+                        //---------------↓ 정렬 ↓---------------┐
+                        GridMaster.CenterAlign(dgv);
+                        //GridMaster.LeftAlign( dgv );
+                        //GridMaster.Align( dgv , 0 , DataGridViewContentAlignment.MiddleLeft );//단일 Column 정렬
+                        //---------------↑ 정렬 ↑---------------┘
+
+                        //---------------↓ 설정 ↓---------------┐
+                        dgv.ReadOnly = true;//읽기전용
+                        //GridMaster.DisableSortColumn( dgv );//오름차순 내림차순 정렬 막기
+                        //dgv.Columns[ 0 ].ReadOnly = true;//읽기전용
+                        //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
+
+                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
+                        //dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
+                        //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
+                        //dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
+                        //dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
+
+                        //---------------↑ 설정 ↑---------------┘
+
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    break;
+
+                //초중종물 에서 중물
+                case "dgvH2":
+
+                    try
+                    {
+                        //---------------↓ 기본 ↓---------------┐
+                        //DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
+                        //string DGV_name = dgv.Name;//적용
+                        //int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
+                        //int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "12"));//데이터가져옴
+                        //int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "12"));//데이터가져옴
+                        //GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
+                        DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
+                        string DGV_name = dgv.Name;//적용
+                        int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
+                        int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "5"));//데이터가져옴
+                        int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "5"));//데이터가져옴
+                        GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
+                        //---------------↑ 기본 ↑---------------┘
+
+                        //---------------↓ 생성 ↓---------------┐
+                        string[] ColumnsName = new string[] {
+
+                        };
+                        int rows = 0;//초기 생성 Row수
+
+                        GridMaster.Init3(dgv, false, height, rows, ColumnsName);
+                        //---------------↑ 생성 ↑---------------┘
+
+                        //---------------↓ 사용자 데이터 추가 부분 ↓---------------┐
+                        //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
+                        //dgv.Rows[ 0 ].Cells[ 0 ].Value = "CORE HEIGHT 1";
+
+                        dgv.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
+
+                        dgv.Columns[0].HeaderText = "Index";
+                        dgv.Columns[1].HeaderText = "블로워 라벨";
+
+                        dgv.Columns[2].HeaderText = "임펠러 바코드";
+                        dgv.Columns[3].HeaderText = "어퍼 바코드";
+                        dgv.Columns[4].HeaderText = "날짜";
+                        dgv.Columns[5].HeaderText = "모델";
+
+                        dgv.Columns[6].HeaderText = "#C30특성 검사 저항 판정";
+                        dgv.Columns[7].HeaderText = "#C30특성 저항 검사 측정값";
+                        dgv.Columns[8].HeaderText = "#C30저항 검사 이상 완료";
+
+                        dgv.Columns[9].HeaderText = "#30 UPPER CASE 공급부 PCB 측정값 최대";
+                        dgv.Columns[10].HeaderText = "#50 스페이서 측정값";
+                        dgv.Columns[11].HeaderText = "#90 스페이서 측정값";
+                        dgv.Columns[12].HeaderText = "#60 베어링압입 결과 거리";
+                        dgv.Columns[13].HeaderText = "#60 베어링압입 결과 하중";
+                        dgv.Columns[14].HeaderText = "#130 스토퍼 높이 측정값";
+
+                        dgv.Columns[15].HeaderText = "밸런스 결과 판정";
+                        dgv.Columns[16].HeaderText = "밸런스 1차 각도";
+                        dgv.Columns[17].HeaderText = "밸런스 1차 밸런스량";
+                        dgv.Columns[18].HeaderText = "밸런스 2차 각도";
+                        dgv.Columns[19].HeaderText = "밸런스 2차 밸런스량";
+                        //  dgv.Columns[19].HeaderText = "특성 검사 저항 판정";
+                        // dgv.Columns[20].HeaderText = "특성 저항 검사 측정값";
+
+                        //dgv.Columns[19].HeaderText = "특성 검사 전류 판정";
+                        //dgv.Columns[20].HeaderText = "특성 검사 전류 측정값";
+                        //dgv.Columns[21].HeaderText = "특성 검사 RPM 판정";
+                        //dgv.Columns[22].HeaderText = "특성 검사 RPM 측정값";
+                        //dgv.Columns[23].HeaderText = "성능 검사 판정";
+                        //dgv.Columns[24].HeaderText = "성능 검사 RPM 측정값";
+                        //dgv.Columns[25].HeaderText = "성능 검사 소음 측정값";
+                        //dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
+                        //dgv.Columns[27].HeaderText = "최종판정";
+
+                        dgv.Columns[20].HeaderText = "특성 검사 RPM 판정"; ;
+                        dgv.Columns[21].HeaderText = "특성 검사 RPM 측정값";
+                        dgv.Columns[22].HeaderText = "특성 검사 전류 판정";
+                        dgv.Columns[23].HeaderText = "특성 검사 전류 측정값";
+                        dgv.Columns[24].HeaderText = "성능 검사 판정";
+                        dgv.Columns[25].HeaderText = "성능 검사 RPM 측정값";
+                        dgv.Columns[26].HeaderText = "성능 검사 소음 측정값";
+                        dgv.Columns[27].HeaderText = "성능 검사 진동 측정값";
+                        dgv.Columns[28].HeaderText = "최종판정";
+
+
+                        //컬럼 가리기
+                        this.dgvH2.Columns[0].Visible = false;
+
+                        //---------------↓ OKNG 색칠 ↓---------------┐
+
+                        GridMaster.Color_Painting(dgv, 6);
+                        GridMaster.Color_Painting(dgv, 13);
+                        GridMaster.Color_Painting(dgv, 15);
+                        GridMaster.Color_Painting(dgv, 18);
+                        GridMaster.Color_Painting(dgv, 20);
+                        GridMaster.Color_Painting(dgv, 22);
+                        GridMaster.Color_Painting(dgv, 24);
+                        GridMaster.Color_Painting(dgv, 28);
+
+                        //---------------↑ OKNG 색칠 ↑---------------┘
+
+
+
+                        //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
+
+                        //---------------↓ 정렬 ↓---------------┐
+                        GridMaster.CenterAlign(dgv);
+                        //GridMaster.LeftAlign( dgv );
+                        //GridMaster.Align( dgv , 0 , DataGridViewContentAlignment.MiddleLeft );//단일 Column 정렬
+                        //---------------↑ 정렬 ↑---------------┘
+
+                        //---------------↓ 설정 ↓---------------┐
+                        dgv.ReadOnly = true;//읽기전용
+                        //GridMaster.DisableSortColumn( dgv );//오름차순 내림차순 정렬 막기
+                        //dgv.Columns[ 0 ].ReadOnly = true;//읽기전용
+                        //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
+
+                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
+                        //dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
+                        //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
+                        //dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
+                        //dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
+
+                        //---------------↑ 설정 ↑---------------┘
+
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    break;
+
+                //초중종물 에서 종물
+                case "dgvH3":
+
+                    try
+                    {
+                        //---------------↓ 기본 ↓---------------┐
+                        //DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
+                        //string DGV_name = dgv.Name;//적용
+                        //int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
+                        //int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "12"));//데이터가져옴
+                        //int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "12"));//데이터가져옴
+                        //GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
+                        DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
+                        string DGV_name = dgv.Name;//적용
+                        int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
+                        int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "5"));//데이터가져옴
+                        int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "5"));//데이터가져옴
+                        GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
+                        //---------------↑ 기본 ↑---------------┘
+
+                        //---------------↓ 생성 ↓---------------┐
+                        string[] ColumnsName = new string[] {
+
+                        };
+                        int rows = 0;//초기 생성 Row수
+
+                        GridMaster.Init3(dgv, false, height, rows, ColumnsName);
+                        //---------------↑ 생성 ↑---------------┘
+
+                        //---------------↓ 사용자 데이터 추가 부분 ↓---------------┐
+                        //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
+                        //dgv.Rows[ 0 ].Cells[ 0 ].Value = "CORE HEIGHT 1";
+
+                        dgv.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
+
+                        dgv.Columns[0].HeaderText = "Index";
+                        dgv.Columns[1].HeaderText = "블로워 라벨";
+
+                        dgv.Columns[2].HeaderText = "임펠러 바코드";
+                        dgv.Columns[3].HeaderText = "어퍼 바코드";
+                        dgv.Columns[4].HeaderText = "날짜";
+                        dgv.Columns[5].HeaderText = "모델";
+
+                        dgv.Columns[6].HeaderText = "#C30특성 검사 저항 판정";
+                        dgv.Columns[7].HeaderText = "#C30특성 저항 검사 측정값";
+                        dgv.Columns[8].HeaderText = "#C30저항 검사 이상 완료";
+
+                        dgv.Columns[9].HeaderText = "#30 UPPER CASE 공급부 PCB 측정값 최대";
+                        dgv.Columns[10].HeaderText = "#50 스페이서 측정값";
+                        dgv.Columns[11].HeaderText = "#90 스페이서 측정값";
+                        dgv.Columns[12].HeaderText = "#60 베어링압입 결과 거리";
+                        dgv.Columns[13].HeaderText = "#60 베어링압입 결과 하중";
+                        dgv.Columns[14].HeaderText = "#130 스토퍼 높이 측정값";
+
+                        dgv.Columns[15].HeaderText = "밸런스 결과 판정";
+                        dgv.Columns[16].HeaderText = "밸런스 1차 각도";
+                        dgv.Columns[17].HeaderText = "밸런스 1차 밸런스량";
+                        dgv.Columns[18].HeaderText = "밸런스 2차 각도";
+                        dgv.Columns[19].HeaderText = "밸런스 2차 밸런스량";
+                        //  dgv.Columns[19].HeaderText = "특성 검사 저항 판정";
+                        // dgv.Columns[20].HeaderText = "특성 저항 검사 측정값";
+
+                        //dgv.Columns[19].HeaderText = "특성 검사 전류 판정";
+                        //dgv.Columns[20].HeaderText = "특성 검사 전류 측정값";
+                        //dgv.Columns[21].HeaderText = "특성 검사 RPM 판정";
+                        //dgv.Columns[22].HeaderText = "특성 검사 RPM 측정값";
+                        //dgv.Columns[23].HeaderText = "성능 검사 판정";
+                        //dgv.Columns[24].HeaderText = "성능 검사 RPM 측정값";
+                        //dgv.Columns[25].HeaderText = "성능 검사 소음 측정값";
+                        //dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
+                        //dgv.Columns[27].HeaderText = "최종판정";
+
+                        dgv.Columns[20].HeaderText = "특성 검사 RPM 판정"; ;
+                        dgv.Columns[21].HeaderText = "특성 검사 RPM 측정값";
+                        dgv.Columns[22].HeaderText = "특성 검사 전류 판정";
+                        dgv.Columns[23].HeaderText = "특성 검사 전류 측정값";
+                        dgv.Columns[24].HeaderText = "성능 검사 판정";
+                        dgv.Columns[25].HeaderText = "성능 검사 RPM 측정값";
+                        dgv.Columns[26].HeaderText = "성능 검사 소음 측정값";
+                        dgv.Columns[27].HeaderText = "성능 검사 진동 측정값";
+                        dgv.Columns[28].HeaderText = "최종판정";
+
+
+                        //컬럼 가리기
+                        this.dgvH3.Columns[0].Visible = false;
+
+                        //---------------↓ OKNG 색칠 ↓---------------┐
+
+                        GridMaster.Color_Painting(dgv, 6);
+                        GridMaster.Color_Painting(dgv, 13);
+                        GridMaster.Color_Painting(dgv, 15);
+                        GridMaster.Color_Painting(dgv, 18);
+                        GridMaster.Color_Painting(dgv, 20);
+                        GridMaster.Color_Painting(dgv, 22);
+                        GridMaster.Color_Painting(dgv, 24);
+                        GridMaster.Color_Painting(dgv, 28);
 
                         //---------------↑ OKNG 색칠 ↑---------------┘
 
@@ -1707,6 +2103,9 @@ namespace KB_Data_V2
             //dgvInit( "dgvM2" );
 
             dgvInit( "dgvH0" );
+            dgvInit("dgvH1");
+            dgvInit("dgvH2");
+            dgvInit("dgvH3");
             dgvInit( "dgvHN0" );
 
             dgvInit( "dgvP0" );
@@ -1857,7 +2256,7 @@ namespace KB_Data_V2
 
             Time0.Time = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
 
-            Time1.Time = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 20, 59, 59);
+            Time1.Time = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 23, 59, 59);
 
         }
 
@@ -3827,7 +4226,7 @@ namespace KB_Data_V2
                   "Datetime",
                                   "Model",
 
-                 
+                 "Decision",
                  "c24",
                  "c25",
                  "c1",
@@ -3853,7 +4252,7 @@ namespace KB_Data_V2
 
                  "c31",
                  "c32",
-                 "c33",
+                 "c33"
                  //"c34",
                  //"c35",
                  //"c36",
@@ -3867,7 +4266,7 @@ namespace KB_Data_V2
 
                  //"barcode4",
 
-                 "Decision"
+                 //"Decision"
 
                         );
 
@@ -3884,7 +4283,7 @@ namespace KB_Data_V2
                   "Datetime",
                                   "Model",
 
-                 
+                 "Decision",
                   "c24",
                  "c25",
                  "c1",
@@ -3910,7 +4309,7 @@ namespace KB_Data_V2
 
                  "c31",
                  "c32",
-                 "c33",
+                 "c33"
                  //"c34",
                  //"c35",
                  //"c36",
@@ -3924,7 +4323,7 @@ namespace KB_Data_V2
 
                  //"barcode4",
 
-                 "Decision"
+                //"Decision"
 
                   );
 
@@ -5117,19 +5516,119 @@ namespace KB_Data_V2
             System.Diagnostics.Process.Start("explorer.exe", @"D:\Database\SavedData\");
         }
 
-        // 초중종물 버튼
+
         private void button14_Click(object sender, EventArgs e)
         {
             dgvH0.Columns.Clear();
-        
+
             string cmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '2022-12-20 08:00:00' AND '2022-12-26 20:00:00' ORDER BY DATETIME ASC LIMIT 3; ";
-        
+
             sql.Select(dgvH0, cmd, false);
-        
+
             dgvInit("dgvH0");
-        
+
             xtraTabControl1.SelectedTabPageIndex = 2;
-        
+
+        }
+
+        // 초중종물 버튼
+        private void simpleButton4_Click(object sender, EventArgs e)
+        {
+            dgvH1.Columns.Clear();
+            dgvH2.Columns.Clear();
+            dgvH3.Columns.Clear();
+
+           // radio_a.
+
+            xtraTabControl1.SelectedTabPageIndex = 14;
+        }
+
+        private void simpleButton11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //초중종물 조회 버튼
+        private void simpleButton29_Click(object sender, EventArgs e)
+        {
+
+            //초물
+            string FirstTime = Date00.Value.ToShortDateString(); 
+            string FirstTime1 = FirstTime.Substring(2, 8); //연도 앞 두자리 자르기
+
+            string Fcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FirstTime1 + " 08:00:00' AND '" + FirstTime1 + " 12:00:00' ORDER BY DATETIME ASC LIMIT 3; ";
+           
+            sql.Select(dgvH1, Fcmd, false);
+
+            dgvInit("dgvH1");
+
+            //중물
+            string MiddleTime = Date00.Value.ToShortDateString();
+            string MiddleTime1 = FirstTime.Substring(2, 8); //연도 앞 두자리 자르기
+
+            string Mcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + MiddleTime1 + " 13:00:00' AND '" + MiddleTime1 + " 20:00:00' ORDER BY DATETIME ASC LIMIT 3; ";
+
+            sql.Select(dgvH2, Mcmd, false);
+
+            dgvInit("dgvH2");
+
+            //종물
+            string LastTime = Date00.Value.ToShortDateString();
+            string LastTime1 = FirstTime.Substring(2, 8); //연도 앞 두자리 자르기
+
+            string Lcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + LastTime1 + " 19:00:00' AND '" + LastTime1 + " 23:59:00' ORDER BY DATETIME ASC LIMIT 3; ";
+
+            sql.Select(dgvH3, Lcmd, false);
+
+            dgvInit("dgvH3");
+        }
+
+        private void simpleButton31_Click(object sender, EventArgs e)
+        {
+            SetToday();
+        }
+
+        //초중종물 초물 UI마스터
+        private void dgvH1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button.ToString().Equals("Right"))
+            {
+                DataGridView thisdgv = (DataGridView)sender;
+                dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
+                dgvmanager.Init += OnInit;
+                dgvmanager.Show();
+            }
+        }
+
+       
+        //초중종물 중물 UI마스터
+        private void dgvH2_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button.ToString().Equals("Right"))
+            {
+                DataGridView thisdgv = (DataGridView)sender;
+                dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
+                dgvmanager.Init += OnInit;
+                dgvmanager.Show();
+            }
+        }
+
+
+        //초중종물 종물 UI마스터
+        private void dgvH3_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button.ToString().Equals("Right"))
+            {
+                DataGridView thisdgv = (DataGridView)sender;
+                dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
+                dgvmanager.Init += OnInit;
+                dgvmanager.Show();
+            }
+        }
+
+        private void labelControl3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
