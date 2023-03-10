@@ -1035,6 +1035,8 @@ namespace KB_Data_V2
                         dgv.Columns[3].HeaderText = "어퍼 바코드";
                         dgv.Columns[4].HeaderText = "날짜";
                         dgv.Columns[5].HeaderText = "모델";
+                        
+                        dgv.Columns[28].DisplayIndex = 5;  //최종판정 앞으로 배치
 
                         dgv.Columns[6].HeaderText = "#C30특성 검사 저항 판정";
                         dgv.Columns[7].HeaderText = "#C30특성 저항 검사 측정값";
@@ -1167,6 +1169,8 @@ namespace KB_Data_V2
                         dgv.Columns[4].HeaderText = "날짜";
                         dgv.Columns[5].HeaderText = "모델";
 
+                        dgv.Columns[28].DisplayIndex = 5;  //최종판정 앞으로 배치
+
                         dgv.Columns[6].HeaderText = "#C30특성 검사 저항 판정";
                         dgv.Columns[7].HeaderText = "#C30특성 저항 검사 측정값";
                         dgv.Columns[8].HeaderText = "#C30저항 검사 이상 완료";
@@ -1297,6 +1301,8 @@ namespace KB_Data_V2
                         dgv.Columns[3].HeaderText = "어퍼 바코드";
                         dgv.Columns[4].HeaderText = "날짜";
                         dgv.Columns[5].HeaderText = "모델";
+
+                        dgv.Columns[28].DisplayIndex = 5; //최종판정 앞으로 배치
 
                         dgv.Columns[6].HeaderText = "#C30특성 검사 저항 판정";
                         dgv.Columns[7].HeaderText = "#C30특성 저항 검사 측정값";
