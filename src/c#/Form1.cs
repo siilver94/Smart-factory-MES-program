@@ -1187,18 +1187,7 @@ namespace KB_Data_V2
                         dgv.Columns[17].HeaderText = "밸런스 1차 밸런스량";
                         dgv.Columns[18].HeaderText = "밸런스 2차 각도";
                         dgv.Columns[19].HeaderText = "밸런스 2차 밸런스량";
-                        //  dgv.Columns[19].HeaderText = "특성 검사 저항 판정";
-                        // dgv.Columns[20].HeaderText = "특성 저항 검사 측정값";
 
-                        //dgv.Columns[19].HeaderText = "특성 검사 전류 판정";
-                        //dgv.Columns[20].HeaderText = "특성 검사 전류 측정값";
-                        //dgv.Columns[21].HeaderText = "특성 검사 RPM 판정";
-                        //dgv.Columns[22].HeaderText = "특성 검사 RPM 측정값";
-                        //dgv.Columns[23].HeaderText = "성능 검사 판정";
-                        //dgv.Columns[24].HeaderText = "성능 검사 RPM 측정값";
-                        //dgv.Columns[25].HeaderText = "성능 검사 소음 측정값";
-                        //dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
-                        //dgv.Columns[27].HeaderText = "최종판정";
 
                         dgv.Columns[20].HeaderText = "특성 검사 RPM 판정"; ;
                         dgv.Columns[21].HeaderText = "특성 검사 RPM 측정값";
