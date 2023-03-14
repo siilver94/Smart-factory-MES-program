@@ -11,6 +11,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -957,13 +958,81 @@ namespace KB_Data_V2
                         GridMaster.Color_Painting(dgv, 20);
                         GridMaster.Color_Painting(dgv, 22);
                         GridMaster.Color_Painting(dgv, 24);
-                        
+
 
                         //---------------↑ OKNG 색칠 ↑---------------┘
 
 
 
-                        //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
+                        //---------------↓ 이력조회 파트별 조회 ↓---------------┐
+
+                        if (radioButton2.Checked)   //전(어퍼케이스 조립)
+                        {
+
+                            this.dgvH0.Columns[15].Visible = false;
+                            this.dgvH0.Columns[16].Visible = false;
+                            this.dgvH0.Columns[17].Visible = false;
+                            this.dgvH0.Columns[18].Visible = false;
+                            this.dgvH0.Columns[19].Visible = false;
+                            this.dgvH0.Columns[20].Visible = false;
+                            this.dgvH0.Columns[21].Visible = false;
+                            this.dgvH0.Columns[22].Visible = false;
+                            this.dgvH0.Columns[23].Visible = false;
+                            this.dgvH0.Columns[24].Visible = false;
+                            this.dgvH0.Columns[25].Visible = false;
+                            this.dgvH0.Columns[26].Visible = false;
+                            this.dgvH0.Columns[27].Visible = false;
+
+
+                        }
+
+                        else if (radioButton1.Checked)   //중(밸런스 검사)
+                        {
+
+                            this.dgvH0.Columns[6].Visible = false;
+                            this.dgvH0.Columns[7].Visible = false;
+                            this.dgvH0.Columns[8].Visible = false;
+                            this.dgvH0.Columns[9].Visible = false;
+                            this.dgvH0.Columns[10].Visible = false;
+                            this.dgvH0.Columns[11].Visible = false;
+                            this.dgvH0.Columns[12].Visible = false;
+                            this.dgvH0.Columns[13].Visible = false;
+                            this.dgvH0.Columns[14].Visible = false;
+
+                            this.dgvH0.Columns[20].Visible = false;
+                            this.dgvH0.Columns[21].Visible = false;
+                            this.dgvH0.Columns[22].Visible = false;
+                            this.dgvH0.Columns[23].Visible = false;
+                            this.dgvH0.Columns[24].Visible = false;
+                            this.dgvH0.Columns[25].Visible = false;
+                            this.dgvH0.Columns[26].Visible = false;
+                            this.dgvH0.Columns[27].Visible = false;
+
+                        }
+
+                        else if (radioButton3.Checked)   //후(성능 검사)
+                        {
+                            this.dgvH0.Columns[6].Visible = false;
+                            this.dgvH0.Columns[7].Visible = false;
+                            this.dgvH0.Columns[8].Visible = false;
+                            this.dgvH0.Columns[9].Visible = false;
+                            this.dgvH0.Columns[10].Visible = false;
+                            this.dgvH0.Columns[11].Visible = false;
+                            this.dgvH0.Columns[12].Visible = false;
+                            this.dgvH0.Columns[13].Visible = false;
+                            this.dgvH0.Columns[14].Visible = false;
+
+                            this.dgvH0.Columns[15].Visible = false;
+                            this.dgvH0.Columns[16].Visible = false;
+                            this.dgvH0.Columns[17].Visible = false;
+                            this.dgvH0.Columns[18].Visible = false;
+                            this.dgvH0.Columns[19].Visible = false;
+                          
+                        }
+
+                        //---------------↑ 이력조회 파트별 조회 ↑---------------┘
+
+
 
                         //---------------↓ 정렬 ↓---------------┐
                         GridMaster.CenterAlign(dgv);
@@ -1187,7 +1256,18 @@ namespace KB_Data_V2
                         dgv.Columns[17].HeaderText = "밸런스 1차 밸런스량";
                         dgv.Columns[18].HeaderText = "밸런스 2차 각도";
                         dgv.Columns[19].HeaderText = "밸런스 2차 밸런스량";
+                        //  dgv.Columns[19].HeaderText = "특성 검사 저항 판정";
+                        // dgv.Columns[20].HeaderText = "특성 저항 검사 측정값";
 
+                        //dgv.Columns[19].HeaderText = "특성 검사 전류 판정";
+                        //dgv.Columns[20].HeaderText = "특성 검사 전류 측정값";
+                        //dgv.Columns[21].HeaderText = "특성 검사 RPM 판정";
+                        //dgv.Columns[22].HeaderText = "특성 검사 RPM 측정값";
+                        //dgv.Columns[23].HeaderText = "성능 검사 판정";
+                        //dgv.Columns[24].HeaderText = "성능 검사 RPM 측정값";
+                        //dgv.Columns[25].HeaderText = "성능 검사 소음 측정값";
+                        //dgv.Columns[26].HeaderText = "성능 검사 진동 측정값";
+                        //dgv.Columns[27].HeaderText = "최종판정";
 
                         dgv.Columns[20].HeaderText = "특성 검사 RPM 판정"; ;
                         dgv.Columns[21].HeaderText = "특성 검사 RPM 측정값";
@@ -1869,7 +1949,7 @@ namespace KB_Data_V2
 
         private void dgvH0_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button.ToString().Equals("Middle"))
+            if (e.Button.ToString().Equals("Right"))
             {
                 DataGridView thisdgv = (DataGridView)sender;
                 dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
@@ -1880,7 +1960,7 @@ namespace KB_Data_V2
 
         private void dgvHN0_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button.ToString().Equals("Middle"))
+            if (e.Button.ToString().Equals("Right"))
             {
                 DataGridView thisdgv = (DataGridView)sender;
                 dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
@@ -2066,6 +2146,8 @@ namespace KB_Data_V2
 
             LoadTxt();
             pass = textBox10.Text;
+
+            xtraTabControl1.SelectedTabPageIndex = 0;
 
             cpkdecision.Value = (decimal)double.Parse(RWdataFast.Load("cpk", 0));
 
@@ -4196,21 +4278,22 @@ namespace KB_Data_V2
         {
             dgvH0.Columns.Clear();
 
+           
 
             //특정 바코드 검색시
             if (NameSearchcheck.Checked)
             {
                 string selected_bcr = "";
 
-                if (radio_bcr1.Checked)
-                    selected_bcr = "barcode1";
-                else if (radio_bcr2.Checked)
-                    selected_bcr = "barcode2";
-                else if (radio_bcr3.Checked)
-                    selected_bcr = "barcode3";
-                //else if (radio_bcr4.Checked)
-                //    selected_bcr = "barcode4";
-
+               //if (radio_bcr1.Checked)
+               //    selected_bcr = "barcode1";
+               //else if (radio_bcr2.Checked)
+               //    selected_bcr = "barcode2";
+               //else if (radio_bcr3.Checked)
+               //    selected_bcr = "barcode3";
+               //else if (radio_bcr4.Checked)
+               //    selected_bcr = "barcode4";
+               
 
                 string cmd = SQLiteCMD_K.Select_Equal("table1", selected_bcr, NameSearchTB.Text,
 
@@ -4267,19 +4350,65 @@ namespace KB_Data_V2
 
                 sql.Select(dgvH0, cmd, false);
             }
+
+            //마스터 제품 검색
+            else if (MNameSearchcheck.Checked)
+            {
+
+
+                string cmd = "SELECT * FROM table1 WHERE barcode1 LIKE 'L%'; ";
+                //"barcode3",
+                //
+                //"Datetime",
+                //"Model",
+                //
+                //"Decision",
+                //"c24",
+                //"c25",
+                //"c1",
+                //
+                //"c14",
+                //"c15",
+                //"c16",
+                //"c17",
+                //"c18",
+                //"c180",
+                //
+                //"c19",
+                //"c20",
+                //"c21",
+                //"c22",
+                //"c23",
+                //
+                //"c26",
+                //"c27",
+                //"c28",
+                //"c29",
+                //"c30",
+                //
+                //"c31",
+                //"c32",
+                //"c33"+
+                // " FROM table1 WHERE barcode1 LIKE 'L%';";
+
+
+                sql.Select(dgvH0, cmd, false);
+
+            }
+
             else//기간검색시
             {
                 string cmd = SQLiteCMD_K.Select_Datetime("table1", "Datetime", Dtime.GetDateTime_string(Date0, Time0), Dtime.GetDateTime_string(Date1, Time1), "",
 
-                    "barcode1",
-                    "barcode2",
-                    "barcode3",
+                 "barcode1",
+                 "barcode2",
+                 "barcode3",
 
-                  "Datetime",
-                                  "Model",
+                 "Datetime",
+                 "Model",
 
                  "Decision",
-                  "c24",
+                 "c24",
                  "c25",
                  "c1",
 
@@ -4338,9 +4467,9 @@ namespace KB_Data_V2
 
                 for (int i = 0; i < allcnt; i++)
                 {
-                    if (dgvH0.Rows[i].Cells[27].Value.Equals("OK"))
+                    if (dgvH0.Rows[i].Cells[5].Value.Equals("OK"))
                         okcnt++;
-                    if (dgvH0.Rows[i].Cells[27].Value.Equals("NG"))
+                    if (dgvH0.Rows[i].Cells[5].Value.Equals("NG"))
                         ngcnt++;
                 }
 
@@ -5546,41 +5675,160 @@ namespace KB_Data_V2
         //초중종물 조회 버튼
         private void simpleButton29_Click(object sender, EventArgs e)
         {
+            //주간
+            if (radio_m.Checked)
+            {
+                //초물
+                string FirstTime = Date00.Value.ToShortDateString();
+                string FirstTime1 = FirstTime.Substring(2, 8); //연도 앞 두자리 자르기
 
-            //초물
-            string FirstTime = Date00.Value.ToShortDateString(); 
-            string FirstTime1 = FirstTime.Substring(2, 8); //연도 앞 두자리 자르기
+                string Fcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FirstTime1 + " 08:00:00' AND '" + FirstTime1 + " 11:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
 
-            string Fcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FirstTime1 + " 08:00:00' AND '" + FirstTime1 + " 12:00:00' ORDER BY DATETIME ASC LIMIT 3; ";
-           
-            sql.Select(dgvH1, Fcmd, false);
+                sql.Select(dgvH1, Fcmd, false);
 
-            dgvInit("dgvH1");
+                dgvInit("dgvH1");
 
-            //중물
-            string MiddleTime = Date00.Value.ToShortDateString();
-            string MiddleTime1 = FirstTime.Substring(2, 8); //연도 앞 두자리 자르기
+                //중물
+                string MiddleTime = Date00.Value.ToShortDateString();
+                string MiddleTime1 = MiddleTime.Substring(2, 8); //연도 앞 두자리 자르기
 
-            string Mcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + MiddleTime1 + " 13:00:00' AND '" + MiddleTime1 + " 20:00:00' ORDER BY DATETIME ASC LIMIT 3; ";
+                string Mcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + MiddleTime1 + " 12:00:00' AND '" + MiddleTime1 + " 16:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
 
-            sql.Select(dgvH2, Mcmd, false);
+                sql.Select(dgvH2, Mcmd, false);
 
-            dgvInit("dgvH2");
+                dgvInit("dgvH2");
 
-            //종물
-            string LastTime = Date00.Value.ToShortDateString();
-            string LastTime1 = FirstTime.Substring(2, 8); //연도 앞 두자리 자르기
+                //종물
+                string LastTime = Date00.Value.ToShortDateString();
+                string LastTime1 = LastTime.Substring(2, 8); //연도 앞 두자리 자르기
 
-            string Lcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + LastTime1 + " 19:00:00' AND '" + LastTime1 + " 23:59:00' ORDER BY DATETIME ASC LIMIT 3; ";
+                string Lcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + LastTime1 + " 17:00:00' AND '" + LastTime1 + " 23:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
 
-            sql.Select(dgvH3, Lcmd, false);
+                sql.Select(dgvH3, Lcmd, false);
 
-            dgvInit("dgvH3");
+                dgvInit("dgvH3");
+            }
+
+
+            //야간
+            else if (radio_n.Checked)
+            {
+                //초물
+                string FirstTime = Date00.Value.ToShortDateString();
+                string FirstTime1 = FirstTime.Substring(2, 8); //연도 앞 두자리 자르기
+
+                string Fcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FirstTime1 + " 20:00:00' AND '" + FirstTime1 + " 23:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+
+                sql.Select(dgvH1, Fcmd, false);
+
+                dgvInit("dgvH1");
+
+                //중물
+                string MiddleTime = Date00.Value.ToShortDateString();
+                string MiddleTime1 = MiddleTime.Substring(2, 8); //연도 앞 두자리 자르기
+
+                string Mcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + MiddleTime1 + " 00:00:00' AND '" + MiddleTime1 + " 04:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+
+                sql.Select(dgvH2, Mcmd, false);
+
+                dgvInit("dgvH2");
+
+                //종물
+                string LastTime = Date00.Value.ToShortDateString();
+                string LastTime1 = LastTime.Substring(2, 8); //연도 앞 두자리 자르기
+
+                string Lcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + LastTime1 + " 05:00:00' AND '" + LastTime1 + " 07:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+
+                sql.Select(dgvH3, Lcmd, false);
+
+                dgvInit("dgvH3");
+            }
+
+
+            //전체
+            else if (radio_a.Checked)
+            {
+
+                //초물
+                string FirstTime = Date00.Value.ToShortDateString();
+                string FirstTime1 = FirstTime.Substring(2, 8); //연도 앞 두자리 자르기
+
+                string Fcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FirstTime1 + " 08:00:00' AND '" + FirstTime1 + " 11:59:59' ORDER BY DATETIME ASC LIMIT 3;";
+                string Mmcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FirstTime1 + " 12:00:00' AND '" + FirstTime1 + " 16:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+
+                
+
+                string dd = Fcmd + Mmcmd;
+                sql.Select(dgvH1, dd, false);
+
+
+                dgvInit("dgvH1");
+
+                //중물
+                string MiddleTime = Date00.Value.ToShortDateString();
+                string MiddleTime1 = MiddleTime.Substring(2, 8); //연도 앞 두자리 자르기
+
+                string Mcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + MiddleTime1 + " 12:00:00' AND '" + MiddleTime1 + " 16:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+
+                sql.Select(dgvH2, Mcmd, false);
+
+                dgvInit("dgvH2");
+
+                //종물
+                string LastTime = Date00.Value.ToShortDateString();
+                string LastTime1 = LastTime.Substring(2, 8); //연도 앞 두자리 자르기
+
+                string Lcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + LastTime1 + " 17:00:00' AND '" + LastTime1 + " 23:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+
+                sql.Select(dgvH3, Lcmd, false);
+
+                dgvInit("dgvH3");
+
+
+
+               ////초물
+               //string FfirstTime = Date00.Value.ToShortDateString();
+               //string FfirstTime1 = FfirstTime.Substring(2, 8); //연도 앞 두자리 자르기
+               //
+               //string Ffcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FfirstTime1 + " 20:00:00' AND '" + FfirstTime1 + " 23:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+               //
+               //sql.Select(dgvH1, Ffcmd, false);
+               //
+               //dgvInit("dgvH1");
+               //
+               ////중물
+               //string MmiddleTime = Date00.Value.ToShortDateString();
+               //string MmiddleTime1 = MmiddleTime.Substring(2, 8); //연도 앞 두자리 자르기
+               //
+               //string Mmcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + MmiddleTime1 + " 00:00:00' AND '" + MmiddleTime1 + " 04:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+               //
+               //sql.Select(dgvH2, Mmcmd, false);
+               //
+               //dgvInit("dgvH2");
+               //
+               ////종물
+               //string LlastTime = Date00.Value.ToShortDateString();
+               //string LlastTime1 = LlastTime.Substring(2, 8); //연도 앞 두자리 자르기
+               //
+               //string Llcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + LlastTime1 + " 05:00:00' AND '" + LlastTime1 + " 07:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+               //
+               //sql.Select(dgvH3, Llcmd, false);
+               //
+               //dgvInit("dgvH3");
+
+
+            }
+
+
+
+
         }
 
         private void simpleButton31_Click(object sender, EventArgs e)
         {
-            SetToday();
+
+            Date00.Value = DateTime.Now;
+          
         }
 
         //초중종물 초물 UI마스터
