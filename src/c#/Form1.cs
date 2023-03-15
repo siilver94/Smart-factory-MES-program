@@ -958,8 +958,6 @@ namespace KB_Data_V2
                         GridMaster.Color_Painting(dgv, 20);
                         GridMaster.Color_Painting(dgv, 22);
                         GridMaster.Color_Painting(dgv, 24);
-
-
                         //---------------↑ OKNG 색칠 ↑---------------┘
 
 
@@ -968,7 +966,6 @@ namespace KB_Data_V2
 
                         if (radioButton2.Checked)   //전(어퍼케이스 조립)
                         {
-
                             this.dgvH0.Columns[15].Visible = false;
                             this.dgvH0.Columns[16].Visible = false;
                             this.dgvH0.Columns[17].Visible = false;
@@ -983,12 +980,10 @@ namespace KB_Data_V2
                             this.dgvH0.Columns[26].Visible = false;
                             this.dgvH0.Columns[27].Visible = false;
 
-
                         }
 
                         else if (radioButton1.Checked)   //중(밸런스 검사)
                         {
-
                             this.dgvH0.Columns[6].Visible = false;
                             this.dgvH0.Columns[7].Visible = false;
                             this.dgvH0.Columns[8].Visible = false;
@@ -1026,8 +1021,7 @@ namespace KB_Data_V2
                             this.dgvH0.Columns[16].Visible = false;
                             this.dgvH0.Columns[17].Visible = false;
                             this.dgvH0.Columns[18].Visible = false;
-                            this.dgvH0.Columns[19].Visible = false;
-                          
+                            this.dgvH0.Columns[19].Visible = false;                         
                         }
 
                         //---------------↑ 이력조회 파트별 조회 ↑---------------┘
@@ -5675,7 +5669,7 @@ namespace KB_Data_V2
         //초중종물 조회 버튼
         private void simpleButton29_Click(object sender, EventArgs e)
         {
-            //주간
+            ////주간
             if (radio_m.Checked)
             {
                 //초물
@@ -5710,7 +5704,7 @@ namespace KB_Data_V2
             }
 
 
-            //야간
+            ////야간
             else if (radio_n.Checked)
             {
                 //초물
@@ -5745,7 +5739,7 @@ namespace KB_Data_V2
             }
 
 
-            //전체
+            ////전체
             else if (radio_a.Checked)
             {
 
