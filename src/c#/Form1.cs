@@ -42,9 +42,7 @@ namespace KB_Data_V2
         
         string LastSavedBarcode2 = "";//가장 최근 저장된 임펠러 바코드
 
-        DataGridView[] dgvES = new DataGridView[2];
-
-        //public string[] QuantityData = new string[8] { "0", "0", "0", "0", "0", "0", "0", "0" };
+        DataGridView[] dgvES = 
         public string[] QuantityData = new string[6] { "0", "0", "0", "0", "0", "0" };
 
         string Mainpath = "Log";
