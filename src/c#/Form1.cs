@@ -42,7 +42,9 @@ namespace KB_Data_V2
         
         string LastSavedBarcode2 = "";//가장 최근 저장된 임펠러 바코드
 
-        DataGridView[] dgvES = 
+        DataGridView[] dgvES = new DataGridView[2];
+
+        //public string[] QuantityData = new string[8] { "0", "0", "0", "0", "0", "0", "0", "0" };
         public string[] QuantityData = new string[6] { "0", "0", "0", "0", "0", "0" };
 
         string Mainpath = "Log";
@@ -220,31 +222,31 @@ namespace KB_Data_V2
                         //---------------↓ 2번라인 ↓---------------┐
                         int l2 = 2;
 
-                        dgv.Rows[0].Cells[l2].Value = "블로워 라벨";
-                        dgv.Rows[1].Cells[l2].Value = "밸런스 결과 판정";
-                        dgv.Rows[2].Cells[l2].Value = "밸런스 1차 각도";
-                        dgv.Rows[3].Cells[l2].Value = "밸런스 1차 밸런스량";
-                        dgv.Rows[4].Cells[l2].Value = "밸런스 2차 각도";
-                        dgv.Rows[5].Cells[l2].Value = "밸런스 2차 밸런스량";
+                        dgv.Rows[0].Cells[l2].Value = "#1블로워 라벨";
+                        dgv.Rows[1].Cells[l2].Value = "#1밸런스 결과 판정";
+                        dgv.Rows[2].Cells[l2].Value = "#1밸런스 1차 각도";
+                        dgv.Rows[3].Cells[l2].Value = "#1밸런스 1차 밸런스량";
+                        dgv.Rows[4].Cells[l2].Value = "#1밸런스 2차 각도";
+                        dgv.Rows[5].Cells[l2].Value = "#1밸런스 2차 밸런스량";
 
-                        dgv.Rows[6].Cells[l2].Value = "블로워 라벨";
-                        dgv.Rows[7].Cells[l2].Value = "밸런스 결과 판정";
-                        dgv.Rows[8].Cells[l2].Value = "밸런스 1차 각도";
-                        dgv.Rows[9].Cells[l2].Value = "밸런스 1차 밸런스량";
-                        dgv.Rows[10].Cells[l2].Value = "밸런스 2차 각도";
-                        dgv.Rows[11].Cells[l2].Value = "밸런스 2차 밸런스량";
+                        dgv.Rows[6].Cells[l2].Value = "#2블로워 라벨";
+                        dgv.Rows[7].Cells[l2].Value = "#2밸런스 결과 판정";
+                        dgv.Rows[8].Cells[l2].Value = "#2밸런스 1차 각도";
+                        dgv.Rows[9].Cells[l2].Value = "#2밸런스 1차 밸런스량";
+                        dgv.Rows[10].Cells[l2].Value = "#2밸런스 2차 각도";
+                        dgv.Rows[11].Cells[l2].Value = "#2밸런스 2차 밸런스량";
 
                         for (int i = 6; i < 12; i++)
                         {
                             dgv.Rows[i].Cells[l2].Style.BackColor = Color.Yellow;
                         }
 
-                        dgv.Rows[12].Cells[l2].Value = "블로워 라벨";
-                        dgv.Rows[13].Cells[l2].Value = "밸런스 결과 판정";
-                        dgv.Rows[14].Cells[l2].Value = "밸런스 1차 각도";
-                        dgv.Rows[15].Cells[l2].Value = "밸런스 1차 밸런스량";
-                        dgv.Rows[16].Cells[l2].Value = "밸런스 2차 각도";
-                        dgv.Rows[17].Cells[l2].Value = "밸런스 2차 밸런스량";
+                        dgv.Rows[12].Cells[l2].Value = "#3블로워 라벨";
+                        dgv.Rows[13].Cells[l2].Value = "#3밸런스 결과 판정";
+                        dgv.Rows[14].Cells[l2].Value = "#3밸런스 1차 각도";
+                        dgv.Rows[15].Cells[l2].Value = "#3밸런스 1차 밸런스량";
+                        dgv.Rows[16].Cells[l2].Value = "#3밸런스 2차 각도";
+                        dgv.Rows[17].Cells[l2].Value = "#3밸런스 2차 밸런스량";
 
 
 
@@ -258,47 +260,47 @@ namespace KB_Data_V2
 
                         int l3 = 4;
 
-                        dgv.Rows[0].Cells[l3].Value = "블로워 라벨";
-                        dgv.Rows[1].Cells[l3].Value = "특성 검사 저항 판정";
-                        dgv.Rows[2].Cells[l3].Value = "특성 저항 검사 측정값";
-                        dgv.Rows[3].Cells[l3].Value = "특성 검사 RPM 판정";
-                        dgv.Rows[4].Cells[l3].Value = "특성 검사 RPM 측정값";
-                        dgv.Rows[5].Cells[l3].Value = "특성 검사 전류 판정";
-                        dgv.Rows[6].Cells[l3].Value = "특성 검사 전류 측정값";
+                        dgv.Rows[0].Cells[l3].Value = "#1블로워 라벨";
+                        dgv.Rows[1].Cells[l3].Value = "#1특성 검사 저항 판정";
+                        dgv.Rows[2].Cells[l3].Value = "#1특성 저항 검사 측정값";
+                        dgv.Rows[3].Cells[l3].Value = "#1특성 검사 RPM 판정";
+                        dgv.Rows[4].Cells[l3].Value = "#1특성 검사 RPM 측정값";
+                        dgv.Rows[5].Cells[l3].Value = "#1특성 검사 전류 판정";
+                        dgv.Rows[6].Cells[l3].Value = "#1특성 검사 전류 측정값";
 
                         for (int i = 0; i < 7; i++)
                         {
                             dgv.Rows[i].Cells[l3].Style.BackColor = Color.Yellow;
                         }
 
-                        dgv.Rows[7].Cells[l3].Value = "블로워 라벨";
-                        dgv.Rows[8].Cells[l3].Value = "특성 검사 저항 판정";
-                        dgv.Rows[9].Cells[l3].Value = "특성 저항 검사 측정값";
-                        dgv.Rows[10].Cells[l3].Value = "특성 검사 RPM 판정";
-                        dgv.Rows[11].Cells[l3].Value = "특성 검사 RPM 측정값";
-                        dgv.Rows[12].Cells[l3].Value = "특성 검사 전류 판정";
-                        dgv.Rows[13].Cells[l3].Value = "특성 검사 전류 측정값";
+                        dgv.Rows[7].Cells[l3].Value = "#2블로워 라벨";
+                        dgv.Rows[8].Cells[l3].Value = "#2특성 검사 저항 판정";
+                        dgv.Rows[9].Cells[l3].Value = "#2특성 저항 검사 측정값";
+                        dgv.Rows[10].Cells[l3].Value = "#2특성 검사 RPM 판정";
+                        dgv.Rows[11].Cells[l3].Value = "#2특성 검사 RPM 측정값";
+                        dgv.Rows[12].Cells[l3].Value = "#2특성 검사 전류 판정";
+                        dgv.Rows[13].Cells[l3].Value = "#2특성 검사 전류 측정값";
 
-                        dgv.Rows[14].Cells[l3].Value = "블로워 라벨";
-                        dgv.Rows[15].Cells[l3].Value = "특성 검사 저항 판정";
-                        dgv.Rows[16].Cells[l3].Value = "특성 저항 검사 측정값";
-                        dgv.Rows[17].Cells[l3].Value = "특성 검사 RPM 판정";
-                        dgv.Rows[18].Cells[l3].Value = "특성 검사 RPM 측정값";
-                        dgv.Rows[19].Cells[l3].Value = "특성 검사 전류 판정";
-                        dgv.Rows[20].Cells[l3].Value = "특성 검사 전류 측정값";
+                        dgv.Rows[14].Cells[l3].Value = "#3블로워 라벨";
+                        dgv.Rows[15].Cells[l3].Value = "#3특성 검사 저항 판정";
+                        dgv.Rows[16].Cells[l3].Value = "#3특성 저항 검사 측정값";
+                        dgv.Rows[17].Cells[l3].Value = "#3특성 검사 RPM 판정";
+                        dgv.Rows[18].Cells[l3].Value = "#3특성 검사 RPM 측정값";
+                        dgv.Rows[19].Cells[l3].Value = "#3특성 검사 전류 판정";
+                        dgv.Rows[20].Cells[l3].Value = "#3특성 검사 전류 측정값";
 
                         for (int i = 14; i < 21; i++)
                         {
                             dgv.Rows[i].Cells[l3].Style.BackColor = Color.Yellow;
                         }
 
-                        dgv.Rows[21].Cells[l3].Value = "블로워 라벨";
-                        dgv.Rows[22].Cells[l3].Value = "특성 검사 저항 판정";
-                        dgv.Rows[23].Cells[l3].Value = "특성 저항 검사 측정값";
-                        dgv.Rows[24].Cells[l3].Value = "특성 검사 RPM 판정";
-                        dgv.Rows[25].Cells[l3].Value = "특성 검사 RPM 측정값";
-                        dgv.Rows[26].Cells[l3].Value = "특성 검사 전류 판정";
-                        dgv.Rows[27].Cells[l3].Value = "특성 검사 전류 측정값";
+                        dgv.Rows[21].Cells[l3].Value = "#4블로워 라벨";
+                        dgv.Rows[22].Cells[l3].Value = "#4특성 검사 저항 판정";
+                        dgv.Rows[23].Cells[l3].Value = "#4특성 저항 검사 측정값";
+                        dgv.Rows[24].Cells[l3].Value = "#4특성 검사 RPM 판정";
+                        dgv.Rows[25].Cells[l3].Value = "#4특성 검사 RPM 측정값";
+                        dgv.Rows[26].Cells[l3].Value = "#4특성 검사 전류 판정";
+                        dgv.Rows[27].Cells[l3].Value = "#4특성 검사 전류 측정값";
 
 
                         //---------------↑ 3번라인 ↑---------------┘
@@ -307,18 +309,18 @@ namespace KB_Data_V2
                         //---------------↓ 4번라인 ↓---------------┐
                         int l4 = 6;
 
-                        dgv.Rows[0].Cells[l4].Value = "블로워 라벨";
-                        dgv.Rows[1].Cells[l4].Value = "성능 검사 판정";
-                        dgv.Rows[2].Cells[l4].Value = "성능 검사 RPM 측정값";
-                        dgv.Rows[3].Cells[l4].Value = "성능 검사 소음 측정값";
-                        dgv.Rows[4].Cells[l4].Value = "성능 검사 진동 측정값";
+                        dgv.Rows[0].Cells[l4].Value = "#1블로워 라벨";
+                        dgv.Rows[1].Cells[l4].Value = "#1성능 검사 판정";
+                        dgv.Rows[2].Cells[l4].Value = "#1성능 검사 RPM 측정값";
+                        dgv.Rows[3].Cells[l4].Value = "#1성능 검사 소음 측정값";
+                        dgv.Rows[4].Cells[l4].Value = "#1성능 검사 진동 측정값";
 
 
-                        dgv.Rows[5].Cells[l4].Value = "블로워 라벨";
-                        dgv.Rows[6].Cells[l4].Value = "성능 검사 판정";
-                        dgv.Rows[7].Cells[l4].Value = "성능 검사 RPM 측정값";
-                        dgv.Rows[8].Cells[l4].Value = "성능 검사 소음 측정값";
-                        dgv.Rows[9].Cells[l4].Value = "성능 검사 진동 측정값";
+                        dgv.Rows[5].Cells[l4].Value = "#2블로워 라벨";
+                        dgv.Rows[6].Cells[l4].Value = "#2성능 검사 판정";
+                        dgv.Rows[7].Cells[l4].Value = "#2성능 검사 RPM 측정값";
+                        dgv.Rows[8].Cells[l4].Value = "#2성능 검사 소음 측정값";
+                        dgv.Rows[9].Cells[l4].Value = "#2성능 검사 진동 측정값";
 
                         for (int i = 5; i < 10; i++)
                         {
@@ -578,55 +580,26 @@ namespace KB_Data_V2
                         string[] ColumnsName = new string[] {
                             "A" , "B"
                         };
-                        int rows = 16;//초기 생성 Row수
+                        int rows = 4;//초기 생성 Row수
                         GridMaster.Init3(dgv, true, height, rows, ColumnsName);
                         //---------------↑ 생성 ↑---------------┘
 
                         //---------------↓ 사용자 데이터 추가 부분 ↓---------------┐
                         //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
                         //dgv.Rows[ 0 ].Cells[ 0 ].Value = "CORE HEIGHT 1";
-                        dgv.Rows[0].Cells[0].Value = "#30 UPPER CASE 공급부 PCB 측정값 최대";
-                        dgv.Rows[1].Cells[0].Value = "#50 스페이서 측정값";
-                        dgv.Rows[2].Cells[0].Value = "#90 스페이서 측정값";
-                        dgv.Rows[3].Cells[0].Value = "#60 베어링압입 결과 거리";
-                        dgv.Rows[4].Cells[0].Value = "#60 베어링압입 결과 하중";
-                        dgv.Rows[5].Cells[0].Value = "#110 스토퍼 높이 측정값";
+                        dgv.Rows[0].Cells[0].Value = "#60 베어링압입 결과 하중";
+                        dgv.Rows[1].Cells[0].Value = "밸런스 2차 각도";
+                        dgv.Rows[2].Cells[0].Value = "밸런스 2차 밸런스량";
+                        dgv.Rows[3].Cells[0].Value = "성능 검사 RPM 측정값";
+             
 
-                        dgv.Rows[6].Cells[0].Value = "밸런스 1차 각도";
-                        dgv.Rows[7].Cells[0].Value = "밸런스 1차 밸런스량";
-                        dgv.Rows[8].Cells[0].Value = "밸런스 2차 각도";
-                        dgv.Rows[9].Cells[0].Value = "밸런스 2차 밸런스량";
-
-                        dgv.Rows[10].Cells[0].Value = "특성 저항 검사 측정값";
-                        dgv.Rows[11].Cells[0].Value = "특성 검사 RPM 측정값";
-                        dgv.Rows[12].Cells[0].Value = "특성 검사 전류 측정값";
-
-                        dgv.Rows[13].Cells[0].Value = "성능 검사 RPM 측정값";
-                        dgv.Rows[14].Cells[0].Value = "성능 검사 소음 측정값";
-                        dgv.Rows[15].Cells[0].Value = "성능 검사 진동 측정값";
 
                         ///////////////##################################################################
 
-                        dgv.Rows[0].Cells[1].Value = "c14";
-                        dgv.Rows[1].Cells[1].Value = "c15";
-                        dgv.Rows[2].Cells[1].Value = "c16";
-                        dgv.Rows[3].Cells[1].Value = "c17";
-                        dgv.Rows[4].Cells[1].Value = "c18";
-                        dgv.Rows[5].Cells[1].Value = "c180";
-
-                        dgv.Rows[6].Cells[1].Value = "c20";
-                        dgv.Rows[7].Cells[1].Value = "c21";
-                        dgv.Rows[8].Cells[1].Value = "c22";
-                        dgv.Rows[9].Cells[1].Value = "c23";
-
-                        dgv.Rows[10].Cells[1].Value = "c25";
-                        dgv.Rows[11].Cells[1].Value = "c27";
-                        dgv.Rows[12].Cells[1].Value = "c29";
-
-                        dgv.Rows[13].Cells[1].Value = "c31";
-                        dgv.Rows[14].Cells[1].Value = "c32";
-                        dgv.Rows[15].Cells[1].Value = "c33";
-
+                        dgv.Rows[0].Cells[1].Value = "c18";
+                        dgv.Rows[1].Cells[1].Value = "c22";
+                        dgv.Rows[2].Cells[1].Value = "c23";
+                        dgv.Rows[3].Cells[1].Value = "c31";
 
                         //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
 
@@ -652,8 +625,7 @@ namespace KB_Data_V2
 
                         //---------------↑ 설정 ↑---------------┘
 
-
-
+                                                                   
                     }
                     catch (Exception)
                     {
@@ -896,8 +868,9 @@ namespace KB_Data_V2
                         //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
                         //dgv.Rows[ 0 ].Cells[ 0 ].Value = "CORE HEIGHT 1";
 
-                        dgv.Columns[4].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
+                        dgv.Columns[3].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
 
+                        dgv.Columns[28].DisplayIndex = 0;
 
                         dgv.Columns[0].HeaderText = "블로워 라벨";
                         dgv.Columns[1].HeaderText = "임펠러 바코드";
@@ -944,6 +917,8 @@ namespace KB_Data_V2
                         dgv.Columns[25].HeaderText = "성능 검사 RPM 측정값";
                         dgv.Columns[26].HeaderText = "성능 검사 소음 측정값";
                         dgv.Columns[27].HeaderText = "성능 검사 진동 측정값";
+
+                        dgv.Columns[28].HeaderText = "행 번호";
 
                         // dgv.Columns[27].HeaderText = "최종판정";
 
@@ -1019,7 +994,7 @@ namespace KB_Data_V2
                             this.dgvH0.Columns[16].Visible = false;
                             this.dgvH0.Columns[17].Visible = false;
                             this.dgvH0.Columns[18].Visible = false;
-                            this.dgvH0.Columns[19].Visible = false;                         
+                            this.dgvH0.Columns[19].Visible = false;
                         }
 
                         //---------------↑ 이력조회 파트별 조회 ↑---------------┘
@@ -1138,9 +1113,11 @@ namespace KB_Data_V2
                         dgv.Columns[27].HeaderText = "성능 검사 진동 측정값";
                         dgv.Columns[28].HeaderText = "최종판정";
 
+                        
 
                         //컬럼 가리기
                         this.dgvH1.Columns[0].Visible = false;
+                        this.dgvH1.Columns[29].Visible = false;
 
                         //---------------↓ OKNG 색칠 ↓---------------┐
 
@@ -4322,7 +4299,8 @@ namespace KB_Data_V2
 
                  "c31",
                  "c32",
-                 "c33"
+                 "c33",
+                 "colIndex"
                  //"c34",
                  //"c35",
                  //"c36",
@@ -4348,7 +4326,7 @@ namespace KB_Data_V2
             {
 
 
-                string cmd = "SELECT * FROM table1 WHERE barcode1 LIKE 'L%'; ";
+                //string cmd = "SELECT * FROM table1 WHERE barcode1 LIKE 'L%'; ";
                 //"barcode3",
                 //
                 //"Datetime",
@@ -4384,14 +4362,14 @@ namespace KB_Data_V2
                 // " FROM table1 WHERE barcode1 LIKE 'L%';";
 
 
-                sql.Select(dgvH0, cmd, false);
+                //sql.Select(dgvH0, cmd, false);
 
             }
 
             else//기간검색시
             {
                 string cmd = SQLiteCMD_K.Select_Datetime("table1", "Datetime", Dtime.GetDateTime_string(Date0, Time0), Dtime.GetDateTime_string(Date1, Time1), "",
-
+                    
                  "barcode1",
                  "barcode2",
                  "barcode3",
@@ -4425,7 +4403,8 @@ namespace KB_Data_V2
 
                  "c31",
                  "c32",
-                 "c33"
+                 "c33",
+                 "colIndex"
                  //"c34",
                  //"c35",
                  //"c36",
@@ -4459,9 +4438,9 @@ namespace KB_Data_V2
 
                 for (int i = 0; i < allcnt; i++)
                 {
-                    if (dgvH0.Rows[i].Cells[5].Value.Equals("OK"))
+                    if (dgvH0.Rows[i].Cells[6].Value.Equals("OK"))
                         okcnt++;
-                    if (dgvH0.Rows[i].Cells[5].Value.Equals("NG"))
+                    if (dgvH0.Rows[i].Cells[6].Value.Equals("NG"))
                         ngcnt++;
                 }
 
@@ -5864,6 +5843,24 @@ namespace KB_Data_V2
         private void labelControl3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dgvH0_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            // 원하는 칼럼에 자동 번호 매기기
+            this.dgvH0.Rows[e.RowIndex].Cells[28].Value = (e.RowIndex + 1).ToString();
+        }
+
+        //이력조회에서 헤더 재 정렬시 색칠하기.
+        private void dgvH0_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            GridMaster.Color_Painting(dgvH0, 5);
+            GridMaster.Color_Painting(dgvH0, 6);
+            GridMaster.Color_Painting(dgvH0, 8);
+            GridMaster.Color_Painting(dgvH0, 15);
+            GridMaster.Color_Painting(dgvH0, 20);
+            GridMaster.Color_Painting(dgvH0, 22);
+            GridMaster.Color_Painting(dgvH0, 24);
         }
     }
 }
