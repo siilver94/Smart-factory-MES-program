@@ -1863,7 +1863,7 @@ namespace KB_Data_V2
 
         private void dgvD0_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (e.Button.ToString().Equals("Middle"))
+            if (e.Button.ToString().Equals("Right"))
             {
                 DataGridView thisdgv = (DataGridView)sender;
                 dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
@@ -5307,7 +5307,7 @@ namespace KB_Data_V2
 
         //x-r 엑셀 파일이 주간과 야간 데이터를 비교하게 만들어져있음, 그래서 주/야구분이 필요
         //이 함수로 어떤 컬럼 하나의 하루치 데이터의 평균값을 구함 주간 평균 하나, 야간 평균 하나
-        public bool X_Rdata(bool Daily, string model, DateTime StartDateTime, DateTime EndDateTime, string db_column, out int row, out double datum)
+        public bool X_Rdata(bool Daily, string model, DateTime StartDateTime, DateTime EndDateTime, string db_column, out double row, out double datum) // row 를 int -> double 로 형변환함
         {
             row = 0;
             datum = 0;
@@ -5317,20 +5317,31 @@ namespace KB_Data_V2
 
             if (Daily)
             {
-                //주간
 
+                //X-R 변경하기 전 쿼리. [총갯수][평균] 을 출력함
+                //string query =
+                //    "SELECT COUNT(*) , AVG(first1." + db_column + ") FROM (SELECT `" + db_column + "` FROM table1 WHERE `Model`='" + model + "' AND `Datetime` > '"
+                //    + StartDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Datetime` < '"
+                //    + EndDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Decision`='OK') AS first1;";
+                //
+
+
+                //주간
+                //X-R 수정 후 OK 인것중에 랜덤하게 1개 출력 하는 쿼리
                 string query =
-                    "SELECT COUNT(*) , AVG(first1." + db_column + ") FROM (SELECT `" + db_column + "` FROM table1 WHERE `Model`='" + model + "' AND `Datetime` > '"
+                    "SELECT " + db_column + " FROM (SELECT `" + db_column + "` FROM table1 WHERE `Model`='" + model + "' AND `Datetime` > '"
                     + StartDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Datetime` < '"
-                    + EndDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Decision`='OK') AS first1;";
+                    + EndDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `"+ db_column + "`!= 0) AS first1 ORDER BY RAND() LIMIT 1;";
+
+                
 
                 DataSet ds = sql.ExecuteQuery(query);
                 if (ds.Tables.Count != 0 && ds.Tables[0].Rows.Count != 0)
                 {
                     try
                     {
-                        row = int.Parse(ds.Tables[0].Rows[0][0].ToString());
-                        datum = double.Parse(ds.Tables[0].Rows[0][1].ToString());
+                        row = double.Parse(ds.Tables[0].Rows[0][0].ToString());
+                        datum = double.Parse(ds.Tables[0].Rows[0][0].ToString());
                     }
                     catch (Exception)
                     {
@@ -5343,9 +5354,10 @@ namespace KB_Data_V2
             }
             else
             {
-                //야간
+                
                 DateTime EndDateTime1 = EndDateTime.AddDays(1);
 
+                //X-R 변경하기 전 쿼리. [총갯수][평균] 을 출력함
                 //string query =
                 //    "SELECT COUNT(*) , AVG(first1.data) FROM (SELECT `data` FROM table1 WHERE `Model`='" + model + "' AND `Datetime` > '"
                 //    + StartDateTime.ToString( "yyyy-MM-dd HH:mm:ss" ) + "' AND `Datetime` < '"
@@ -5353,10 +5365,13 @@ namespace KB_Data_V2
                 //    + db_column + "' AND `Inspection`='"
                 //    + inspection + "') AS first1;";
 
+
+                //야간
+                //X-R 수정 후 OK 인것중에 랜덤하게 1개 출력 하는 쿼리
                 string query =
-                    "SELECT COUNT(*) , AVG(first1." + db_column + ") FROM (SELECT `" + db_column + "` FROM table1 WHERE `Model`='" + model + "' AND `Datetime` > '"
+                    "SELECT " + db_column + " FROM (SELECT `" + db_column + "` FROM table1 WHERE `Model`='" + model + "' AND `Datetime` > '"
                     + StartDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Datetime` < '"
-                    + EndDateTime1.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Decision`='OK') AS first1;";
+                    + EndDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `" + db_column + "`!= 0) AS first1 ORDER BY RAND() LIMIT 1;";
 
 
 
@@ -5365,8 +5380,8 @@ namespace KB_Data_V2
                 {
                     try
                     {
-                        row = int.Parse(ds.Tables[0].Rows[0][0].ToString());
-                        datum = double.Parse(ds.Tables[0].Rows[0][1].ToString());
+                        row = double.Parse(ds.Tables[0].Rows[0][0].ToString());
+                        datum = double.Parse(ds.Tables[0].Rows[0][0].ToString());
                     }
                     catch (Exception)
                     {
@@ -5378,10 +5393,13 @@ namespace KB_Data_V2
 
             }
 
-            if (row == 0)
-                return false;
-            else
-                return true;
+           if (row == 0)
+               return false;
+           else
+               return true;
+           
+
+            
         }
 
 
@@ -5391,7 +5409,6 @@ namespace KB_Data_V2
             {
                 return;
             }
-
             try
             {
                 Process[] p = Process.GetProcessesByName("EXCEL");
@@ -5421,6 +5438,9 @@ namespace KB_Data_V2
 
                 DateTime start0 = new DateTime(Date0.Value.Year, Date0.Value.Month, Date0.Value.Day);
                 DateTime end0 = new DateTime(Date1.Value.Year, Date1.Value.Month, Date1.Value.Day);
+                Console.WriteLine(start0);
+                Console.WriteLine(end0);
+
 
                 int cnt = 0;
                 int ValueCount = 0;
@@ -5441,38 +5461,73 @@ namespace KB_Data_V2
                 {
                     cnt++;
 
-                    int row0 = 0;
+                    double row0 = 0;
                     double datum0 = 0;
 
-                    int row1 = 0;
+                    double row1 = 0;
                     double datum1 = 0;
+
+                    double row2 = 0;
+                    double datum2 = 0;
+
+                    double row3 = 0;
+                    double datum3 = 0;
+
+                    double row4 = 0;
+                    double datum4 = 0;
 
                     DateTime ins0 = new DateTime(start0.Year, start0.Month, start0.Day, daynight0.Time.Hour, daynight0.Time.Minute, daynight0.Time.Second);
                     DateTime ins1 = new DateTime(start0.Year, start0.Month, start0.Day, daynight1.Time.Hour, daynight1.Time.Minute, daynight1.Time.Second);
                     DateTime ins2 = new DateTime(start0.Year, start0.Month, start0.Day, daynight2.Time.Hour, daynight2.Time.Minute, daynight2.Time.Second);
                     DateTime ins3 = new DateTime(start0.Year, start0.Month, start0.Day, daynight3.Time.Hour, daynight3.Time.Minute, daynight3.Time.Second);
 
+                    //Console.WriteLine(ins0);
+                    //Console.WriteLine(ins1);
+                    //Console.WriteLine(ins2);
+                    //Console.WriteLine(ins3);
 
                     bool s1 = X_Rdata(true, ModelNamelbl.Text, ins0, ins1, selected_columns_name, out row0, out datum0);
-                    bool s2 = X_Rdata(false, ModelNamelbl.Text, ins2, ins3, selected_columns_name, out row1, out datum1);
+                    //bool s2 = X_Rdata(false, ModelNamelbl.Text, ins2, ins3, selected_columns_name, out row1, out datum1); 야간
 
-                    if (s1 || s2)
+                    bool s2 = X_Rdata(true, ModelNamelbl.Text, ins0, ins1, selected_columns_name, out row1, out datum1);
+                    bool s3 = X_Rdata(true, ModelNamelbl.Text, ins0, ins1, selected_columns_name, out row2, out datum2);
+                    bool s4 = X_Rdata(true, ModelNamelbl.Text, ins0, ins1, selected_columns_name, out row3, out datum3);
+                    bool s5 = X_Rdata(true, ModelNamelbl.Text, ins0, ins1, selected_columns_name, out row4, out datum4);
+
+                    //Console.WriteLine(s1);
+                    //Console.WriteLine(s2);
+
+                    //x-r 수정후 값 1개만 출력하면 되니 생략
+                    //if (s1 || s2)
+                    //{
+                    //    x_rdataclass[ValueCount].datetime = start0.ToShortDateString(); 
+                    //    x_rdataclass[ValueCount].s1_data = datum0;       //x1 주간 평균
+                    //    x_rdataclass[ValueCount].s2_data = datum1;       //x2 야간 평균
+                    //    x_rdataclass[ValueCount].s1 = row0;              //x3
+                    //    x_rdataclass[ValueCount].s2 = row1;              //x4
+                    //
+                    //    ValueCount++;
+                    //
+                    //    Console.WriteLine( " - " + cnt + " - " );
+                    //    Console.WriteLine( start0.ToShortDateString( ) );
+                    //    Console.WriteLine( row0 );
+                    //    Console.WriteLine( row1 );
+                    //    Console.WriteLine( datum0 );
+                    //    Console.WriteLine( datum1 );
+                    //
+                    //}
+
+                    //날짜와, 쿼리문에서 랜덤하게 가져온 값을 저장
+                    if (s1 || s2 || s3 || s4 || s5)
                     {
                         x_rdataclass[ValueCount].datetime = start0.ToShortDateString();
                         x_rdataclass[ValueCount].s1_data = datum0;
                         x_rdataclass[ValueCount].s2_data = datum1;
-                        x_rdataclass[ValueCount].s1 = row0;
-                        x_rdataclass[ValueCount].s2 = row1;
+                        x_rdataclass[ValueCount].s3_data = datum2;
+                        x_rdataclass[ValueCount].s4_data = datum3;
+                        x_rdataclass[ValueCount].s5_data = datum4;
 
                         ValueCount++;
-
-                        //Console.WriteLine( " - " + cnt + " - " );
-                        //Console.WriteLine( start0.ToShortDateString( ) );
-                        //Console.WriteLine( row0 );
-                        //Console.WriteLine( row1 );
-                        //Console.WriteLine( datum0 );
-                        //Console.WriteLine( datum1 );
-
                     }
 
                     start0 = start0.AddDays(1);
@@ -5496,11 +5551,17 @@ namespace KB_Data_V2
 
                 for (int i = 0; i < ValueCount; i++)
                 {
+                    //34,35,36,37줄에 랜덤하게 쿼리로 가져온 값 출력
                     ws.Cells[33, 3 + i].Value = x_rdataclass[i].datetime;
                     ws.Cells[34, 3 + i].Value = x_rdataclass[i].s1_data.ToString("N2");
                     ws.Cells[35, 3 + i].Value = x_rdataclass[i].s2_data.ToString("N2");
-                    ws.Cells[36, 3 + i].Value = x_rdataclass[i].s1;
-                    ws.Cells[37, 3 + i].Value = x_rdataclass[i].s2;
+                    ws.Cells[36, 3 + i].Value = x_rdataclass[i].s3_data.ToString("N2");
+                    ws.Cells[37, 3 + i].Value = x_rdataclass[i].s4_data.ToString("N2");
+                    ws.Cells[38, 3 + i].Value = x_rdataclass[i].s5_data.ToString("N2");
+
+                    //ws.Cells[35, 3 + i].Value = x_rdataclass[i].s2_data.ToString("N2");
+                    //ws.Cells[36, 3 + i].Value = x_rdataclass[i].s1;
+                    //ws.Cells[37, 3 + i].Value = x_rdataclass[i].s2;
                 }
 
                 ws.Cells[5, 3].Value = ModelNamelbl.Text;
