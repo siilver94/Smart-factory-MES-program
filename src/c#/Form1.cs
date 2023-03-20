@@ -1117,7 +1117,7 @@ namespace KB_Data_V2
 
                         //컬럼 가리기
                         this.dgvH1.Columns[0].Visible = false;
-                        this.dgvH1.Columns[29].Visible = false;
+                        //this.dgvH1.Columns[29].Visible = false;
 
                         //---------------↓ OKNG 색칠 ↓---------------┐
 
@@ -5327,7 +5327,7 @@ namespace KB_Data_V2
 
 
                 //주간
-                //X-R 수정 후 OK 인것중에 랜덤하게 1개 출력 하는 쿼리
+                //X-R 수정 후 값이 0이 아닌 것중에 랜덤하게 1개 출력 하는 쿼리
                 string query =
                     "SELECT " + db_column + " FROM (SELECT `" + db_column + "` FROM table1 WHERE `Model`='" + model + "' AND `Datetime` > '"
                     + StartDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Datetime` < '"
@@ -5367,7 +5367,7 @@ namespace KB_Data_V2
 
 
                 //야간
-                //X-R 수정 후 OK 인것중에 랜덤하게 1개 출력 하는 쿼리
+                //X-R 수정 후 값이 0이 아닌 것중에 랜덤하게 1개 출력 하는 쿼리
                 string query =
                     "SELECT " + db_column + " FROM (SELECT `" + db_column + "` FROM table1 WHERE `Model`='" + model + "' AND `Datetime` > '"
                     + StartDateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' AND `Datetime` < '"
@@ -5397,9 +5397,7 @@ namespace KB_Data_V2
                return false;
            else
                return true;
-           
-
-            
+                     
         }
 
 
@@ -5553,11 +5551,11 @@ namespace KB_Data_V2
                 {
                     //34,35,36,37줄에 랜덤하게 쿼리로 가져온 값 출력
                     ws.Cells[33, 3 + i].Value = x_rdataclass[i].datetime;
-                    ws.Cells[34, 3 + i].Value = x_rdataclass[i].s1_data.ToString("N2");
-                    ws.Cells[35, 3 + i].Value = x_rdataclass[i].s2_data.ToString("N2");
-                    ws.Cells[36, 3 + i].Value = x_rdataclass[i].s3_data.ToString("N2");
-                    ws.Cells[37, 3 + i].Value = x_rdataclass[i].s4_data.ToString("N2");
-                    ws.Cells[38, 3 + i].Value = x_rdataclass[i].s5_data.ToString("N2");
+                    ws.Cells[34, 3 + i].Value = x_rdataclass[i].s1_data.ToString("N2");       //x1
+                    ws.Cells[35, 3 + i].Value = x_rdataclass[i].s2_data.ToString("N2");       //x2
+                    ws.Cells[36, 3 + i].Value = x_rdataclass[i].s3_data.ToString("N2");       //x3
+                    ws.Cells[37, 3 + i].Value = x_rdataclass[i].s4_data.ToString("N2");       //x4
+                    ws.Cells[38, 3 + i].Value = x_rdataclass[i].s5_data.ToString("N2");       //x5
 
                     //ws.Cells[35, 3 + i].Value = x_rdataclass[i].s2_data.ToString("N2");
                     //ws.Cells[36, 3 + i].Value = x_rdataclass[i].s1;
@@ -5714,7 +5712,11 @@ namespace KB_Data_V2
                 string FirstTime = Date00.Value.ToShortDateString();
                 string FirstTime1 = FirstTime.Substring(2, 8); //연도 앞 두자리 자르기
 
-                string Fcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FirstTime1 + " 08:00:00' AND '" + FirstTime1 + " 11:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+                //기존 쿼리
+                //string Fcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FirstTime1 + " 08:00:00' AND '" + FirstTime1 + " 11:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+
+                //기존 쿼리에서 최종판정이 OK 인것으로만 출력되게 변경. 이하 모두 변경
+                string Fcmd = "SELECT * FROM (SELECT * FROM table1 WHERE `Datetime` > '" + FirstTime1 + " 08:00:00' AND `Datetime` < '" + FirstTime1 + " 11:59:59' AND `Decision`='OK') AS first1 ORDER BY DATETIME ASC LIMIT 3;";
 
                 sql.Select(dgvH1, Fcmd, false);
 
@@ -5724,7 +5726,11 @@ namespace KB_Data_V2
                 string MiddleTime = Date00.Value.ToShortDateString();
                 string MiddleTime1 = MiddleTime.Substring(2, 8); //연도 앞 두자리 자르기
 
-                string Mcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + MiddleTime1 + " 12:00:00' AND '" + MiddleTime1 + " 16:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+                //기존
+                //string Mcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + MiddleTime1 + " 12:00:00' AND '" + MiddleTime1 + " 16:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+
+                //변경
+                string Mcmd = "SELECT * FROM (SELECT * FROM table1 WHERE `Datetime` > '" + MiddleTime1 + " 12:00:00' AND `Datetime` < '" + MiddleTime1 + " 16:59:59' AND `Decision`='OK') AS first1 ORDER BY DATETIME ASC LIMIT 3;";
 
                 sql.Select(dgvH2, Mcmd, false);
 
@@ -5734,7 +5740,11 @@ namespace KB_Data_V2
                 string LastTime = Date00.Value.ToShortDateString();
                 string LastTime1 = LastTime.Substring(2, 8); //연도 앞 두자리 자르기
 
-                string Lcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + LastTime1 + " 17:00:00' AND '" + LastTime1 + " 23:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+                //기존
+                //string Lcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + LastTime1 + " 17:00:00' AND '" + LastTime1 + " 23:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+
+                //변경
+                string Lcmd = "SELECT * FROM (SELECT * FROM table1 WHERE `Datetime` > '" + LastTime1 + " 17:00:00' AND `Datetime` < '" + LastTime1 + " 23:59:59' AND `Decision`='OK') AS first1 ORDER BY DATETIME ASC LIMIT 3;";
 
                 sql.Select(dgvH3, Lcmd, false);
 
@@ -5749,7 +5759,11 @@ namespace KB_Data_V2
                 string FirstTime = Date00.Value.ToShortDateString();
                 string FirstTime1 = FirstTime.Substring(2, 8); //연도 앞 두자리 자르기
 
-                string Fcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FirstTime1 + " 20:00:00' AND '" + FirstTime1 + " 23:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+                //기존
+                //string Fcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + FirstTime1 + " 20:00:00' AND '" + FirstTime1 + " 23:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+
+                //변경
+                string Fcmd = "SELECT * FROM (SELECT * FROM table1 WHERE `Datetime` > '" + FirstTime1 + " 20:00:00' AND `Datetime` < '" + FirstTime1 + " 23:59:59' AND `Decision`='OK') AS first1 ORDER BY DATETIME ASC LIMIT 3;";
 
                 sql.Select(dgvH1, Fcmd, false);
 
@@ -5759,7 +5773,11 @@ namespace KB_Data_V2
                 string MiddleTime = Date00.Value.ToShortDateString();
                 string MiddleTime1 = MiddleTime.Substring(2, 8); //연도 앞 두자리 자르기
 
-                string Mcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + MiddleTime1 + " 00:00:00' AND '" + MiddleTime1 + " 04:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+                //기존
+                //string Mcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + MiddleTime1 + " 00:00:00' AND '" + MiddleTime1 + " 04:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+
+                //변경
+                string Mcmd = "SELECT * FROM (SELECT * FROM table1 WHERE `Datetime` > '" + MiddleTime1 + " 00:00:00' AND `Datetime` < '" + MiddleTime1 + " 04:59:59' AND `Decision`='OK') AS first1 ORDER BY DATETIME ASC LIMIT 3;";
 
                 sql.Select(dgvH2, Mcmd, false);
 
@@ -5769,7 +5787,11 @@ namespace KB_Data_V2
                 string LastTime = Date00.Value.ToShortDateString();
                 string LastTime1 = LastTime.Substring(2, 8); //연도 앞 두자리 자르기
 
-                string Lcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + LastTime1 + " 05:00:00' AND '" + LastTime1 + " 07:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+                //기존
+                //string Lcmd = "SELECT * FROM table1 WHERE DATETIME BETWEEN '" + LastTime1 + " 05:00:00' AND '" + LastTime1 + " 07:59:59' ORDER BY DATETIME ASC LIMIT 3; ";
+
+                //변경
+                string Lcmd = "SELECT * FROM (SELECT * FROM table1 WHERE `Datetime` > '" + LastTime1 + " 05:00:00' AND `Datetime` < '" + LastTime1 + " 07:59:59' AND `Decision`='OK') AS first1 ORDER BY DATETIME ASC LIMIT 3;";
 
                 sql.Select(dgvH3, Lcmd, false);
 
