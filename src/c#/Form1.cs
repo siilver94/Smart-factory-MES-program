@@ -107,18 +107,15 @@ namespace KB_Data_V2
         private void simpleButton23_Click(object sender, EventArgs e)   //  메인화면 버튼
         {
             xtraTabControl1.SelectedTabPageIndex = 0;
-            dgvH0.Columns.Clear();
         }
 
         private void simpleButton22_Click(object sender, EventArgs e)   //  모델 버튼
         {
             xtraTabControl1.SelectedTabPageIndex = 1;
-            dgvH0.Columns.Clear();
         }
 
         private void simpleButton30_Click(object sender, EventArgs e)   //  이력조회 버튼
         {
-            dgvH0.Columns.Clear();
             xtraTabControl1.SelectedTabPageIndex = 2;
             xtraTabControl1.TabPages[2].Controls.Add(timerange);
 
@@ -128,20 +125,17 @@ namespace KB_Data_V2
 
         private void simpleButton19_Click(object sender, EventArgs e)   //  라벨설정1 버튼
         {
-            dgvH0.Columns.Clear();
             Form2 frm = new Form2(this);
             frm.Show();
         }
 
         private void simpleButton05_Click(object sender, EventArgs e)   //  프로그램설정 버튼
         {
-            dgvH0.Columns.Clear();
             xtraTabControl1.SelectedTabPageIndex = 9;
         }
 
         private void simpleButton6_Click(object sender, EventArgs e)   //  X_R Report 버튼
         {
-            dgvH0.Columns.Clear();
             xtraTabControl1.SelectedTabPageIndex = 11;
             xtraTabControl1.TabPages[11].Controls.Add(timerange);
 
@@ -2023,7 +2017,34 @@ namespace KB_Data_V2
         #endregion
 
 
-       
+        bool BarcodeCheck(string bcr, string columnsname, int okcnt_cutline)
+        {
+            DataSet ds = sql.ExecuteQuery("SELECT * FROM table1 WHERE `" + columnsname + "`='" + bcr + "' ;");
+            int okcnt = 0;
+
+
+            if (ds.Tables[0].Rows.Count > 0)//해당 바코드 찾았다.
+            {
+                int cnt = ds.Tables[0].Columns.Count;//컬럼 몇개니
+
+                for (int i = 0; i < cnt; i++)//그 컬럼 수 안에 OK수량 계산
+                {
+                    if (ds.Tables[0].Rows[0][i].ToString().Equals("NG"))//NG하나라도 있음 return false다
+                        return false;
+                    else if (ds.Tables[0].Rows[0][i].ToString().Equals("OK"))//OK 카운트해라.
+                        okcnt++;
+
+                }
+
+                if (okcnt >= okcnt_cutline)//OK 수량 커트라인에 합격 했나?
+                    return true;
+                else//수량 안맞으면 NG다
+                    return false;
+
+            }
+            else//그런 바코드 데이터 한개도 없다
+                return false;
+        }
 
         #region InputItem 관련
         private static DateTime Delay(int MS)
@@ -2098,12 +2119,6 @@ namespace KB_Data_V2
             xtraTabControl1.SelectedTabPageIndex = 0;
 
             cpkdecision.Value = (decimal)double.Parse(RWdataFast.Load("cpk", 0));
-
-
-            //X-R 상한 하한 기준치 최대값 설정
-            this.numericUpDown21.Maximum = 10000;
-            this.numericUpDown22.Maximum = 10000;
-            this.numericUpDown23.Maximum = 10000;
 
 #if Release
             string plc1_ip = "192.168.13.10";
@@ -2202,35 +2217,6 @@ namespace KB_Data_V2
 
 #endif
 
-        }
-
-        bool BarcodeCheck(string bcr, string columnsname, int okcnt_cutline)
-        {
-            DataSet ds = sql.ExecuteQuery("SELECT * FROM table1 WHERE `" + columnsname + "`='" + bcr + "' ;");
-            int okcnt = 0;
-
-
-            if (ds.Tables[0].Rows.Count > 0)//해당 바코드 찾았다.
-            {
-                int cnt = ds.Tables[0].Columns.Count;//컬럼 몇개니
-
-                for (int i = 0; i < cnt; i++)//그 컬럼 수 안에 OK수량 계산
-                {
-                    if (ds.Tables[0].Rows[0][i].ToString().Equals("NG"))//NG하나라도 있음 return false다
-                        return false;
-                    else if (ds.Tables[0].Rows[0][i].ToString().Equals("OK"))//OK 카운트해라.
-                        okcnt++;
-
-                }
-
-                if (okcnt >= okcnt_cutline)//OK 수량 커트라인에 합격 했나?
-                    return true;
-                else//수량 안맞으면 NG다
-                    return false;
-
-            }
-            else//그런 바코드 데이터 한개도 없다
-                return false;
         }
 
         //cccccccccc
@@ -3075,45 +3061,37 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터1 저장  ERROR");
                 }
 
-                try
+                //판정값 1과 2로 바꾸기
+                int data3dec;
+                if (data3 == "OK")
+                    data3dec = 1;
+
+                else
+                    data3dec = 2;
+                plc2.MCWrite(8021, data3dec);// 특성 검사 저항 판정
+
+
+                if (data4 != "")
                 {
 
-                    //판정값 1과 2로 바꾸기
-                    int data3dec;
-                    if (data3 == "OK")
-                        data3dec = 1;
+                    // 더블워드여서 데이터 2개로 놔눠서 전송
+                    double data4d = Convert.ToDouble(data4) * 100000;
+                    string fdata4 = data4d.ToString().Substring(0, 2);
+                    string bdata4 = data4d.ToString().Substring(2, 4);
 
-                    else
-                        data3dec = 2;
-                    plc2.MCWrite(8021, data3dec);// 특성 검사 저항 판정
-
-
-                    if (data4 != "")
-                    {
-
-                        // 더블워드여서 데이터 2개로 놔눠서 전송
-                        double data4d = Convert.ToDouble(data4) * 100000;
-                        string fdata4 = data4d.ToString().Substring(0, 2);
-                        string bdata4 = data4d.ToString().Substring(2, 4);
-
-                        //소수점을 두개로 놔누어서 전송
-                        plc2.MCWrite(8022, Convert.ToInt32(fdata4));
-                        plc2.MCWrite(8023, Convert.ToInt32(bdata4));
-                    }
-                    else
-                    {
-                        plc2.MCWrite(8022, 0);
-                        plc2.MCWrite(8023, 0);
-                    }
-
-                    plc2.MCWrite(8020, 1);//저장했습니다.
-
-                }  catch (Exception exc)
-                {
-                    InputItem(dgvD1, barcode1 + " / 저항검사1 저장 [7] - ERROR", "NG");
-                    Log_K.WriteLog(log_lst, Mainpath, " / 저항데이터1 저장  ERROR");
-                    plc2.MCWrite(8020, 1);//저장했습니다.
+                    //소수점을 두개로 놔누어서 전송
+                    plc2.MCWrite(8022, Convert.ToInt32(fdata4));
+                    plc2.MCWrite(8023, Convert.ToInt32(bdata4));
                 }
+                else
+                {
+                    plc2.MCWrite(8022, 0);
+                    plc2.MCWrite(8023, 0);
+                }
+
+                plc2.MCWrite(8020, 1);//저장했습니다.
+                
+
 
                 //this.Invoke( new dele( ( ) =>
                 //{
@@ -3214,45 +3192,38 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터2 저장 ERROR");
                 }
 
+              
 
-                try
+                //판정값 1과 2로 바꾸기
+                int data3dec;
+                if (data3 == "OK")
+                    data3dec = 1;
+
+                else
+                    data3dec = 2;
+                plc2.MCWrite(8031, data3dec);// 특성 검사 저항 판정
+                
+
+                if (data4 != "")
                 {
-                    //판정값 1과 2로 바꾸기
-                    int data3dec;
-                    if (data3 == "OK")
-                        data3dec = 1;
 
-                    else
-                        data3dec = 2;
-                    plc2.MCWrite(8031, data3dec);// 특성 검사 저항 판정
+                    // 더블워드여서 데이터 2개로 놔눠서 전송
+                    double data4d = Convert.ToDouble(data4) * 100000;
+                    string fdata4 = data4d.ToString().Substring(0, 2);
+                    string bdata4 = data4d.ToString().Substring(2, 4);
 
-
-                    if (data4 != "")
-                    {
-
-                        // 더블워드여서 데이터 2개로 놔눠서 전송
-                        double data4d = Convert.ToDouble(data4) * 100000;
-                        string fdata4 = data4d.ToString().Substring(0, 2);
-                        string bdata4 = data4d.ToString().Substring(2, 4);
-
-                        //소수점을 두개로 놔누어서 전송
-                        plc2.MCWrite(8032, Convert.ToInt32(fdata4));
-                        plc2.MCWrite(8033, Convert.ToInt32(bdata4));
-                    }
-                    else
-                    {
-                        plc2.MCWrite(8032, 0);
-                        plc2.MCWrite(8033, 0);
-                    }
-
-                    plc2.MCWrite(8030, 1);//저장했습니다.
-
-                 }catch (Exception exc){
-                    InputItem(dgvD1, barcode1 + " / 저항데티어2 저장 [7] - ERROR", "NG");
-                    Log_K.WriteLog(log_lst, Mainpath, " / 저항데이터2 저장 ERROR");
-                    plc2.MCWrite(8030, 1);//저장했습니다.
+                    //소수점을 두개로 놔누어서 전송
+                    plc2.MCWrite(8032, Convert.ToInt32(fdata4));
+                    plc2.MCWrite(8033, Convert.ToInt32(bdata4));
+                }
+                else
+                {
+                    plc2.MCWrite(8032, 0);
+                    plc2.MCWrite(8033, 0);
                 }
 
+                plc2.MCWrite(8030, 1);//저장했습니다.
+                
 
             }
 
@@ -3342,46 +3313,38 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터13 저장 ERROR");
 
                 }
+            
 
-                try
+                //판정값 1과 2로 바꾸기
+                int data3dec;
+                if (data3 == "OK")
+                    data3dec = 1;
+
+                else
+                    data3dec = 2;
+                plc2.MCWrite(8041, data3dec);// 특성 검사 저항 판정
+
+
+                if (data4 != "")
                 {
-                    //판정값 1과 2로 바꾸기
-                    int data3dec;
-                    if (data3 == "OK")
-                        data3dec = 1;
 
-                    else
-                        data3dec = 2;
-                    plc2.MCWrite(8041, data3dec);// 특성 검사 저항 판정
+                    // 더블워드여서 데이터 2개로 놔눠서 전송
+                    double data4d = Convert.ToDouble(data4) * 100000;
+                    string fdata4 = data4d.ToString().Substring(0, 2);
+                    string bdata4 = data4d.ToString().Substring(2, 4);
 
-
-                    if (data4 != "")
-                    {
-
-                        // 더블워드여서 데이터 2개로 놔눠서 전송
-                        double data4d = Convert.ToDouble(data4) * 100000;
-                        string fdata4 = data4d.ToString().Substring(0, 2);
-                        string bdata4 = data4d.ToString().Substring(2, 4);
-
-                        //소수점을 두개로 놔누어서 전송
-                        plc2.MCWrite(8042, Convert.ToInt32(fdata4));
-                        plc2.MCWrite(8043, Convert.ToInt32(bdata4));
-                    }
-                    else
-                    {
-                        plc2.MCWrite(8042, 0);
-                        plc2.MCWrite(8043, 0);
-                    }
-
-                    plc2.MCWrite(8040, 1);//저장했습니다.
-
-                } catch (Exception exc)
-                {
-                    InputItem(dgvD1, barcode1 + " / 저항데이터3 저장 [7] - ERROR", "NG");
-                    Log_K.WriteLog(log_lst, Mainpath, " / 저항데이터13 저장 ERROR");
-                    plc2.MCWrite(8040, 1);//저장했습니다.
-
+                    //소수점을 두개로 놔누어서 전송
+                    plc2.MCWrite(8042, Convert.ToInt32(fdata4));
+                    plc2.MCWrite(8043, Convert.ToInt32(bdata4));
                 }
+                else
+                {
+                    plc2.MCWrite(8042, 0);
+                    plc2.MCWrite(8043, 0);
+                }
+
+                plc2.MCWrite(8040, 1);//저장했습니다.
+                
 
             }
 
@@ -3472,45 +3435,38 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터4 저장 ERROR");
                 }
 
+              
 
-                try
+                //판정값 1과 2로 바꾸기
+                int data3dec;
+                if (data3 == "OK")
+                    data3dec = 1;
+
+                else
+                    data3dec = 2;
+                plc2.MCWrite(8051, data3dec);// 특성 검사 저항 판정
+
+
+                if (data4 != "")
                 {
-                    //판정값 1과 2로 바꾸기
-                    int data3dec;
-                    if (data3 == "OK")
-                        data3dec = 1;
 
-                    else
-                        data3dec = 2;
-                    plc2.MCWrite(8051, data3dec);// 특성 검사 저항 판정
+                    // 더블워드여서 데이터 2개로 놔눠서 전송
+                    double data4d = Convert.ToDouble(data4) * 100000;
+                    string fdata4 = data4d.ToString().Substring(0, 2);
+                    string bdata4 = data4d.ToString().Substring(2, 4);
 
-
-                    if (data4 != "")
-                    {
-
-                        // 더블워드여서 데이터 2개로 놔눠서 전송
-                        double data4d = Convert.ToDouble(data4) * 100000;
-                        string fdata4 = data4d.ToString().Substring(0, 2);
-                        string bdata4 = data4d.ToString().Substring(2, 4);
-
-                        //소수점을 두개로 놔누어서 전송
-                        plc2.MCWrite(8052, Convert.ToInt32(fdata4));
-                        plc2.MCWrite(8053, Convert.ToInt32(bdata4));
-                    }
-                    else
-                    {
-                        plc2.MCWrite(8052, 0);
-                        plc2.MCWrite(8053, 0);
-                    }
-
-                    plc2.MCWrite(8050, 1);//저장했습니다.
-
-                }catch (Exception exc)
-                {
-                    InputItem(dgvD1, barcode1 + " / 저항데이터4 저장 [7] - ERROR", "NG");
-                    Log_K.WriteLog(log_lst, Mainpath, " / 저항데이터4 저장 ERROR");
-                    plc2.MCWrite(8050, 1);//저장했습니다.
+                    //소수점을 두개로 놔누어서 전송
+                    plc2.MCWrite(8052, Convert.ToInt32(fdata4));
+                    plc2.MCWrite(8053, Convert.ToInt32(bdata4));
                 }
+                else
+                {
+                    plc2.MCWrite(8052, 0);
+                    plc2.MCWrite(8053, 0);
+                }
+
+                plc2.MCWrite(8050, 1);//저장했습니다.
+                
 
             }
 
@@ -3628,139 +3584,6 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 성능데이터1 저장 ERROR");
                 }
 
-
-
-                //최종판정 추가
-                if (!LastCheck.Checked)
-                {
-                    
-                    string res = "";
-                   
-                    //최종판정 위치 변경 후 삭제
-                    try
-                    {
-                        bool decision = BarcodeCheck(barcode1, "barcode1", 6);
-                        if (decision)
-                        {
-                          //  plc2.MCWrite(8100, 1);
-                            res = "OK";
-                        }
-                        else
-                        {
-                          //  plc2.MCWrite(8100, 2);
-                            res = "NG";
-                    
-                        }
-                    
-                    
-                    }
-                    catch (Exception)
-                    {
-                    
-                    }
-
-
-                    //---------------↓ 최종판정 DB에저장 ↓---------------┐
-
-                    try
-                    {
-                        int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-
-                        if (rows != 0)
-                        {
-                            string cmd = SQLCMD.MakeUpdateCmdSentence_where_equals(sql.table, "barcode1", barcode1, "",
-                              "Decision", res
-
-                            );
-                            sql.ExecuteNonQuery(cmd);
-
-                            this.Invoke(new dele(() =>
-                            {
-                                InputItem(dgvD1, barcode1 + " / #I60 완성 로더 바코드 DATA 요구 [10]", res);
-                                InputItem(dgvD1, barcode1 + " / 최종판정 DB에 저장");
-                                Log_K.WriteLog(log_lst, Mainpath, " / 최종판정 DB에 저장  : " + barcode1 + " / " + res);
-                            }));
-                        }
-
-                    }
-                    catch (Exception)
-                    {
-                        this.Invoke(new dele(() =>
-                        {
-                            InputItem(dgvD1, barcode1 + " / #I60 완성 로더 바코드 DATA 요구 [10] - ERROR", "NG");
-                            Log_K.WriteLog(log_lst, Mainpath, " / #I60 완성 로더 바코드 DATA 요구 [10] - ERROR");
-                        }));
-                    }
-
-                    //---------------↑ 최종판정 DB에저장 ↑---------------┘
-                }
-
-                else
-                {
-                    
-                    string res = "";
-                   
-                    try
-                    {
-                        bool decision = BarcodeCheck( barcode1, "barcode1", 6 );
-                        if ( decision )
-                        {
-
-                        //최종판정 위치 변경 후 삭제
-                        //plc2.MCWrite(8100, 1);
-                        res = "OK";
-
-                        }
-                        else
-                        {
-                            //plc2.MCWrite( 8100, 1 );
-                            res = "OK";
-
-                        }
-
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-
-                    //---------------↓ 최종판정 DB에저장 ↓---------------┐
-
-                    try
-                    {
-                        int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-
-                        if (rows != 0)
-                        {
-                            string cmd = SQLCMD.MakeUpdateCmdSentence_where_equals(sql.table, "barcode1", barcode1, "",
-                              "Decision", res
-
-                            );
-                            sql.ExecuteNonQuery(cmd);
-
-                            this.Invoke(new dele(() =>
-                            {
-                                InputItem(dgvD1, barcode1 + " / #I60 완성 로더 바코드 DATA 요구 [10]-리워크모드", res);
-                                InputItem(dgvD1, barcode1 + " / 최종판정 OK-리워크모드");
-                                Log_K.WriteLog(log_lst, Mainpath, " / 최종판정 OK-리워크모드  : " + barcode1 + " / " + res);
-                            }));
-                        }
-
-                    }
-                    catch (Exception)
-                    {
-                        this.Invoke(new dele(() =>
-                        {
-                            InputItem(dgvD1, barcode1 + " / #I60 완성 로더 바코드 DATA 요구 [10]-리워크모드 - ERROR", "NG");
-                            Log_K.WriteLog(log_lst, Mainpath, " /  #I60 완성 로더 바코드 DATA 요구 [10]-리워크모드 - ERROR");
-                        }));
-                    }
-
-                    //---------------↑ 최종판정 DB에저장 ↑---------------┘
-                }
-
-
                 plc2.MCWrite(8070, 1);//저장했습니다.
 
             }
@@ -3874,138 +3697,6 @@ namespace KB_Data_V2
                 {
                     InputItem(dgvD1, barcode1 + " / 성능데이터2 저장 [9] - ERROR", "NG");
                     Log_K.WriteLog(log_lst, Mainpath, " / 성능데이터2 저장 ERROR");
-                }
-
-                //최종판정 추가
-
-                
-                if (!LastCheck.Checked)
-                {
-
-                    string res = "";
-                   
-                  //  최종판정 위치 변경 후 삭제
-                    try
-                    {
-                        bool decision = BarcodeCheck(barcode1, "barcode1", 6);
-                        if (decision)
-                        {
-                            //plc2.MCWrite(8100, 1);
-                            res = "OK";
-                        }
-                        else
-                        {
-                           // plc2.MCWrite(8100, 2);
-                            res = "NG";
-                    
-                        }
-                    
-                    
-                    }
-                    catch (Exception)
-                    {
-                    
-                    }
-
-
-                    //---------------↓ 최종판정 DB에저장 ↓---------------┐
-
-                    try
-                    {
-                        int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-
-                        if (rows != 0)
-                        {
-                            string cmd = SQLCMD.MakeUpdateCmdSentence_where_equals(sql.table, "barcode1", barcode1, "",
-                              "Decision", res
-
-                            );
-                            sql.ExecuteNonQuery(cmd);
-
-                            this.Invoke(new dele(() =>
-                            {
-                                InputItem(dgvD1, barcode1 + " / #I60 완성 로더 바코드 DATA 요구 [10]", res);
-                                InputItem(dgvD1, barcode1 + " / 최종판정 DB에 저장");
-                                Log_K.WriteLog(log_lst, Mainpath, " / 최종판정 DB에 저장  : " + barcode1 + " / " + res);
-                            }));
-                        }
-
-                    }
-                    catch (Exception)
-                    {
-                        this.Invoke(new dele(() =>
-                        {
-                            InputItem(dgvD1, barcode1 + " / #I60 완성 로더 바코드 DATA 요구 [10] - ERROR", "NG");
-                            Log_K.WriteLog(log_lst, Mainpath, " / #I60 완성 로더 바코드 DATA 요구 [10] - ERROR");
-                        }));
-                    }
-
-                    //---------------↑ 최종판정 DB에저장 ↑---------------┘
-                }
-
-                else
-                {
-
-                    string res = "";
-                   
-                    try
-                    {
-                        bool decision = BarcodeCheck( barcode1, "barcode1", 6 );
-                        if ( decision )
-                        {
-
-                        //최종판정 위치 변경 후 삭제
-                        //plc2.MCWrite(8100, 1);
-                        res = "OK";
-
-                        }
-                        else
-                        {
-                           // plc2.MCWrite( 8100, 1 );
-                            res = "OK";
-
-                        }
-
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-
-                    //---------------↓ 최종판정 DB에저장 ↓---------------┐
-
-                    try
-                    {
-                        int rows = sql.ExecuteQuery_Select_Count("SELECT COUNT(*) FROM table1 WHERE `Barcode1`='" + barcode1 + "' ;");
-
-                        if (rows != 0)
-                        {
-                            string cmd = SQLCMD.MakeUpdateCmdSentence_where_equals(sql.table, "barcode1", barcode1, "",
-                              "Decision", res
-
-                            );
-                            sql.ExecuteNonQuery(cmd);
-
-                            this.Invoke(new dele(() =>
-                            {
-                                InputItem(dgvD1, barcode1 + " / #I60 완성 로더 바코드 DATA 요구 [10]-리워크모드", res);
-                                InputItem(dgvD1, barcode1 + " / 최종판정 OK-리워크모드");
-                                Log_K.WriteLog(log_lst, Mainpath, " / 최종판정 OK-리워크모드  : " + barcode1 + " / " + res);
-                            }));
-                        }
-
-                    }
-                    catch (Exception)
-                    {
-                        this.Invoke(new dele(() =>
-                        {
-                            InputItem(dgvD1, barcode1 + " / #I60 완성 로더 바코드 DATA 요구 [10]-리워크모드 - ERROR", "NG");
-                            Log_K.WriteLog(log_lst, Mainpath, " /  #I60 완성 로더 바코드 DATA 요구 [10]-리워크모드 - ERROR");
-                        }));
-                    }
-
-                    //---------------↑ 최종판정 DB에저장 ↑---------------┘
                 }
 
                 plc2.MCWrite(8090, 1);//저장했습니다.
@@ -4816,9 +4507,9 @@ namespace KB_Data_V2
 
                 for (int i = 0; i < allcnt; i++)
                 {
-                    if (dgvH0.Rows[i].Cells[5].Value.Equals("OK"))
+                    if (dgvH0.Rows[i].Cells[6].Value.Equals("OK"))
                         okcnt++;
-                    if (dgvH0.Rows[i].Cells[5].Value.Equals("NG"))
+                    if (dgvH0.Rows[i].Cells[6].Value.Equals("NG"))
                         ngcnt++;
                 }
 
