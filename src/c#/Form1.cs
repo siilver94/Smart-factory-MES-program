@@ -107,31 +107,39 @@ namespace KB_Data_V2
         private void simpleButton23_Click(object sender, EventArgs e)   //  메인화면 버튼
         {
             xtraTabControl1.SelectedTabPageIndex = 0;
+            dgvH0.Columns.Clear();
+
         }
 
         private void simpleButton22_Click(object sender, EventArgs e)   //  모델 버튼
         {
             xtraTabControl1.SelectedTabPageIndex = 1;
+            dgvH0.Columns.Clear();
         }
 
         private void simpleButton30_Click(object sender, EventArgs e)   //  이력조회 버튼
         {
             xtraTabControl1.SelectedTabPageIndex = 2;
-            xtraTabControl1.TabPages[2].Controls.Add(timerange);
+            xtraTabControl1.TabPages[2].Controls.Add(timerange);    
 
             Time0.Visible = true;
             Time1.Visible = true;
+
+            dgvH0.Columns.Clear();
         }
 
         private void simpleButton19_Click(object sender, EventArgs e)   //  라벨설정1 버튼
         {
             Form2 frm = new Form2(this);
             frm.Show();
+
+            dgvH0.Columns.Clear();
         }
 
         private void simpleButton05_Click(object sender, EventArgs e)   //  프로그램설정 버튼
         {
             xtraTabControl1.SelectedTabPageIndex = 9;
+            dgvH0.Columns.Clear();
         }
 
         private void simpleButton6_Click(object sender, EventArgs e)   //  X_R Report 버튼
@@ -143,6 +151,7 @@ namespace KB_Data_V2
             Time1.Visible = false;
 
             SetToday();
+            dgvH0.Columns.Clear();
         }
         #endregion
 
@@ -2017,34 +2026,7 @@ namespace KB_Data_V2
         #endregion
 
 
-        bool BarcodeCheck(string bcr, string columnsname, int okcnt_cutline)
-        {
-            DataSet ds = sql.ExecuteQuery("SELECT * FROM table1 WHERE `" + columnsname + "`='" + bcr + "' ;");
-            int okcnt = 0;
-
-
-            if (ds.Tables[0].Rows.Count > 0)//해당 바코드 찾았다.
-            {
-                int cnt = ds.Tables[0].Columns.Count;//컬럼 몇개니
-
-                for (int i = 0; i < cnt; i++)//그 컬럼 수 안에 OK수량 계산
-                {
-                    if (ds.Tables[0].Rows[0][i].ToString().Equals("NG"))//NG하나라도 있음 return false다
-                        return false;
-                    else if (ds.Tables[0].Rows[0][i].ToString().Equals("OK"))//OK 카운트해라.
-                        okcnt++;
-
-                }
-
-                if (okcnt >= okcnt_cutline)//OK 수량 커트라인에 합격 했나?
-                    return true;
-                else//수량 안맞으면 NG다
-                    return false;
-
-            }
-            else//그런 바코드 데이터 한개도 없다
-                return false;
-        }
+       
 
         #region InputItem 관련
         private static DateTime Delay(int MS)
@@ -2119,6 +2101,12 @@ namespace KB_Data_V2
             xtraTabControl1.SelectedTabPageIndex = 0;
 
             cpkdecision.Value = (decimal)double.Parse(RWdataFast.Load("cpk", 0));
+
+
+            //X-R 상한 하한 기준치 최대값 설정
+            this.numericUpDown21.Maximum = 10000;
+            this.numericUpDown22.Maximum = 10000;
+            this.numericUpDown23.Maximum = 10000;
 
 #if Release
             string plc1_ip = "192.168.13.10";
@@ -2217,6 +2205,35 @@ namespace KB_Data_V2
 
 #endif
 
+        }
+
+        bool BarcodeCheck(string bcr, string columnsname, int okcnt_cutline)
+        {
+            DataSet ds = sql.ExecuteQuery("SELECT * FROM table1 WHERE `" + columnsname + "`='" + bcr + "' ;");
+            int okcnt = 0;
+
+
+            if (ds.Tables[0].Rows.Count > 0)//해당 바코드 찾았다.
+            {
+                int cnt = ds.Tables[0].Columns.Count;//컬럼 몇개니
+
+                for (int i = 0; i < cnt; i++)//그 컬럼 수 안에 OK수량 계산
+                {
+                    if (ds.Tables[0].Rows[0][i].ToString().Equals("NG"))//NG하나라도 있음 return false다
+                        return false;
+                    else if (ds.Tables[0].Rows[0][i].ToString().Equals("OK"))//OK 카운트해라.
+                        okcnt++;
+
+                }
+
+                if (okcnt >= okcnt_cutline)//OK 수량 커트라인에 합격 했나?
+                    return true;
+                else//수량 안맞으면 NG다
+                    return false;
+
+            }
+            else//그런 바코드 데이터 한개도 없다
+                return false;
         }
 
         //cccccccccc
@@ -4316,8 +4333,6 @@ namespace KB_Data_V2
         {
             dgvH0.Columns.Clear();
 
-           
-
             //특정 바코드 검색시
             if (NameSearchcheck.Checked)
             {
@@ -4391,8 +4406,8 @@ namespace KB_Data_V2
             }
 
             //마스터 제품 검색
-            else if (MNameSearchcheck.Checked)
-            {
+           // else if (MNameSearchcheck.Checked)
+            //{
 
 
                 //string cmd = "SELECT * FROM table1 WHERE barcode1 LIKE 'L%'; ";
@@ -4433,7 +4448,7 @@ namespace KB_Data_V2
 
                 //sql.Select(dgvH0, cmd, false);
 
-            }
+            //}
 
             else//기간검색시
             {
@@ -4492,7 +4507,7 @@ namespace KB_Data_V2
                   );
 
                 sql.Select(dgvH0, cmd, false);
-
+               
             }
 
             dgvInit("dgvH0");
@@ -4507,9 +4522,9 @@ namespace KB_Data_V2
 
                 for (int i = 0; i < allcnt; i++)
                 {
-                    if (dgvH0.Rows[i].Cells[6].Value.Equals("OK"))
+                    if (dgvH0.Rows[i].Cells[5].Value.Equals("OK"))
                         okcnt++;
-                    if (dgvH0.Rows[i].Cells[6].Value.Equals("NG"))
+                    if (dgvH0.Rows[i].Cells[5].Value.Equals("NG"))
                         ngcnt++;
                 }
 
@@ -4532,6 +4547,8 @@ namespace KB_Data_V2
                 dgvHN0.Rows[0].Cells[3].Value = "";
             }
             //---------------↑ 수량 ↑---------------┘
+            
+
         } 
         #endregion
 
@@ -4768,8 +4785,8 @@ namespace KB_Data_V2
         // ^LS0    랑    ^MMT 빼라..         LS0 아마도 0,0새로잡는거     mmt 피딩끝나면 센서신호 안줌   
         string HyundaiLabel_CMD(string cap1, string cap2, string cap3, string day_english, string count, string barcode)
         {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             //^FO400,80^GFA,00512,00512,00008,:Z64
-            //  2020_0206 TM 제외 QR 코드 위치 이동 -> 현대 바코드수정필요 
-            //  2020-0730 바코드 아래로 글자 위로 수정 day _ count 줄이랑 barcode 줄 좌표 변경 550 , 175 / 230 >> 550, 25 / 53
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      //  2020_0206 TM 제외 QR 코드 위치 이동 -> 현대 바코드수정필요 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      //  2020-0730 바코드 아래로 글자 위로 수정 day _ count 줄이랑 barcode 줄 좌표 변경 550 , 175 / 230 >> 550, 25 / 53
 
             string result =
             //"^XA^PW827^LL0213^FO64,0^GFA,04096,04096,00032,:Z64:eJztlE1u1DAUx5/lFm9gvKpggRKOwSJqZjEH6I5rdDkL1JgLwIUQGCHEtheoMOoFXFWoFk1j3rMdx0Mzs2FJ3oySsX/z/D78twEWW+xfjb35tZ4G3pu/uPT+dx603g+vdt09mk4DTgO3w1uaGtLgMw28Krn3PYg0Fdby3hZYDDUOW5tSsRRjKHh9WWPCx32MFV6iDNCpzpBPjBVBWWIPnabARNhDWnNKgNvgxIOLSJXxfkpPMz8mBvXYhovMpeLk3zpybXPSmVcxNe8afL4VthMUUOYCGqyGwtsKB47bgVksiY+BYIsNCuElpm9GznIBDiTybuQ3PXOAu5W5hdqHTRcKmOY3Dl2RnyfMDO4f/sUbroArfhu4wbAF1yQAhhz4nY38xch13H/kGgS1kTl2b+D1xLsoicQ1s+zWwsux/Rp85qvIecHZyOnXk8RvCm4Kvorx+U9X+JPkvqCiYvw7w6woueGkT+RYP/JbG/mYP1hO4u964lg/9U/ovuCC1No5EKF/1H+JfOwfbAUdl84C7Y8O+0c8708TlIW8yvsr1cXEK0nyQYk3IRnbMVurC5b1IT/QYcEdcVE/7TtXq1ZmLn6Qlqlt+DrlZ8/Z2QmcTPrkQdioSIOvVqXZLGSUjqYH1ISESbPFAaXTxYc4M54bWdwQdHr5wIa4WJorLgCSr+jTTLwZeL5ugg9JOB3sOizQeiis9S7fP4L+2O5eUMfl/RXFoktOq+fzLsvLbMygfci/Z+6/Xasfuf/Ptj5awwbWG/wcbTaPuVltxXt27a3va/99jjdyxb4iH/bwCvm12tqq4fO8Qn91bld7uDyN/vu4+Bj959f3A3eTv5rj9lD8+0/Eg387Xx8zKf4eDoHv9wdzuH788kP9AyM9+vvhIN/6fpbrp2CeXTF1dnXZsG+P+WKLLbbYYrP2B2qJ5/0=:21A^FO400,80^GFA,00512,00512,00008,:Z64:eJzF0LENwzAMBEASKlwmG2SFbOCV7M5dDGQxb5AVNILUsRDyEV80kAEChM0Vkig+RX5VUxvO2CmQQ6MPtPDtXGfAvd/AB9sFOHhcqaXKBiZUTVYUt4QWtvXZTd1+p2uLhIVKtc3VMIWg6rIPyukSavH/UVNmDLwy5xtz9vHTPlQ3YkjEkCnyK3zMr32c+zn39d/6AGMCf8I=:35BF^FO256,0^GFA,00768,00768,00012,:Z64:eJzVz7ENwjAQBVAjFzQoNwKLoGStFBEYUVBmFQaIZI+SDZzSFYcj5f5dmACueoV9979z/zpBeTA+Gt9e+oQnfcIRJo74cM4xibtxnMVXeizige5woVDEC4VeTlUP4pnCRY/t3CIC8xvR6mz2396C+roTtcz+3V3jNRty2sy2S0dP9LXdKXMyxmGfJXKdXNSU1I3SndxPzgddmEeB:C941" +
@@ -4792,9 +4809,9 @@ namespace KB_Data_V2
             "^FT275,83^A0N,17,16^FH\\^FDMADE IN KOREA^FS" +
             "^FT308,57^A0N,37,36^FH\\^FDKBAT^FS" + //KBAT 로고
 
-           
 
-           // "^BY128,128^FT550,202^BXN,8,200,0,0,1,~" + //1219 수정전
+
+            // "^BY128,128^FT550,202^BXN,8,200,0,0,1,~" + //1219 수정전
             "^BY128,128^FT400,202^BXN,8,200,0,0,1,~" + // 데이터매트릭스 바코드  수정
             //"^BY128,128^FT712,149^BXN,8,200,0,0,1,~" +
             //"^BY128,128^FT812,149^BXN,8,200,0,0,1,~" +
@@ -4865,7 +4882,7 @@ namespace KB_Data_V2
             "^FT138,138^A0N,22,26^FH\\^FD" + Cap2 + "^FS" +
             "^FO123,2^GB0,209,7^FS" +
             "^BY128,128^FT366,145^BXN,8,200,0,0,1,~" +  //  FT 366 클수록 오른쪽 작을수록 왼쪽
-            
+
             "^FH\\^FD" + barcode + "^FS" +
             "^PQ1,0,1,Y^XZ";
 
@@ -4922,6 +4939,7 @@ namespace KB_Data_V2
         #region 이력조회 버튼
         private void simpleButton14_Click(object sender, EventArgs e)   //  이력조회에 조회 버튼
         {
+            dgvH0.Columns.Clear();
             int daydiff = Ken2.Util.Dtime.DayDiff(Dtime.GetDateTime(Date0, Time0), Dtime.GetDateTime(Date1, Time1));
             if (daydiff > 32)
             {
@@ -4930,6 +4948,8 @@ namespace KB_Data_V2
             }
 
             SelectHistory();
+            
+
         }
 
         private void simpleButton15_Click(object sender, EventArgs e)   //  이력조회 오늘 버튼
