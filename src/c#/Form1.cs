@@ -2193,8 +2193,7 @@ namespace KB_Data_V2
             Directory.CreateDirectory("D:\\" + Mainpath + "\\Log");
             Log_K.WriteLog(log_lst, Mainpath, "프로그램 시작");
 
-            Directory.CreateDirectory("D:\\" + Mainpath + "\\Log2");
-            Log_K.WriteLog(log_lst2, Mainpath, "프로그램 시작");
+          
 
 #if !Release
 
@@ -2235,7 +2234,7 @@ namespace KB_Data_V2
                 return false;
         }
 
-        private int BarcodeCheck33(string bcr, string columnsname, int okcnt_cutline)
+        private int BarcodeCheck33(string bcr, string columnsname)
         {
             DataSet ds = sql.ExecuteQuery("SELECT * FROM table1 WHERE `" + columnsname + "`='" + bcr + "' ;");
             int okcnt = 0;
@@ -2506,7 +2505,7 @@ namespace KB_Data_V2
                         this.Invoke(new dele(() =>
                         {
                             Log_K.WriteLog(log_lst, Mainpath, "DB데이터 없음 인서트 완료");
-                            Log_K.WriteLog(log_lst, Mainpath, "임펠라바코드 / 어퍼바코드 / 결과 / 측정값 / #50스페이서측정 / #90스페이서측정 / 베어링 거리 / 베어링 하중 / 스토퍼 높이 / 특성 저항 판정 / 특성저항 검사 측정값");
+                            Log_K.WriteLog(log_lst, Mainpath, "[PLC1]임펠라바코드 / 어퍼바코드 / 결과 / 측정값 / #50스페이서측정 / #90스페이서측정 / 베어링 거리 / 베어링 하중 / 스토퍼 높이 / 특성 저항 판정 / 특성저항 검사 측정값");
                             Log_K.WriteLog(log_lst, Mainpath, barcode2 + "/" + barcode3 + "/" + decision_str[15] + "/" + data5 + "/" + data6 + "/" + data7 + "/" + data8 + "/" + data9 + "/" + data10 + "/" + data11 + "/" + data12);
                         }));
                     }
@@ -2550,7 +2549,7 @@ namespace KB_Data_V2
                         this.Invoke(new dele(() =>
                         {
                             Log_K.WriteLog(log_lst, Mainpath, "DB데이터 있음 업데이트 완료");
-                            Log_K.WriteLog(log_lst, Mainpath, "임펠라바코드 / 어퍼바코드 / 결과 / 측정값 / #50스페이서측정 / #90스페이서측정 / 베어링 거리 / 베어링 하중 / 스토퍼 높이 / 특성 저항 판정 / 특성저항 검사 측정값");
+                            Log_K.WriteLog(log_lst, Mainpath, "[PLC1]임펠라바코드 / 어퍼바코드 / 결과 / 측정값 / #50스페이서측정 / #90스페이서측정 / 베어링 거리 / 베어링 하중 / 스토퍼 높이 / 특성 저항 판정 / 특성저항 검사 측정값");
                             Log_K.WriteLog(log_lst, Mainpath, barcode2 + "/" + barcode3 + "/" + decision_str[15] + "/" + data5 + "/" + data6 + "/" + data7 + "/" + data8 + "/" + data9 + "/" + data10 + "/" + data11 + "/" + data12);
                         }));
 
@@ -2583,7 +2582,7 @@ namespace KB_Data_V2
                     this.Invoke(new dele(() =>
                     {
 
-                        Log_K.WriteLog(log_lst, Mainpath, "최종 LastSaveBarcode2 : " + LastSavedBarcode2);
+                        Log_K.WriteLog(log_lst, Mainpath, "[PLC1]최종 LastSaveBarcode2 : " + LastSavedBarcode2);
                     }));
                 }
 
@@ -3018,10 +3017,8 @@ namespace KB_Data_V2
                       "Datetime", Dtime.Now(Dtime.StringType.ForDatum),
                       "Model", ModelNamelbl.Text,
 
-                       "c24", data3,
-                     "c25", data4,
-
-                      
+                      "c24", data3,
+                      "c25", data4,
 
                       "c26", data5,
                       "c27", data6,
@@ -3101,7 +3098,7 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터1 저장  ERROR");
                 }
 
-                Log_K.WriteLog(log_lst2, Mainpath,  barcode1 + "특성데이터 저장 완료[SAVE1]");
+                Log_K.WriteLog(log_lst2, "Mainpath",  barcode1 + "특성데이터 저장 완료[SAVE1]");
 
 
                 try
@@ -3117,6 +3114,7 @@ namespace KB_Data_V2
                         data3dec = 2;
                     plc2.MCWrite(8021, data3dec);// 특성 검사 저항 판정
 
+                    
 
                     if (data4 != "")
                     {
@@ -3135,7 +3133,7 @@ namespace KB_Data_V2
                         plc2.MCWrite(8022, 0);
                         plc2.MCWrite(8023, 0);
                     }
-                    Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "저항검사 판정 완료[SAVE2]");
+                    Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "저항검사 판정 완료 / 저항판정 : " + data3dec + " / [SAVE1]");
 
 
                 }  catch (Exception exc)
@@ -3143,7 +3141,7 @@ namespace KB_Data_V2
                     InputItem(dgvD1, barcode1 + " / 저항검사1 저장 [7] - ERROR", "NG");
                     Log_K.WriteLog(log_lst, Mainpath, " / 저항데이터1 저장  ERROR");
 
-                    Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "저항검사 판정 ERROR[SAVE2]");
+                    Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "저항검사 판정 ERROR[SAVE1]");
                 }
 
                 //this.Invoke( new dele( ( ) =>
@@ -3159,7 +3157,8 @@ namespace KB_Data_V2
 
 
                 plc2.MCWrite(8020, 1);//저장했습니다.
-                Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "저항검사 판정 8020 신호 전송[SAVE1]");
+                Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "저항검사 판정 8020 신호 전송[SAVE1]");
+
             }
 
             if (name.Equals("Save2"))//32개바이트
@@ -3249,7 +3248,7 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터2 저장 ERROR");
                 }
 
-                Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "특성데이터 저장 완료[SAVE2]");
+                Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "특성데이터 저장 완료[SAVE2]");
 
                 try
                 {
@@ -3281,19 +3280,19 @@ namespace KB_Data_V2
                         plc2.MCWrite(8033, 0);
                     }
 
-                    Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "저항검사 판정 완료[SAVE2]");
+                    Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "저항검사 판정 완료 / 저항판정 : " + data3dec + " / [SAVE2]");
 
                 }
                 catch (Exception exc){
                     InputItem(dgvD1, barcode1 + " / 저항데티어2 저장 [7] - ERROR", "NG");
                     Log_K.WriteLog(log_lst, Mainpath, " / 저항데이터2 저장 ERROR");
 
-                    Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "저항검사 판정 ERROR[SAVE2]");
+                    Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "저항검사 판정 ERROR[SAVE2]");
                     
                 }
 
                 plc2.MCWrite(8030, 1);//저장했습니다.
-                Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "저항검사 판정 8030 신호 전송[SAVE2]");
+                Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "저항검사 판정 8030 신호 전송[SAVE2]");
             }
 
             if (name.Equals("Save3"))//32개바이트
@@ -3383,7 +3382,7 @@ namespace KB_Data_V2
 
                 }
 
-                Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "특성데이터 저장 완료[SAVE3]");
+                Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "특성데이터 저장 완료[SAVE3]");
 
                 try
                 {
@@ -3415,21 +3414,21 @@ namespace KB_Data_V2
                         plc2.MCWrite(8043, 0);
                     }
 
-                    Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "저항검사 판정 완료[SAVE3]");
+                    Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "저항검사 판정 완료 / 저항판정 : " + data3dec + " / [SAVE3]");
 
                 } catch (Exception exc)
                 {
                     InputItem(dgvD1, barcode1 + " / 저항데이터3 저장 [7] - ERROR", "NG");
                     Log_K.WriteLog(log_lst, Mainpath, " / 저항데이터13 저장 ERROR");
 
-                    Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "저항검사 판정 ERROR[SAVE3]");
+                    Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "저항검사 판정 ERROR[SAVE3]");
 
 
                 }
                 
 
                 plc2.MCWrite(8040, 1);//저장했습니다.
-                Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "저항검사 판정 8040 신호 전송[SAVE3]");
+                Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "저항검사 판정 8040 신호 전송[SAVE3]");
 
             }
 
@@ -3520,7 +3519,7 @@ namespace KB_Data_V2
                     Log_K.WriteLog(log_lst, Mainpath, " / 특성데이터4 저장 ERROR");
                 }
 
-                Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "특성데이터 저장 완료[SAVE4]");
+                Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "특성데이터 저장 완료[SAVE4]");
 
                 try
                 {
@@ -3552,18 +3551,18 @@ namespace KB_Data_V2
                         plc2.MCWrite(8053, 0);
                     }
 
-                    Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "저항검사 판정 완료[SAVE4]");
+                    Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "저항검사 판정 완료 / 저항판정 : " + data3dec + " / [SAVE4]");
 
                 }
                 catch (Exception exc)
                 {
                     InputItem(dgvD1, barcode1 + " / 저항데이터4 저장 [7] - ERROR", "NG");
                     Log_K.WriteLog(log_lst, Mainpath, " / 저항데이터4 저장 ERROR");
-                    Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "저항검사 판정 ERROR[SAVE4]");
+                    Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "저항검사 판정 ERROR[SAVE4]");
                 }
 
                 plc2.MCWrite(8050, 1);//저장했습니다.
-                Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "저항검사 판정 8050 신호 전송[SAVE4]");
+                Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "저항검사 판정 8050 신호 전송[SAVE4]");
 
             }
 
@@ -3579,22 +3578,22 @@ namespace KB_Data_V2
                 try
                 {
                     bool decision = BarcodeCheck(barcode1, "barcode1", 5);
-                    int decisionCnt = BarcodeCheck33(barcode1, "barcode1", 5);
+                    int decisionCnt = BarcodeCheck33(barcode1, "barcode1");
 
-                    Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "#G11 컨베이어 바코드  : " + barcode1 + " OK 수 : " + decisionCnt);
+                    Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "#G11 컨베이어 바코드  :  OK 수 : " + decisionCnt + " / 결과 : " + decision);
 
                     if (decision)
                     {
                         plc2.MCWrite(8060, 1);
                         res = "OK";
 
-                        Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "/ #G11 컨베이어 바코드 /  OK 수 : " + decisionCnt +" / 8060에 1로 날림.");
+                        Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "/ #G11 컨베이어 바코드 /  OK 수 : " + decisionCnt +" / 8060에 1로 날림.");
                     }
                     else
                     {
                         plc2.MCWrite(8060, 2);
                         res = "NG";
-                        Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "/ #G11 컨베이어 바코드 /  OK 수 : " + decisionCnt + " / 8060에 2로 날림.");
+                        Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "/ #G11 컨베이어 바코드 /  OK 수 : " + decisionCnt + " / 8060에 2로 날림.");
                     }
 
 
@@ -3699,6 +3698,10 @@ namespace KB_Data_V2
                     try
                     {
                         bool decision = BarcodeCheck(barcode1, "barcode1", 6);
+                        int decisionCnt = BarcodeCheck33(barcode1, "barcode1");
+
+                        Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "최종판정시 OK 수 : " + decisionCnt + " / 결과 : " + decision);
+
                         if (decision)
                         {
                           //  plc2.MCWrite(8100, 1);
@@ -3762,6 +3765,10 @@ namespace KB_Data_V2
                     try
                     {
                         bool decision = BarcodeCheck( barcode1, "barcode1", 6 );
+                        int decisionCnt = BarcodeCheck33(barcode1, "barcode1");
+
+                        Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "최종판정시 OK 수 : " + decisionCnt + " / 결과 : " + decision);
+
                         if ( decision )
                         {
 
@@ -3834,28 +3841,28 @@ namespace KB_Data_V2
                 try
                 {
                     bool decision = BarcodeCheck(barcode1, "barcode1", 5);
-                    int decisionCnt = BarcodeCheck33(barcode1, "barcode1", 5);
+                    int decisionCnt = BarcodeCheck33(barcode1, "barcode1");
 
-                    Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "#G11 컨베이어 바코드  : " + barcode1 + " OK 수 : " + decisionCnt);
+                    Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "#G12 컨베이어 바코드  :  OK 수 : " + decisionCnt + " / 결과 : " + decision);
 
                     if (decision)
                     {
                         plc2.MCWrite(8080, 1);
                         res = "OK";
-                        Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "/ #G11 컨베이어 바코드 /  OK 수 : " + decisionCnt + " / 8080에 1로 날림.");
+                        Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "/ #G12 컨베이어 바코드 /  OK 수 : " + decisionCnt + " / 8080에 1로 날림.");
                     }
                     else
                     {
                         plc2.MCWrite(8080, 2);
                         res = "NG";
-                        Log_K.WriteLog(log_lst2, Mainpath, barcode1 + "/ #G11 컨베이어 바코드 /  OK 수 : " + decisionCnt + " / 8080에 2로 날림.");
+                        Log_K.WriteLog(log_lst2, "Mainpath", barcode1 + "/ #G12 컨베이어 바코드 /  OK 수 : " + decisionCnt + " / 8080에 2로 날림.");
                     }
 
 
                     this.Invoke(new dele(() =>
                     {
                         InputItem(dgvD1, barcode1 + " / #G12 컨베이어 바코드 DATA 요구 [8]", res);
-                        Log_K.WriteLog(log_lst, Mainpath, " / #G12 컨베이어 바코드  : " + barcode1);
+                        Log_K.WriteLog(log_lst, "Mainpath", " / #G12 컨베이어 바코드  : " + barcode1);
 
                     }));
 
