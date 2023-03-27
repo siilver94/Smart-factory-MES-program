@@ -2217,8 +2217,8 @@ namespace KB_Data_V2
 
                 for (int i = 0; i < cnt; i++)//그 컬럼 수 안에 OK수량 계산
                 {
-                    if (ds.Tables[0].Rows[0][i].ToString().Equals("NG"))//NG하나라도 있음 return false다
-                        return false;
+                    if (ds.Tables[0].Rows[0][i].ToString().Equals("NG")) ;//NG하나라도 있음 return false다
+                                                                          //return false;
                     else if (ds.Tables[0].Rows[0][i].ToString().Equals("OK"))//OK 카운트해라.
                         okcnt++;
 
@@ -3469,7 +3469,7 @@ namespace KB_Data_V2
 
                       );
                         sql.ExecuteNonQuery(cmd);
-
+                        
 
                     }
                     else
@@ -4307,6 +4307,7 @@ namespace KB_Data_V2
 
         void Reading_barcode_NG_View_Handy(string bcr) // ######################### 불량 테스트 핸디
         {
+            
             try
             {
                 if (bcr.Length == 9)//브라켓 현대바코드
@@ -4331,6 +4332,8 @@ namespace KB_Data_V2
 
                 this.Invoke(new dele(() =>
                 {
+                    
+
                     dgvES[0].Rows.Clear();
                     dgvES[1].Rows.Clear();
                     dgvInit("dgvH0");
@@ -4346,8 +4349,11 @@ namespace KB_Data_V2
                             InputItem(dgvES[0], dgvH0.Columns[i].HeaderText, dgvH0.Rows[0].Cells[i].Value.ToString());
                         else
                             InputItem(dgvES[1], dgvH0.Columns[i].HeaderText, dgvH0.Rows[0].Cells[i].Value.ToString());
+                        
 
                     }
+                    
+                    
 
                     dgvH0.Rows.Clear();
                     dgvES[0].CurrentCell = null;
@@ -4637,89 +4643,12 @@ namespace KB_Data_V2
 
             string cmd = SQLiteCMD_K.Select_Equal("table1", barcode_dis, barcode_condition,
 
-                   "barcode1",
-                   "barcode2",
-                   "barcode3",
+                 "barcode1",
+                 "barcode2",
+                 "barcode3",
 
                  "Datetime",
                  "Model",
-
-                 "c1",
-                 "c24",
-                 "c25",
-
-                 "c14",
-                 "c15",
-                 "c16",
-                 "c17",
-                 "c18",
-                 "c180",
-
-                 "c19",
-                 "c20",
-                 "c21",
-                 "c22",
-                 "c23",
-                 "c24",
-                 "c25",
-                 "c26",
-                 "c27",
-                 "c28",
-                 "c29",
-                 "c30",
-
-                 "c31",
-                 "c32",
-                 "c33",
-                 //"c34",
-                 //"c35",
-                 //"c36",
-                 //"c37",
-                 //"c38",
-                 //"c39",
-                 //"c40",
-                 //"c41",
-                 //"c42",
-                 //"c43",
-
-                 //"barcode4",
-
-                 "Decision"
-
-                       );
-
-            sql.Select(dgvH0, cmd, false);
-        }
-
-        void SelectHistory()
-        {
-            dgvH0.Columns.Clear();
-
-           
-
-            //특정 바코드 검색시
-            if (NameSearchcheck.Checked)
-            {
-                string selected_bcr = "";
-
-               //if (radio_bcr1.Checked)
-               //    selected_bcr = "barcode1";
-               //else if (radio_bcr2.Checked)
-               //    selected_bcr = "barcode2";
-               //else if (radio_bcr3.Checked)
-               //    selected_bcr = "barcode3";
-               //else if (radio_bcr4.Checked)
-               //    selected_bcr = "barcode4";
-               
-
-                string cmd = SQLiteCMD_K.Select_Equal("table1", selected_bcr, NameSearchTB.Text,
-
-                    "barcode1",
-                    "barcode2",
-                    "barcode3",
-
-                  "Datetime",
-                                  "Model",
 
                  "Decision",
                  "c24",
@@ -4738,7 +4667,91 @@ namespace KB_Data_V2
                  "c21",
                  "c22",
                  "c23",
-                 
+
+                // "c24",
+                // "c25",
+
+                 "c26",
+                 "c27",
+                 "c28",
+                 "c29",
+                 "c30",
+
+                 "c31",
+                 "c32",
+                 "c33",
+
+
+                  "c24",
+                  "c25"
+                 //"c34",
+                 //"c35",
+                 //"c36",
+                 //"c37",
+                 //"c38",
+                 //"c39",
+                 //"c40",
+                 //"c41",
+                 // "c42",
+                 //"c43"
+
+                       //"barcode4",
+
+                       //  "Decision"
+
+                       );
+           
+            sql.Select(dgvH0, cmd, false);
+        }
+
+        void SelectHistory()
+        {
+            dgvH0.Columns.Clear();
+
+           
+
+            //특정 바코드 검색시
+            if (NameSearchcheck.Checked)
+            {
+                string selected_bcr = "";
+
+               if (radio_bcr1.Checked)
+                   selected_bcr = "barcode1";
+               //else if (radio_bcr2.Checked)
+               //    selected_bcr = "barcode2";
+               //else if (radio_bcr3.Checked)
+               //    selected_bcr = "barcode3";
+               //else if (radio_bcr4.Checked)
+               //    selected_bcr = "barcode4";
+               
+
+                string cmd = SQLiteCMD_K.Select_Equal("table1", selected_bcr, NameSearchTB.Text,
+
+                 "barcode1",
+                 "barcode2",
+                 "barcode3",
+
+                 "Datetime",
+                 "Model",
+
+                 "Decision",
+                 "c24",
+                 "c25",
+                 "c1",
+
+                 "c14",
+                 "c15",
+                 "c16",
+                 "c17",
+                 "c18",
+                 "c180",
+
+                 "c19",
+                 "c20",
+                 "c21",
+                 "c22",
+                 "c23",
+
                  "c26",
                  "c27",
                  "c28",
@@ -4749,20 +4762,20 @@ namespace KB_Data_V2
                  "c32",
                  "c33",
                  "colIndex"
-                 //"c34",
-                 //"c35",
-                 //"c36",
-                 //"c37",
-                 //"c38",
-                 //"c39",
-                 //"c40",
-                 //"c41",
-                 //"c42",
-                 //"c43",
+                        //"c34",
+                        //"c35",
+                        //"c36",
+                        //"c37",
+                        //"c38",
+                        //"c39",
+                        //"c40",
+                        //"c41",
+                        //"c42",
+                        //"c43",
 
-                 //"barcode4",
+                        //"barcode4",
 
-                 //"Decision"
+                        //"Decision"
 
                         );
 
@@ -4876,7 +4889,7 @@ namespace KB_Data_V2
 
             dgvInit("dgvH0");
 
-
+            //dgvHN0.Columns.Clear();
             //---------------↓ 수량 ↓---------------┐
             if (NameSearchcheck.Checked == false)
             {
@@ -5313,6 +5326,7 @@ namespace KB_Data_V2
 
         private void simpleButton15_Click(object sender, EventArgs e)   //  이력조회 오늘 버튼
         {
+            dgvH0.Columns.Clear();
             NameSearchcheck.Checked = false;
             SetToday();
         }
@@ -5321,6 +5335,7 @@ namespace KB_Data_V2
         {
             try
             {
+                dgvH0.Columns.Clear();
                 string Item = dgvH0.Rows[dgvH0.CurrentCell.RowIndex].Cells[0].Value.ToString();
                 NameSearchcheck.Checked = true;
                 NameSearchTB.Text = Item;
@@ -5334,11 +5349,12 @@ namespace KB_Data_V2
 
         private void simpleButton18_Click(object sender, EventArgs e)   //  CSV파일로 저장
         {
+            
             Directory.CreateDirectory(@"D:\Database\SavedData\");
             GridMaster.SaveCSV(dgvH0, @"D:\Database\SavedData\" + Dtime.Now(Dtime.StringType.ForFile) + ".csv");
-
+            dgvH0.Columns.Clear();
             MessageBox.Show("데이터가 저장되었습니다.\n경로 : " + @"D:\Database\SavedData\", "Message");
-        }
+                    }
 
         private void simpleButton34_Click(object sender, EventArgs e)   //  CSV폴더 열기
         {
@@ -6392,6 +6408,70 @@ namespace KB_Data_V2
             GridMaster.Color_Painting(dgvH0, 20);
             GridMaster.Color_Painting(dgvH0, 22);
             GridMaster.Color_Painting(dgvH0, 24);
+        }
+
+
+        //날짜 선택시 이력조회0 dgvH0 초기화
+        private void Date0_CloseUp(object sender, EventArgs e)
+        {
+            dgvH0.Columns.Clear();
+        }
+
+        //날짜 선택시 이력조회0 dgvH0 초기화
+        private void Date1_CloseUp(object sender, EventArgs e)
+        {
+            dgvH0.Columns.Clear();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void simpleButton5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                  this.Invoke(new dele(() =>
+                    {
+                        SelectHistory("barcode1", "LH-CNA04B2M27DA0C");
+
+                    }));
+                
+
+                this.Invoke(new dele(() =>
+                {
+                    dgvES[0].Rows.Clear();
+                    dgvES[1].Rows.Clear();
+                    dgvInit("dgvH0");
+                    
+                    xtraTabControl1.SelectedTabPageIndex = 10;
+                    es_barcode.Text = "LH-CNA04B2M27DA0C";
+
+                    int colcnt = dgvH0.Columns.Count;
+
+                    //for (int i = 0; i < 28; i++)  핸디 리더기 출력시 컬럼 위치 변경으로 인해서 30-> 28로 강제로 변환
+                    for (int i = 0; i < 28; i++)
+                    {
+                        if (i < 20)
+                            InputItem(dgvES[0], dgvH0.Columns[i].HeaderText, dgvH0.Rows[0].Cells[i].Value.ToString());
+                        else
+                            InputItem(dgvES[1], dgvH0.Columns[i].HeaderText, dgvH0.Rows[0].Cells[i].Value.ToString());
+                        
+
+                    }
+                    
+                    dgvH0.Rows.Clear();
+                    dgvES[0].CurrentCell = null;
+                    dgvES[1].CurrentCell = null;
+                }));
+
+
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }
