@@ -1075,7 +1075,6 @@ namespace KB_Data_V2
                         //#90 스페이서 측정값
                         //c16
 
-
                         string data4 = Ken2.Communication.MCProtocolCmd_K.View_MCData_2Word( buff[ CalcByte( 5050 ) ] , buff[ CalcByte( 5050 ) + 1 ] , buff[ CalcByte( 5050 ) + 2 ] , buff[ CalcByte( 5050 ) + 3 ] ).ToString( );
                         //#60 베어링압입 결과 거리
                         //c17
@@ -1115,9 +1114,7 @@ namespace KB_Data_V2
                         data6 = DecimalPoint( data6 , 2 );
 
                         //  추가
-                        data8 = DecimalPoint( data8 , 3 );
-
-                        
+                        data8 = DecimalPoint( data8 , 3 );                        
 
                         data1 = RoundUp( data1 , 2 ).ToString( );
                         data2 = RoundUp( data2 , 2 ).ToString( );
@@ -1900,7 +1897,7 @@ namespace KB_Data_V2
                     if ( Save2.Detect( buff[ CalcOffset( 7080 ) ] , 1 ) )
                     {
                         string bcr = DataChange_K.ByteToString_Clean_0x00( buff , CalcByte( 7083 ) , 18 ).Trim( );
-
+                        
                         //string data1 = ByteToDecision( buff[ CalcByte( 7100 ) ] );
                        // string data2 = Ken2.Communication.MCProtocolCmd_K.View_MCData_2Word( buff[ CalcByte( 7101 ) ] , buff[ CalcByte( 7101 ) + 1 ] , buff[ CalcByte( 7101 ) + 2 ] , buff[ CalcByte( 7101 ) + 3 ] ).ToString( );
                         string data3 = ByteToDecision( buff[ CalcByte( 7104 ) ] );
@@ -2019,10 +2016,8 @@ namespace KB_Data_V2
                         data3 = RoundUp( data3 , 2 ).ToString( );
                         data4 = RoundUp( data4 , 2 ).ToString( );
 
-                        if ( TalkingComm != null ) TalkingComm( "Save5" , "" , bcr , data1 , data2 , data3 , data4 , "" , "" , "" );
-
-                        //최종판정 
-                        if (TalkingComm != null) TalkingComm("BarcodeCheck4", "", bcr, "", "", "", "", "", "", "");
+                        if (TalkingComm != null) TalkingComm("Save5", "", bcr, data1, data2, data3, data4, "", "", "");
+                            
 
                     }
 
@@ -2058,21 +2053,22 @@ namespace KB_Data_V2
                         data3 = RoundUp( data3 , 2 ).ToString( );
                         data4 = RoundUp( data4 , 2 ).ToString( );
 
-                        if ( TalkingComm != null ) TalkingComm( "Save6" , "" , bcr , data1 , data2 , data3 , data4 , "" , "" , "" );
+                        if (TalkingComm != null) TalkingComm("Save6", "", bcr, data1, data2, data3, data4, "", "", "");
 
-                        //최종판정 
-                        if (TalkingComm != null) TalkingComm("BarcodeCheck4", "", bcr, "", "", "", "", "", "", "");
+
+                        
 
                     }
 
                     //최종판정 을 성능검사 를 하고 하는것으로 이동
                     //#I60 완성 로더 바코드 DATA 요구
-                    //if (BarcodeCheck4.Detect(buff[CalcOffset(7400)], 1))
-                    //{
-                    //    string bcr = DataChange_K.ByteToString_Clean_0x00(buff, CalcByte(7403), 18).Trim();
+                    if (BarcodeCheck4.Detect(buff[CalcOffset(7400)], 1))
+                    {
+                        string bcr = DataChange_K.ByteToString_Clean_0x00(buff, CalcByte(7403), 18).Trim();
 
-                    //    if (TalkingComm != null) TalkingComm("BarcodeCheck4", "", bcr, "", "", "", "", "", "", "");
-                    //}
+                        //완성 로더 바코드만 체크하고 최종판정을 안하는 것으로 해서 4 -> 5로 변경
+                        if (TalkingComm != null) TalkingComm("BarcodeCheck5", "", bcr, "", "", "", "", "", "", "");
+                    }
 
 
                 }
