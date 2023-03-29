@@ -2108,8 +2108,10 @@ namespace KB_Data_V2
             string plc1_ip = "192.168.13.10";
             string plc2_ip = "192.168.13.110";  
             string printer_ip = "192.168.13.41";
-            string pc = "192.168.13.173";
+            //string pc = "192.168.13.173";
 
+            //생산현황 추가로인한 IP 대역 변경
+            string pc = "192.168.14.173";
 #else
             string plc1_ip = "192.168.56.1";
             string plc2_ip = "192.168.56.1";
@@ -4343,18 +4345,17 @@ namespace KB_Data_V2
 
                     int colcnt = dgvH0.Columns.Count;
 
-                    for (int i = 0; i < colcnt; i++)
+                    //핸디 컬럼 변경으로 인해 colcnt -> 28로 임의로 변경.
+                    for (int i = 0; i < 28; i++)
                     {
                         if (i < 20)
                             InputItem(dgvES[0], dgvH0.Columns[i].HeaderText, dgvH0.Rows[0].Cells[i].Value.ToString());
                         else
                             InputItem(dgvES[1], dgvH0.Columns[i].HeaderText, dgvH0.Rows[0].Cells[i].Value.ToString());
                         
-
                     }
                     
                     
-
                     dgvH0.Rows.Clear();
                     dgvES[0].CurrentCell = null;
                     dgvES[1].CurrentCell = null;
@@ -6428,50 +6429,5 @@ namespace KB_Data_V2
 
         }
 
-        private void simpleButton5_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                  this.Invoke(new dele(() =>
-                    {
-                        SelectHistory("barcode1", "LH-CNA04B2M27DA0C");
-
-                    }));
-                
-
-                this.Invoke(new dele(() =>
-                {
-                    dgvES[0].Rows.Clear();
-                    dgvES[1].Rows.Clear();
-                    dgvInit("dgvH0");
-                    
-                    xtraTabControl1.SelectedTabPageIndex = 10;
-                    es_barcode.Text = "LH-CNA04B2M27DA0C";
-
-                    int colcnt = dgvH0.Columns.Count;
-
-                    //for (int i = 0; i < 28; i++)  핸디 리더기 출력시 컬럼 위치 변경으로 인해서 30-> 28로 강제로 변환
-                    for (int i = 0; i < 28; i++)
-                    {
-                        if (i < 20)
-                            InputItem(dgvES[0], dgvH0.Columns[i].HeaderText, dgvH0.Rows[0].Cells[i].Value.ToString());
-                        else
-                            InputItem(dgvES[1], dgvH0.Columns[i].HeaderText, dgvH0.Rows[0].Cells[i].Value.ToString());
-                        
-
-                    }
-                    
-                    dgvH0.Rows.Clear();
-                    dgvES[0].CurrentCell = null;
-                    dgvES[1].CurrentCell = null;
-                }));
-
-
-            }
-            catch (Exception)
-            {
-
-            }
-        }
     }
 }
