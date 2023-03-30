@@ -461,7 +461,7 @@ namespace KB_Data_V2
                         dgv.Rows[3].Cells[0].Value = "라벨 설정1(어퍼케이스)";
                         //dgv.Rows[6].Cells[0].Value = "라벨 설정2(볼트체결기)";
                         //dgv.Rows[4].Cells[0].Value = "핸디 리더기(COM2)";
-                        dgv.Rows[4].Cells[0].Value = "생산현황표시PC 연결(192.168.13.173)";
+                        dgv.Rows[4].Cells[0].Value = "생산현황표시PC 연결(192.168.14.183)";
 
 
                         //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
@@ -2111,7 +2111,7 @@ namespace KB_Data_V2
             //string pc = "192.168.13.173";
 
             //생산현황 추가로인한 IP 대역 변경
-            string pc = "192.168.14.173";
+            string pc = "192.168.14.183";
 #else
             string plc1_ip = "192.168.56.1";
             string plc2_ip = "192.168.56.1";
@@ -2176,7 +2176,7 @@ namespace KB_Data_V2
             LabelPrinter = new TCPClient_LabelPrinter(printer_ip,9100, 1000);
             //LabelPrinter.TalkingComm += LabelPrinter_TalkingComm;
             //모니터 수량 PC
-            monitor_pc = new TCPClient_Monitor(pc, 9100, 500, this);
+            monitor_pc = new TCPClient_Monitor(pc, 5000, 500, this);
 
             sql = new Mysql_K("127.0.0.1", "kb_metal_2", "table1", "a", "qwerasdf");
 
