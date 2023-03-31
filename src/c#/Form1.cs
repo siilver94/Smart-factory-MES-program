@@ -163,6 +163,7 @@ namespace KB_Data_V2
         {
             ControlData.Save(textBox10);    //  프린터1 비밀번호
         }
+
         public void LoadTxt()
         {
             ControlData.Load(textBox10);
@@ -823,7 +824,7 @@ namespace KB_Data_V2
                         //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
 
                         //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
-                        //dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
+                        //dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기
                         //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
                         //dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
                         //dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
@@ -1436,6 +1437,120 @@ namespace KB_Data_V2
                     break;
 
 
+                    //마스터
+                case "dgvMT0":
+
+                    try
+                    {
+                        //---------------↓ 기본 ↓---------------┐
+                        //DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
+                        //string DGV_name = dgv.Name;//적용
+                        //int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
+                        //int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "12"));//데이터가져옴
+                        //int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "12"));//데이터가져옴
+                        //GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
+                        DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
+                        string DGV_name = dgv.Name;//적용
+                        int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
+                        int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "5"));//데이터가져옴
+                        int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "5"));//데이터가져옴
+                        GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
+                        //---------------↑ 기본 ↑---------------┘
+
+                        //---------------↓ 생성 ↓---------------┐
+                        string[] ColumnsName = new string[] {
+
+                        };
+                        int rows = 0;//초기 생성 Row수
+
+                        GridMaster.Init3(dgv, false, height, rows, ColumnsName);
+                        //---------------↑ 생성 ↑---------------┘
+
+                        //---------------↓ 사용자 데이터 추가 부분 ↓---------------┐
+                        //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
+                        //dgv.Rows[ 0 ].Cells[ 0 ].Value = "CORE HEIGHT 1";
+
+                        dgv.Columns[1].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";
+
+                        dgv.Columns[0].HeaderText = "마스터바코드";                    
+                        dgv.Columns[1].HeaderText = "날짜";
+                        dgv.Columns[2].HeaderText = "모델";
+
+                        dgv.Columns[3].HeaderText = "밸런스 결과 판정";
+                        dgv.Columns[4].HeaderText = "밸런스 1차 각도";
+                        dgv.Columns[5].HeaderText = "밸런스 1차 밸런스량";
+
+                        dgv.Columns[6].HeaderText = "성능 검사 판정";
+                        dgv.Columns[7].HeaderText = "성능 검사 RPM 측정값";
+                        dgv.Columns[8].HeaderText = "성능 검사 소음 측정값";
+                        dgv.Columns[9].HeaderText = "성능 검사 진동 측정값";
+
+
+                        //밸런스 마스터
+                        if (radioButton5.Checked)
+                        {
+                            this.dgvMT0.Columns[6].Visible = false;
+                            this.dgvMT0.Columns[7].Visible = false;
+                            this.dgvMT0.Columns[8].Visible = false;
+                            this.dgvMT0.Columns[9].Visible = false;
+
+                        }
+                        // 성능 마스터
+                        else if (radioButton6.Checked)
+                        {
+                            this.dgvMT0.Columns[3].Visible = false;
+                            this.dgvMT0.Columns[4].Visible = false;
+                            this.dgvMT0.Columns[5].Visible = false;                            
+
+                        }
+
+                 
+
+                        //컬럼 가리기
+                       // this.dgvMT0.Columns[0].Visible = false;
+
+                        //---------------↓ OKNG 색칠 ↓---------------┐
+
+                        GridMaster.Color_Painting(dgv, 3);
+                        GridMaster.Color_Painting(dgv, 6);
+                       
+
+                        //---------------↑ OKNG 색칠 ↑---------------┘
+
+
+
+                        //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
+
+                        //---------------↓ 정렬 ↓---------------┐
+                        GridMaster.CenterAlign(dgv);
+                        //GridMaster.LeftAlign( dgv );
+                        //GridMaster.Align( dgv , 0 , DataGridViewContentAlignment.MiddleLeft );//단일 Column 정렬
+                        //---------------↑ 정렬 ↑---------------┘
+
+                        //---------------↓ 설정 ↓---------------┐
+                        dgv.ReadOnly = true;//읽기전용
+                        //GridMaster.DisableSortColumn( dgv );//오름차순 내림차순 정렬 막기
+                        //dgv.Columns[ 0 ].ReadOnly = true;//읽기전용
+                        //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
+
+                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
+                        //dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
+                        //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
+                        //dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
+                        //dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
+
+                        //---------------↑ 설정 ↑---------------┘
+
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    break;
+
+
+
                 case "dgvHN0":
 
                     try
@@ -2021,9 +2136,8 @@ namespace KB_Data_V2
         } 
         #endregion
 
-
        
-
+    
         #region InputItem 관련
         private static DateTime Delay(int MS)
         {
@@ -2138,7 +2252,7 @@ namespace KB_Data_V2
             dgvInit("dgvH1");
             dgvInit("dgvH2");
             dgvInit("dgvH3");
-            dgvInit( "dgvHN0" );
+            dgvInit("dgvHN0");
 
             dgvInit( "dgvP0" );
             //dgvInit( "dgvP1" );
@@ -2150,6 +2264,8 @@ namespace KB_Data_V2
 
             dgvInit( "dgvDE0" );
 
+
+            dgvInit("dgvMT0");
             //---------------↓ PLC와 통신 ↓---------------┐
 
 
@@ -4636,6 +4752,7 @@ namespace KB_Data_V2
         void SelectHistory(string barcode_dis, string barcode_condition)
         {
             dgvH0.Columns.Clear();
+            dgvHN0.Columns.Clear();
 
             dgvHN0.Rows[0].Cells[0].Value = "";
             dgvHN0.Rows[0].Cells[1].Value = "";
@@ -4709,7 +4826,7 @@ namespace KB_Data_V2
         {
             dgvH0.Columns.Clear();
 
-           
+            //dgvHN0.Columns.Clear();
 
             //특정 바코드 검색시
             if (NameSearchcheck.Checked)
@@ -4786,45 +4903,46 @@ namespace KB_Data_V2
             //마스터 제품 검색
             else if (MNameSearchcheck.Checked)
             {
+               // string bcr = "";
+               // bcr = MNameSearchTB.ToString();
+               //
+               // string cmd = "SELECT * FROM table1 WHERE barcode1 = "+bcr+" ; ";
+               //"barcode3",
+               //
+               //"Datetime",
+               //"Model",
+               //
+               //"Decision",
+               //"c24",
+               //"c25",
+               //"c1",
+               //
+               //"c14",
+               //"c15",
+               //"c16",                                            
+               //"c17",
+               //"c18",
+               //"c180",
+               //
+               //"c19",
+               //"c20",
+               //"c21",
+               //"c22",
+               //"c23",
+               //
+               //"c26",
+               //"c27",
+               //"c28",
+               //"c29",
+               //"c30",
+               //
+               //"c31",
+               //"c32",
+               //"c33"
+               
 
 
-                //string cmd = "SELECT * FROM table1 WHERE barcode1 LIKE 'L%'; ";
-                //"barcode3",
-                //
-                //"Datetime",
-                //"Model",
-                //
-                //"Decision",
-                //"c24",
-                //"c25",
-                //"c1",
-                //
-                //"c14",
-                //"c15",
-                //"c16",
-                //"c17",
-                //"c18",
-                //"c180",
-                //
-                //"c19",
-                //"c20",
-                //"c21",
-                //"c22",
-                //"c23",
-                //
-                //"c26",
-                //"c27",
-                //"c28",
-                //"c29",
-                //"c30",
-                //
-                //"c31",
-                //"c32",
-                //"c33"+
-                // " FROM table1 WHERE barcode1 LIKE 'L%';";
-
-
-                //sql.Select(dgvH0, cmd, false);
+               // sql.Select(dgvH0, cmd, false);
 
             }
 
@@ -6159,7 +6277,7 @@ namespace KB_Data_V2
 
            // radio_a.
 
-            xtraTabControl1.SelectedTabPageIndex = 14;
+            xtraTabControl1.SelectedTabPageIndex = 12;
         }
 
         private void simpleButton11_Click(object sender, EventArgs e)
@@ -6429,5 +6547,84 @@ namespace KB_Data_V2
 
         }
 
+        //마스터 버튼
+        private void simpleButton5_Click(object sender, EventArgs e)
+        {
+            dgvH0.Columns.Clear();
+            xtraTabControl1.SelectedTabPageIndex = 15;
+
+          
+        }
+
+
+        //마스터 제품 조회
+        private void simpleButton11_Click_1(object sender, EventArgs e)
+        {
+            //성능
+            //MPER#1OK23010515 
+            //MPER#1NG23010515 
+
+            //발란스
+            //MBAL#1OK23010515 
+            //MBAL#1NG23010515
+
+            string Mdate = dateTimePicker1.Value.ToShortDateString();
+            ////전체
+            if (radioButton7.Checked)
+            {
+                
+
+                //선택한 날짜에 m으로 시작하는 데이터 검색
+                string cmd = "SELECT barcode1, Datetime, Model,c19,c20,c21,c30,c31,c32,c33 FROM table1 WHERE barcode1 LIKE 'm%' AND DATE(DATETIME) = '" + Mdate + "'; ";
+
+                sql.Select(dgvMT0, cmd, false);
+
+                dgvInit("dgvMT0");
+
+            }
+            //밸런스 마스터
+            else if (radioButton5.Checked)
+            {
+                //선택한 날짜에 mb으로 시작하는 데이터 검색
+                string cmd = "SELECT barcode1, Datetime, Model,c19,c20,c21,c30,c31,c32,c33 FROM table1 WHERE barcode1 LIKE 'mb%' AND DATE(DATETIME) = '" + Mdate + "'; ";
+
+                sql.Select(dgvMT0, cmd, false);
+
+                dgvInit("dgvMT0");
+
+            }
+            // 성능 마스터
+            else if (radioButton6.Checked)
+            {
+                //선택한 날짜에 mp으로 시작하는 데이터 검색
+                string cmd = "SELECT barcode1, Datetime, Model,c19,c20,c21,c30,c31,c32,c33 FROM table1 WHERE barcode1 LIKE 'mp%' AND DATE(DATETIME) = '" + Mdate + "'; ";
+
+                sql.Select(dgvMT0, cmd, false);
+
+                dgvInit("dgvMT0");
+
+            }
+
+
+        }
+
+        //마스터 크기변경
+        private void dgvMT0_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button.ToString().Equals("Right"))
+            {
+                DataGridView thisdgv = (DataGridView)sender;
+                dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
+                dgvmanager.Init += OnInit;
+                dgvmanager.Show();
+            }
+        }
+
+
+        //마스터 오늘 설정
+        private void simpleButton10_Click(object sender, EventArgs e)
+        {
+            dateTimePicker1.Value = DateTime.Now;
+        }
     }
 }
