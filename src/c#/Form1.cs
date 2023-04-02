@@ -15,6 +15,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Timer = System.Windows.Forms.Timer;
 
 namespace KB_Data_V2
 {
@@ -1885,7 +1886,34 @@ namespace KB_Data_V2
                     //        //---------------↓ 정렬 ↓---------------┐
                     //        //GridMaster.CenterAlign( dgv );
                     //        GridMaster.LeftAlign(dgv);
-                    //        //GridMaster.Align( dgv , 0 , DataGridViewContentA
+                    //        //GridMaster.Align( dgv , 0 , DataGridViewContentAlignment.MiddleLeft );//단일 Column 정렬
+                    //        //---------------↑ 정렬 ↑---------------┘
+
+                    //        //---------------↓ 설정 ↓---------------┐
+                    //        dgv.ReadOnly = true;//읽기전용
+                    //        GridMaster.DisableSortColumn(dgv);//오름차순 내림차순 정렬 막기
+                    //        //dgv.Columns[ 0 ].ReadOnly = true;//읽기전용
+                    //        //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
+
+                    //        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
+                    //        dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
+                    //        //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
+                    //        //dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
+                    //        //dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
+
+                    //        //---------------↑ 설정 ↑---------------┘
+
+
+
+                    //    }
+                    //    catch (Exception)
+                    //    {
+
+                    //    }
+
+                    //    break;
+                    //case "dgvES3":
+
                     //    try
                     //    {
                     //        //---------------↓ 기본 ↓---------------┐
@@ -5016,6 +5044,11 @@ namespace KB_Data_V2
                 dgvHN0.Rows[0].Cells[3].Value = "";
             }
             //---------------↑ 수량 ↑---------------┘
+
+        //수량 체크 화면 좌우 스크롤로 초기화 시켜서 dgvHN0 보이게 하기
+           dgvH0.HorizontalScrollingOffset += 1000;
+           Delay(200);          
+           dgvH0.HorizontalScrollingOffset = 0;
         } 
         #endregion
 
@@ -5403,17 +5436,22 @@ namespace KB_Data_V2
                 );
         }
 
+
+
         #region 이력조회 버튼
         private void simpleButton14_Click(object sender, EventArgs e)   //  이력조회에 조회 버튼
         {
-            int daydiff = Ken2.Util.Dtime.DayDiff(Dtime.GetDateTime(Date0, Time0), Dtime.GetDateTime(Date1, Time1));
-            if (daydiff > 32)
-            {
-                MessageBox.Show("한 달 이내의 이력만 조회해주세요", "Error");
-                return;
-            }
+           
+           int daydiff = Ken2.Util.Dtime.DayDiff(Dtime.GetDateTime(Date0, Time0), Dtime.GetDateTime(Date1, Time1));
+           if (daydiff > 32)
+           {
+               MessageBox.Show("한 달 이내의 이력만 조회해주세요", "Error");
+               return;
+           }
 
-            SelectHistory();
+           SelectHistory();
+
+
         }
 
         private void simpleButton15_Click(object sender, EventArgs e)   //  이력조회 오늘 버튼
