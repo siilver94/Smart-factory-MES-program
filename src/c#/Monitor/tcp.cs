@@ -1,266 +1,636 @@
 
-using Ken2.Communication;
+using Ken2.Util;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
-using System.Net;
-using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace KB_Monitor_V2
 {
-    public class TCPServer_K
+    public partial class Form1 : Form
     {
-        string IP = "";
-        int port = 0;
+        TCPServer_K server1;
+        TCPServer_K server2;
 
-        public TcpListener mServer;
-        public TcpClient mClient;
-        public NetworkStream _stream;
-        public bool Connected = false;
+        Ken2.UIControl.dgvManager dgvmanager;
+        private delegate void dele();//delegate
 
-
-        private delegate void dele( );//delegate
-
-        //이벤트 발생시키는 클래스에 선언
-        public delegate void EveHandler( string name , object data , int length );
-        public event EveHandler TalkingComm;
-
-
-        public TCPServer_K( string ip , int port )
+        public Form1()
         {
-            this.IP = ip;
-            this.port = port;
+            InitializeComponent();
+        }
 
-            mServer = new TcpListener( IPAddress.Parse( IP ) , port );
-            mServer.Start( );
+        //fffffffffff
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
-            ListenThreadStart( 0 );
+#if Release
+            string ip = "192.168.14.173";
+            string ip = "192.168.14.183";
+ 
+#else
+            //string ip = "192.168.56.1";여
+
+            string ip1 = "192.168.14.173";    //3라인
+            string ip2 = "192.168.14.183";  //4라인
+
+#endif
+            server1 = new TCPServer_K(ip1, 5000);
+            server1.TalkingComm += server_TalkingComm;
+
+            dgvInit("dgvD0");
+
+
+            server2 = new TCPServer_K(ip2, 5000);
+            server2.TalkingComm += server_TalkingComm2;
+
+            dgvInit("dgvD1");
+
+            StartmainThread(0);
 
         }
 
-        public void Pause( )
+       
+
+
+        #region ////////////////// mainThread //////////////////
+        private Thread mainThread;
+        bool mainThreadFlag = false;
+        private void mainThreadMethod(object param)
         {
-            ReceiveThreadStop( );
-
-            if ( _stream != null )
-            {
-                _stream.Close( );
-            }
-
-            if ( mClient != null )
-            {
-                mClient.Close( );
-            }
-
-            TalkingComm( "DisConnected" , 0 , 0 );
-            Connected = false;
-        }
-
-        public void Dispose( )
-        {
-            ListenThreadStop( );
-            ReceiveThreadStop( );
-        }
-
-
-        #region -----# ListenThread #-----
-        private Thread ListenThread;//스레드
-        bool ListenThreadFlag = false;//Bool Flag
-        //스레드함수
-
-        //tttttttttttttttttt
-        private void ListenThreadMethod( object param )
-        {
-            int para = ( int ) param;
-
-
-            while ( ListenThreadFlag )
-            {
-
-                try
-                {
-                    mServer.BeginAcceptTcpClient( HandleAsyncConnection , mServer );
-                    //여기서 무한정기다리지않고 번호표뽑고 연결할라고 대기하는놈들 몇마리인지
-                    //확인 후 있으면 HandleAsyncConnection 콜백함수 호출해줌.
-                    //없으면 넘어가기(비동기)
-                    //AcceptTcpClient = 동기 신호로 무한정기다리면서 연결하는놈
-
-                }
-                catch ( Exception )
-                {
-
-                }
-
-                Thread.Sleep( 1000 );
-
-            }
-
-            try
-            {
-                mServer.Stop( );
-                mClient.Close( );
-                _stream.Close( );
-            }
-            catch ( Exception )
-            {
-
-            }
-
-        }
-        //스레드함수
-        public void ListenThreadStart( int param )
-        {
-            //스레드스타트
-            ListenThreadFlag = true;
-            ListenThread = new Thread( ( new ParameterizedThreadStart( ListenThreadMethod ) ) );
-            ListenThread.Start( param );
-
-            //스레드스타트
-        }
-        public void ListenThreadStop( )
-        {
-            //스레드종료
-            ListenThreadFlag = false;
-
-        }
-        #endregion
-
-
-        private void HandleAsyncConnection( IAsyncResult res )
-        {
-            try
-            {
-                mClient = mServer.EndAcceptTcpClient( res );
-                _stream = mClient.GetStream( );
-                _stream.ReadTimeout = 1000;
-
-                ReceiveThreadStart( 0 );
-
-            }
-            catch
-            {
-
-            }
-        }
-
-
-        #region -----# ReceiveThread #-----
-
-        private Thread ReceiveThread;//스레드
-        bool ReceiveThreadFlag = false;//Bool Flag
-        //스레드함수
-        //ttttttttttttttttttttttttt
-        private void ReceiveThreadMethod( object param )
-        {
-            int length = 0;
-
-            int para = ( int ) param;
-            TalkingComm( "Connected" , 0 , 0 );
-            Connected = true;
-
-            while ( ReceiveThreadFlag )
+            int para = (int)param;
+            while (mainThreadFlag)
             {
                 try
                 {
-                    byte[ ] buff = new byte[ 6000 ];
-
-                    length = _stream.Read( buff , 0 , buff.Length );
-
-
-                    if ( length == 0 )
+                    this.Invoke(new dele(() =>
                     {
-                        Pause( );
-                        break;
+                        label1.Text = Dtime.Now(Dtime.StringType.CurrentTime);
+                        dgvD0.CurrentCell = null;
+                        dgvD1.CurrentCell = null;
+                    }));
+                }
+                catch (Exception exc)
+                {
+                }
+                //Thread.Sleep(1000);
+            }
+        }
+
+
+        public void StartmainThread(int param)
+        {
+            mainThreadFlag = true;
+            mainThread = new Thread((new ParameterizedThreadStart(mainThreadMethod)));
+            mainThread.Start(param);
+        }
+        public void StopmainThread(int None)
+        {
+            mainThreadFlag = false;
+        }
+        public void KillmainThread(int None)
+        {
+            mainThread.Abort();
+        }
+        #endregion ////////////////// mainThread //////////////////
+
+
+        //evvvvvvvvvvvvvv
+        //3라인 통신
+        private void server_TalkingComm(string name, object data, int length)
+        {
+            if (name.Equals("Data"))
+            {
+
+                byte[] bt = (byte[])data;
+                string data_str = Encoding.ASCII.GetString(bt, 0, length);
+
+                string[] comm_data = new string[12];
+
+                try
+                {
+                    comm_data = data_str.Split('@')[0].Split('~');
+                }
+                catch (Exception)
+                {
+
+                }
+
+                this.Invoke(new dele(() =>
+                {
+                    try
+                    {
+                        //모델
+                        dgvD0.Rows[0].Cells[1].Value = comm_data[0];
+                        dgvD0.Rows[0].Cells[2].Value = comm_data[1];
+                        dgvD0.Rows[0].Cells[3].Value = comm_data[2];
+                        //dgvD0.Rows[0].Cells[4].Value = comm_data[3];
+
+                        //합계
+                        //dgvD0.Rows[2].Cells[1].Value = comm_data[4];
+                        //dgvD0.Rows[2].Cells[2].Value = comm_data[6];
+                        //dgvD0.Rows[2].Cells[3].Value = comm_data[8];
+                        ////dgvD0.Rows[2].Cells[4].Value = comm_data[10];
+                        dgvD0.Rows[2].Cells[1].Value = comm_data[3];
+                        dgvD0.Rows[2].Cells[2].Value = comm_data[5];
+                        dgvD0.Rows[2].Cells[3].Value = comm_data[7];
+                        //dgvD0.Rows[2].Cells[4].Value = comm_data[10];
+
+                        //NG
+                        //dgvD0.Rows[4].Cells[1].Value = comm_data[5];
+                        //dgvD0.Rows[4].Cells[2].Value = comm_data[7];
+                        //dgvD0.Rows[4].Cells[3].Value = comm_data[9];
+                        ////dgvD0.Rows[4].Cells[4].Value = comm_data[11];
+                        dgvD0.Rows[4].Cells[1].Value = comm_data[4];
+                        dgvD0.Rows[4].Cells[2].Value = comm_data[6];
+                        dgvD0.Rows[4].Cells[3].Value = comm_data[8];
+                        //dgvD0.Rows[4].Cells[4].Value = comm_data[11];
+
+                        //OK
+                        //dgvD0.Rows[3].Cells[1].Value = int.Parse(comm_data[4]) - int.Parse(comm_data[5]);
+                        //dgvD0.Rows[3].Cells[2].Value = int.Parse(comm_data[6]) - int.Parse(comm_data[7]);
+                        //dgvD0.Rows[3].Cells[3].Value = int.Parse(comm_data[8]) - int.Parse(comm_data[9]);
+                        ////dgvD0.Rows[3].Cells[4].Value = int.Parse(comm_data[10]) - int.Parse(comm_data[11]);
+                        dgvD0.Rows[3].Cells[1].Value = int.Parse(comm_data[3]) - int.Parse(comm_data[4]);
+                        dgvD0.Rows[3].Cells[2].Value = int.Parse(comm_data[5]) - int.Parse(comm_data[6]);
+                        dgvD0.Rows[3].Cells[3].Value = int.Parse(comm_data[7]) - int.Parse(comm_data[8]);
+                        //dgvD0.Rows[3].Cells[4].Value = int.Parse(comm_data[10]) - int.Parse(comm_data[11]);
+
+                        //목표
+                        //dgvD0.Rows[5].Cells[1].Value = comm_data[12];
+                        //dgvD0.Rows[5].Cells[2].Value = comm_data[13];
+                        //dgvD0.Rows[5].Cells[3].Value = comm_data[14];
+                        ////dgvD0.Rows[5].Cells[4].Value = comm_data[15];
+                        dgvD0.Rows[5].Cells[1].Value = comm_data[9];
+                        dgvD0.Rows[5].Cells[2].Value = comm_data[10];
+                        dgvD0.Rows[5].Cells[3].Value = comm_data[11];
+                        //dgvD0.Rows[5].Cells[4].Value = comm_data[15];
+
+
+                        //진도율
+                        int[] var = new int[4];
+
+                        //for (int i = 0; i < 4; i++)
+                        //{
+                        //    var[i] = (int)((double.Parse(comm_data[4 + (i * 2)]) / double.Parse(comm_data[12 + i])) * 100);
+                        //    if (!(var[i] >= 0 && var[i] <= 1000))
+                        //        var[i] = 0;
+
+                        //    dgvD0.Rows[6].Cells[1 + i].Value = var[i] + "%";
+                        //}
+
+                        for (int i = 0; i < 3; i++)
+                        {
+                            var[i] = (int)((double.Parse(comm_data[3 + (i * 2)]) / double.Parse(comm_data[9 + i])) * 100);
+                            if (!(var[i] >= 0 && var[i] <= 1000))
+                                var[i] = 0;
+
+                            dgvD0.Rows[6].Cells[1 + i].Value = var[i] + "%";
+                        }
+
+
+                    }
+                    catch (Exception)
+                    {
+
                     }
 
-                    if ( length < 5 )
-                        return;
+                }));
+            }
+
+        }
 
 
-                    if ( TalkingComm != null ) TalkingComm( "Data" , buff , length );
+        //4라인 통신
+        private void server_TalkingComm2(string name, object data, int length)
+        {
+            if (name.Equals("Data"))
+            {
 
-                    byte[ ] bt = new byte[ 1 ] { 0x31 };
-                    _stream.Write( bt , 0 , 1 );
+                byte[] bt = (byte[])data;
+                string data_str = Encoding.ASCII.GetString(bt, 0, length);
 
+                string[] comm_data = new string[12];
+
+                try
+                {
+                    comm_data = data_str.Split('@')[0].Split('~');
                 }
-                catch ( Exception )
+                catch (Exception)
                 {
 
                 }
+
+                this.Invoke(new dele(() =>
+                {
+                    try
+                    {
+                        //모델
+                        dgvD1.Rows[0].Cells[1].Value = comm_data[0];
+                        dgvD1.Rows[0].Cells[2].Value = comm_data[1];
+                        dgvD1.Rows[0].Cells[3].Value = comm_data[2];
+                        //dgvD0.Rows[0].Cells[4].Value = comm_data[3];
+
+                        //합계
+                        //dgvD0.Rows[2].Cells[1].Value = comm_data[4];
+                        //dgvD0.Rows[2].Cells[2].Value = comm_data[6];
+                        //dgvD0.Rows[2].Cells[3].Value = comm_data[8];
+                        ////dgvD0.Rows[2].Cells[4].Value = comm_data[10];
+                        dgvD1.Rows[2].Cells[1].Value = comm_data[3];
+                        dgvD1.Rows[2].Cells[2].Value = comm_data[5];
+                        dgvD1.Rows[2].Cells[3].Value = comm_data[7];
+                        //dgvD0.Rows[2].Cells[4].Value = comm_data[10];
+
+                        //NG
+                        //dgvD0.Rows[4].Cells[1].Value = comm_data[5];
+                        //dgvD0.Rows[4].Cells[2].Value = comm_data[7];
+                        //dgvD0.Rows[4].Cells[3].Value = comm_data[9];
+                        ////dgvD0.Rows[4].Cells[4].Value = comm_data[11];
+                        dgvD1.Rows[4].Cells[1].Value = comm_data[4];
+                        dgvD1.Rows[4].Cells[2].Value = comm_data[6];
+                        dgvD1.Rows[4].Cells[3].Value = comm_data[8];
+                        //dgvD0.Rows[4].Cells[4].Value = comm_data[11];
+
+                        //OK
+                        //dgvD0.Rows[3].Cells[1].Value = int.Parse(comm_data[4]) - int.Parse(comm_data[5]);
+                        //dgvD0.Rows[3].Cells[2].Value = int.Parse(comm_data[6]) - int.Parse(comm_data[7]);
+                        //dgvD0.Rows[3].Cells[3].Value = int.Parse(comm_data[8]) - int.Parse(comm_data[9]);
+                        ////dgvD0.Rows[3].Cells[4].Value = int.Parse(comm_data[10]) - int.Parse(comm_data[11]);
+                        dgvD1.Rows[3].Cells[1].Value = int.Parse(comm_data[3]) - int.Parse(comm_data[4]);
+                        dgvD1.Rows[3].Cells[2].Value = int.Parse(comm_data[5]) - int.Parse(comm_data[6]);
+                        dgvD1.Rows[3].Cells[3].Value = int.Parse(comm_data[7]) - int.Parse(comm_data[8]);
+                        //dgvD0.Rows[3].Cells[4].Value = int.Parse(comm_data[10]) - int.Parse(comm_data[11]);
+
+                        //목표
+                        //dgvD0.Rows[5].Cells[1].Value = comm_data[12];
+                        //dgvD0.Rows[5].Cells[2].Value = comm_data[13];
+                        //dgvD0.Rows[5].Cells[3].Value = comm_data[14];
+                        ////dgvD0.Rows[5].Cells[4].Value = comm_data[15];
+                        dgvD1.Rows[5].Cells[1].Value = comm_data[9];
+                        dgvD1.Rows[5].Cells[2].Value = comm_data[10];
+                        dgvD1.Rows[5].Cells[3].Value = comm_data[11];
+                        //dgvD0.Rows[5].Cells[4].Value = comm_data[15];
+
+
+                        //진도율
+                        int[] var = new int[4];
+
+                        //for (int i = 0; i < 4; i++)
+                        //{
+                        //    var[i] = (int)((double.Parse(comm_data[4 + (i * 2)]) / double.Parse(comm_data[12 + i])) * 100);
+                        //    if (!(var[i] >= 0 && var[i] <= 1000))
+                        //        var[i] = 0;
+
+                        //    dgvD0.Rows[6].Cells[1 + i].Value = var[i] + "%";
+                        //}
+
+                        for (int i = 0; i < 3; i++)
+                        {
+                            var[i] = (int)((double.Parse(comm_data[3 + (i * 2)]) / double.Parse(comm_data[9 + i])) * 100);
+                            if (!(var[i] >= 0 && var[i] <= 1000))
+                                var[i] = 0;
+
+                            dgvD1.Rows[6].Cells[1 + i].Value = var[i] + "%";
+                        }
+
+
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }));
             }
-        }
-        //스레드함수
-        public void ReceiveThreadStart( int param )
-        {
-            //스레드스타트
-            ReceiveThreadFlag = true;
-            ReceiveThread = new Thread( ( new ParameterizedThreadStart( ReceiveThreadMethod ) ) );
-            ReceiveThread.Start( param );
 
         }
-        public void ReceiveThreadStop( )
+
+
+        public void dgvInit(string name)
         {
-            //스레드종료
-            ReceiveThreadFlag = false;
-            //ReceiveThread = null;
+            switch (name)
+            {
+
+                case "dgvD0":
+
+                    try
+                    {
+                        //---------------↓ 기본 ↓---------------┐
+                        DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
+                        string DGV_name = dgv.Name;//적용
+                        int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
+                        int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "12"));//데이터가져옴
+                        int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "12"));//데이터가져옴
+                        GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
+                        //GridMaster.FontSize2( dgv , "New Gulim" , fontheader , fontcell );//한자나 글자 깨질 때 이걸로 사용하세요.
+                        //---------------↑ 기본 ↑---------------┘
+
+                        //---------------↓ 생성 ↓---------------┐
+                        string[] ColumnsName = new string[] {
+                            "A","A","A","A"//,"A"
+                        };
+                        int rows = 7;//초기 생성 Row수
+
+                        GridMaster.Init3(dgv, true, height, rows, ColumnsName);
+                        //---------------↑ 생성 ↑---------------┘
+
+                        //---------------↓ 사용자 데이터 추가 부분 ↓---------------┐
+                        //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
+                        //GridMaster.LoadCSV( dgvD0 , @"C:\Users\kclip3\Desktop\CR0.csv" );//셀데이터로드
+                        dgv.Rows[0].Cells[0].Value = "모델";
+                        dgv.Rows[1].Cells[0].Value = "공정";
+                        dgv.Rows[2].Cells[0].Value = "합계";
+                        dgv.Rows[3].Cells[0].Value = "OK";
+                        dgv.Rows[4].Cells[0].Value = "NG";
+                        dgv.Rows[5].Cells[0].Value = "목표수량";
+                        dgv.Rows[6].Cells[0].Value = "진도율";
+
+                        dgv.Rows[0].Cells[1].Value = "..";
+                        dgv.Rows[0].Cells[2].Value = "..";
+                        dgv.Rows[0].Cells[3].Value = "..";
+                        //dgv.Rows[0].Cells[4].Value = "..";
+
+
+                        dgv.Rows[1].Cells[1].Value = "어퍼케이스 조립";
+                        dgv.Rows[1].Cells[2].Value = "발란스";
+                        dgv.Rows[1].Cells[3].Value = "성능검사";
+                        //dgv.Rows[1].Cells[4].Value = "BRKT 체결";
+
+                        for (int i = 0; i < 4; i++)
+                        {
+                            dgv.Rows[2 + i].Cells[1].Value = 0;
+                            dgv.Rows[2 + i].Cells[2].Value = 0;
+                            dgv.Rows[2 + i].Cells[3].Value = 0;
+                            //dgv.Rows[2 + i].Cells[4].Value = 0;
+                        }
+
+                        dgv.Rows[6].Cells[1].Value = "0%";
+                        dgv.Rows[6].Cells[2].Value = "0%";
+                        dgv.Rows[6].Cells[3].Value = "0%";
+                        //dgv.Rows[6].Cells[4].Value = "0%";
+
+                        dgv.Rows[0].Cells[1].Style.ForeColor = Color.Yellow;
+                        dgv.Rows[0].Cells[2].Style.ForeColor = Color.Yellow;
+                        dgv.Rows[0].Cells[3].Style.ForeColor = Color.Yellow;
+                        //dgv.Rows[0].Cells[4].Style.ForeColor = Color.Yellow;
+
+                        dgv.Rows[2].Cells[1].Style.ForeColor = Color.Cyan;
+                        dgv.Rows[2].Cells[2].Style.ForeColor = Color.Cyan;
+                        dgv.Rows[2].Cells[3].Style.ForeColor = Color.Cyan;
+                        //dgv.Rows[2].Cells[4].Style.ForeColor = Color.Cyan;
+
+                        dgv.Rows[3].Cells[1].Style.ForeColor = Color.Lime;
+                        dgv.Rows[3].Cells[2].Style.ForeColor = Color.Lime;
+                        dgv.Rows[3].Cells[3].Style.ForeColor = Color.Lime;
+                        //dgv.Rows[3].Cells[4].Style.ForeColor = Color.Lime;
+
+                        dgv.Rows[4].Cells[1].Style.ForeColor = Color.Red;
+                        dgv.Rows[4].Cells[2].Style.ForeColor = Color.Red;
+                        dgv.Rows[4].Cells[3].Style.ForeColor = Color.Red;
+                        //dgv.Rows[4].Cells[4].Style.ForeColor = Color.Red;
+
+                        //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
+
+                        //---------------↓ 정렬 ↓---------------┐
+                        GridMaster.CenterAlign(dgv);
+                        //GridMaster.LeftAlign( dgv );
+                        //GridMaster.Align( dgv , 0 , DataGridViewContentAlignment.MiddleLeft );//단일 Column 정렬
+                        //---------------↑ 정렬 ↑---------------┘
+
+                        //---------------↓ 설정 ↓---------------┐
+                        dgv.ReadOnly = true;//읽기전용
+                        //dgv.Columns[ 0 ].ReadOnly = true;//읽기전용
+
+                        GridMaster.DisableSortColumn(dgv);//오름차순 내림차순 정렬 막기
+
+                        //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
+                        dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
+                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
+
+                        //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
+                        dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
+                        dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
+                        //dgv.DefaultCellStyle.SelectionBackColor = Color.Transparent;
+                        //dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
+                        dgv.BackgroundColor = Color.Black;
+
+                        //---------------↑ 설정 ↑---------------┘
+
+
+
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    break;
+
+                    //4라인
+                case "dgvD1":
+
+                    try
+                    {
+                        //---------------↓ 기본 ↓---------------┐
+                        DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
+                        string DGV_name = dgv.Name;//적용
+                        int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
+                        int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "12"));//데이터가져옴
+                        int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "12"));//데이터가져옴
+                        GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
+                        //GridMaster.FontSize2( dgv , "New Gulim" , fontheader , fontcell );//한자나 글자 깨질 때 이걸로 사용하세요.
+                        //---------------↑ 기본 ↑---------------┘
+
+                        //---------------↓ 생성 ↓---------------┐
+                        string[] ColumnsName = new string[] {
+                            "A","A","A","A"//,"A"
+                        };
+                        int rows = 7;//초기 생성 Row수
+
+                        GridMaster.Init3(dgv, true, height, rows, ColumnsName);
+                        //---------------↑ 생성 ↑---------------┘
+
+                        //---------------↓ 사용자 데이터 추가 부분 ↓---------------┐
+                        //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
+                        //GridMaster.LoadCSV( dgvD0 , @"C:\Users\kclip3\Desktop\CR0.csv" );//셀데이터로드
+                        dgv.Rows[0].Cells[0].Value = "모델";
+                        dgv.Rows[1].Cells[0].Value = "공정";
+                        dgv.Rows[2].Cells[0].Value = "합계";
+                        dgv.Rows[3].Cells[0].Value = "OK";
+                        dgv.Rows[4].Cells[0].Value = "NG";
+                        dgv.Rows[5].Cells[0].Value = "목표수량";
+                        dgv.Rows[6].Cells[0].Value = "진도율";
+
+                        dgv.Rows[0].Cells[1].Value = "..";
+                        dgv.Rows[0].Cells[2].Value = "..";
+                        dgv.Rows[0].Cells[3].Value = "..";
+                        //dgv.Rows[0].Cells[4].Value = "..";
+
+
+                        dgv.Rows[1].Cells[1].Value = "어퍼케이스 조립";
+                        dgv.Rows[1].Cells[2].Value = "발란스";
+                        dgv.Rows[1].Cells[3].Value = "성능검사";
+                        //dgv.Rows[1].Cells[4].Value = "BRKT 체결";
+
+                        for (int i = 0; i < 4; i++)
+                        {
+                            dgv.Rows[2 + i].Cells[1].Value = 0;
+                            dgv.Rows[2 + i].Cells[2].Value = 0;
+                            dgv.Rows[2 + i].Cells[3].Value = 0;
+                            //dgv.Rows[2 + i].Cells[4].Value = 0;
+                        }
+
+                        dgv.Rows[6].Cells[1].Value = "0%";
+                        dgv.Rows[6].Cells[2].Value = "0%";
+                        dgv.Rows[6].Cells[3].Value = "0%";
+                        //dgv.Rows[6].Cells[4].Value = "0%";
+
+                        dgv.Rows[0].Cells[1].Style.ForeColor = Color.Yellow;
+                        dgv.Rows[0].Cells[2].Style.ForeColor = Color.Yellow;
+                        dgv.Rows[0].Cells[3].Style.ForeColor = Color.Yellow;
+                        //dgv.Rows[0].Cells[4].Style.ForeColor = Color.Yellow;
+
+                        dgv.Rows[2].Cells[1].Style.ForeColor = Color.Cyan;
+                        dgv.Rows[2].Cells[2].Style.ForeColor = Color.Cyan;
+                        dgv.Rows[2].Cells[3].Style.ForeColor = Color.Cyan;
+                        //dgv.Rows[2].Cells[4].Style.ForeColor = Color.Cyan;
+
+                        dgv.Rows[3].Cells[1].Style.ForeColor = Color.Lime;
+                        dgv.Rows[3].Cells[2].Style.ForeColor = Color.Lime;
+                        dgv.Rows[3].Cells[3].Style.ForeColor = Color.Lime;
+                        //dgv.Rows[3].Cells[4].Style.ForeColor = Color.Lime;
+
+                        dgv.Rows[4].Cells[1].Style.ForeColor = Color.Red;
+                        dgv.Rows[4].Cells[2].Style.ForeColor = Color.Red;
+                        dgv.Rows[4].Cells[3].Style.ForeColor = Color.Red;
+                        //dgv.Rows[4].Cells[4].Style.ForeColor = Color.Red;
+
+                        //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
+
+                        //---------------↓ 정렬 ↓---------------┐
+                        GridMaster.CenterAlign(dgv);
+                        //GridMaster.LeftAlign( dgv );
+                        //GridMaster.Align( dgv , 0 , DataGridViewContentAlignment.MiddleLeft );//단일 Column 정렬
+                        //---------------↑ 정렬 ↑---------------┘
+
+                        //---------------↓ 설정 ↓---------------┐
+                        dgv.ReadOnly = true;//읽기전용
+                        //dgv.Columns[ 0 ].ReadOnly = true;//읽기전용
+
+                        GridMaster.DisableSortColumn(dgv);//오름차순 내림차순 정렬 막기
+
+                        //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
+                        dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
+                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
+
+                        //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
+                        dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
+                        dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
+                        //dgv.DefaultCellStyle.SelectionBackColor = Color.Transparent;
+                        //dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
+                        dgv.BackgroundColor = Color.Black;
+
+                        //---------------↑ 설정 ↑---------------┘
+
+
+
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    break;
+
+
+            }
+
 
         }
-        #endregion
+             
 
-
-        public void SendString( string str )
+        //ccccccccccccc
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            byte[ ] buff = DataChange_K.StringToByteArr( str );
-
+            StopmainThread(0);
             try
             {
-                _stream.Write( buff , 0 , buff.Length );
+                server1.Dispose();
+
+                server2.Dispose();
             }
-            catch ( Exception )
+            catch (Exception)
             {
-                Pause( );
+
             }
         }
 
-        public void Send( string str )
+        void OnInit(string name, object data)
         {
-
-            //try
-            //{
-            //    string SendData = Parsing.DeleteSpace( str );
-
-            //    //int SendDataLength = textBox2.TextLength;//4
-
-            //    char[ ] CharArray = SendData.ToCharArray( );// 0 0 0 0
-
-            //    string[ ] NewSendData = new string[ CharArray.Length / 2 ];// 2
-
-            //    for ( int i = 0 ; i < NewSendData.Length ; i++ )
-            //    {
-            //        NewSendData[ i ] = CharArray[ i * 2 ].ToString( ) + CharArray[ i * 2 + 1 ].ToString( );
-            //    }
-
-            //    byte[ ] SendBuffer = new byte[ NewSendData.Length ];
-
-            //    for ( int i = 0 ; i < SendBuffer.Length ; i++ )
-            //    {
-            //        SendBuffer[ i ] = byte.Parse( NewSendData[ i ] , System.Globalization.NumberStyles.HexNumber );
-            //    }
-
-            //    _stream.Write( SendBuffer , 0 , SendBuffer.Length );
-
-
-            //}
-            //catch ( Exception eee )
-            //{
-            //    Pause( );
-
-            //}
-
+            this.Invoke(new dele(() =>
+            {
+                dgvInit(name);
+            }));
         }
-    }
 
+        //3라인 컬럼수정
+        private void dgvD0_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button.ToString().Equals("Right"))
+            {
+                DataGridView thisdgv = (DataGridView)sender;
+                dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
+                dgvmanager.Init += OnInit;
+                dgvmanager.Show();
+            }
+        }
+
+        //4라인 컬럼수정
+        private void dgvD1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button.ToString().Equals("Right"))
+            {
+                DataGridView thisdgv = (DataGridView)sender;
+                dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
+                dgvmanager.Init += OnInit;
+                dgvmanager.Show();
+            }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Application.Exit();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private Point mousePoint; // 현재 마우스 포인터의 좌표저장 변수 선언
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            mousePoint = new Point(e.X, e.Y); //현재 마우스 좌표 저장
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) //마우스 왼쪽 클릭 시에만 실행
+            {
+                //폼의 위치를 드래그중인 마우스의 좌표로 이동 
+                Location = new Point(Left - (mousePoint.X - e.X), Top - (mousePoint.Y - e.Y));
+            }
+        }
+
+        
+    }
 }
