@@ -1,3 +1,4 @@
+
 using Ken2.Communication;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace kbi_monitor
+namespace KB_Monitor_V2
 {
     public class TCPServer_K
     {
