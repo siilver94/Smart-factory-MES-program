@@ -294,9 +294,7 @@ namespace KB_Monitor_V2
 
                         //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
                         dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
-                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
-
-                        //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
+                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd 
                         dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
                         dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
                         //dgv.DefaultCellStyle.SelectionBackColor = Color.Transparent;
