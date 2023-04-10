@@ -1151,14 +1151,7 @@ namespace KB_Data_V2
 
                         //---------------↓ 설정 ↓---------------┐
                         dgv.ReadOnly = true;//읽기전용
-                        //GridMaster.DisableSortColumn( dgv );//오름차순 내림차순 정렬 막기
-                        //dgv.Columns[ 0 ].ReadOnly = true;//읽기전용
-                        //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
-
-                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
-                        //dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
-                        //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
-                        //dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
+           
                         //dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
 
                         //---------------↑ 설정 ↑---------------┘
