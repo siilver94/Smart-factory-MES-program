@@ -198,7 +198,7 @@ namespace KB_Data_V2
                         //---------------↑ 생성 ↑---------------┘
 
                         //---------------↓ 사용자 데이터 추가 부분 ↓---------------┐
-                        //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
+                    
 
                         //---------------↓ 1번라인 ↓---------------┐
 
