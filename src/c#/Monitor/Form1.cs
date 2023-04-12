@@ -42,8 +42,7 @@ namespace KB_Monitor_V2
             server1 = new TCPServer_K(ip1, 5000);
             server1.TalkingComm += server_TalkingComm;
 
-            //server2 = new TCPServer_K(ip2, 5000);
-            //server2.TalkingComm += server_TalkingComm;
+            
 
             dgvInit("dgvD0");
 
