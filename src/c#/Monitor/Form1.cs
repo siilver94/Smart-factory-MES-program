@@ -31,24 +31,32 @@ namespace KB_Monitor_V2
         {
 
 #if Release
-            string ip = "192.168.13.173";
+            string ip = "192.168.14.173";
+            string ip = "192.168.14.183";
  
 #else
-            //string ip = "192.168.56.1";
-            string ip1 = "192.168.13.173";
-            string ip2 = "192.168.13.174";
+            //string ip = "192.168.56.1";여
+
+            string ip1 = "192.168.14.173";    //3라인
+            string ip2 = "192.168.14.183";  //4라인
 
 #endif
             server1 = new TCPServer_K(ip1, 5000);
             server1.TalkingComm += server_TalkingComm;
 
-            
-
             dgvInit("dgvD0");
+
+
+            server2 = new TCPServer_K(ip2, 5000);
+            server2.TalkingComm += server_TalkingComm2;
+
+            dgvInit("dgvD1");
 
             StartmainThread(0);
 
         }
+
+       
 
 
         #region ////////////////// mainThread //////////////////
@@ -65,6 +73,7 @@ namespace KB_Monitor_V2
                     {
                         label1.Text = Dtime.Now(Dtime.StringType.CurrentTime);
                         dgvD0.CurrentCell = null;
+                        dgvD1.CurrentCell = null;
                     }));
                 }
                 catch (Exception exc)
@@ -73,6 +82,8 @@ namespace KB_Monitor_V2
                 //Thread.Sleep(1000);
             }
         }
+
+
         public void StartmainThread(int param)
         {
             mainThreadFlag = true;
@@ -91,6 +102,7 @@ namespace KB_Monitor_V2
 
 
         //evvvvvvvvvvvvvv
+        //3라인 통신
         private void server_TalkingComm(string name, object data, int length)
         {
             if (name.Equals("Data"))
@@ -160,6 +172,7 @@ namespace KB_Monitor_V2
                         dgvD0.Rows[5].Cells[3].Value = comm_data[11];
                         //dgvD0.Rows[5].Cells[4].Value = comm_data[15];
 
+
                         //진도율
                         int[] var = new int[4];
 
@@ -179,6 +192,111 @@ namespace KB_Monitor_V2
                                 var[i] = 0;
 
                             dgvD0.Rows[6].Cells[1 + i].Value = var[i] + "%";
+                        }
+
+
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }));
+            }
+
+        }
+
+
+        //4라인 통신
+        private void server_TalkingComm2(string name, object data, int length)
+        {
+            if (name.Equals("Data"))
+            {
+
+                byte[] bt = (byte[])data;
+                string data_str = Encoding.ASCII.GetString(bt, 0, length);
+
+                string[] comm_data = new string[12];
+
+                try
+                {
+                    comm_data = data_str.Split('@')[0].Split('~');
+                }
+                catch (Exception)
+                {
+
+                }
+
+                this.Invoke(new dele(() =>
+                {
+                    try
+                    {
+                        //모델
+                        dgvD1.Rows[0].Cells[1].Value = comm_data[0];
+                        dgvD1.Rows[0].Cells[2].Value = comm_data[1];
+                        dgvD1.Rows[0].Cells[3].Value = comm_data[2];
+                        //dgvD0.Rows[0].Cells[4].Value = comm_data[3];
+
+                        //합계
+                        //dgvD0.Rows[2].Cells[1].Value = comm_data[4];
+                        //dgvD0.Rows[2].Cells[2].Value = comm_data[6];
+                        //dgvD0.Rows[2].Cells[3].Value = comm_data[8];
+                        ////dgvD0.Rows[2].Cells[4].Value = comm_data[10];
+                        dgvD1.Rows[2].Cells[1].Value = comm_data[3];
+                        dgvD1.Rows[2].Cells[2].Value = comm_data[5];
+                        dgvD1.Rows[2].Cells[3].Value = comm_data[7];
+                        //dgvD0.Rows[2].Cells[4].Value = comm_data[10];
+
+                        //NG
+                        //dgvD0.Rows[4].Cells[1].Value = comm_data[5];
+                        //dgvD0.Rows[4].Cells[2].Value = comm_data[7];
+                        //dgvD0.Rows[4].Cells[3].Value = comm_data[9];
+                        ////dgvD0.Rows[4].Cells[4].Value = comm_data[11];
+                        dgvD1.Rows[4].Cells[1].Value = comm_data[4];
+                        dgvD1.Rows[4].Cells[2].Value = comm_data[6];
+                        dgvD1.Rows[4].Cells[3].Value = comm_data[8];
+                        //dgvD0.Rows[4].Cells[4].Value = comm_data[11];
+
+                        //OK
+                        //dgvD0.Rows[3].Cells[1].Value = int.Parse(comm_data[4]) - int.Parse(comm_data[5]);
+                        //dgvD0.Rows[3].Cells[2].Value = int.Parse(comm_data[6]) - int.Parse(comm_data[7]);
+                        //dgvD0.Rows[3].Cells[3].Value = int.Parse(comm_data[8]) - int.Parse(comm_data[9]);
+                        ////dgvD0.Rows[3].Cells[4].Value = int.Parse(comm_data[10]) - int.Parse(comm_data[11]);
+                        dgvD1.Rows[3].Cells[1].Value = int.Parse(comm_data[3]) - int.Parse(comm_data[4]);
+                        dgvD1.Rows[3].Cells[2].Value = int.Parse(comm_data[5]) - int.Parse(comm_data[6]);
+                        dgvD1.Rows[3].Cells[3].Value = int.Parse(comm_data[7]) - int.Parse(comm_data[8]);
+                        //dgvD0.Rows[3].Cells[4].Value = int.Parse(comm_data[10]) - int.Parse(comm_data[11]);
+
+                        //목표
+                        //dgvD0.Rows[5].Cells[1].Value = comm_data[12];
+                        //dgvD0.Rows[5].Cells[2].Value = comm_data[13];
+                        //dgvD0.Rows[5].Cells[3].Value = comm_data[14];
+                        ////dgvD0.Rows[5].Cells[4].Value = comm_data[15];
+                        dgvD1.Rows[5].Cells[1].Value = comm_data[9];
+                        dgvD1.Rows[5].Cells[2].Value = comm_data[10];
+                        dgvD1.Rows[5].Cells[3].Value = comm_data[11];
+                        //dgvD0.Rows[5].Cells[4].Value = comm_data[15];
+
+
+                        //진도율
+                        int[] var = new int[4];
+
+                        //for (int i = 0; i < 4; i++)
+                        //{
+                        //    var[i] = (int)((double.Parse(comm_data[4 + (i * 2)]) / double.Parse(comm_data[12 + i])) * 100);
+                        //    if (!(var[i] >= 0 && var[i] <= 1000))
+                        //        var[i] = 0;
+
+                        //    dgvD0.Rows[6].Cells[1 + i].Value = var[i] + "%";
+                        //}
+
+                        for (int i = 0; i < 3; i++)
+                        {
+                            var[i] = (int)((double.Parse(comm_data[3 + (i * 2)]) / double.Parse(comm_data[9 + i])) * 100);
+                            if (!(var[i] >= 0 && var[i] <= 1000))
+                                var[i] = 0;
+
+                            dgvD1.Rows[6].Cells[1 + i].Value = var[i] + "%";
                         }
 
 
@@ -239,8 +357,128 @@ namespace KB_Monitor_V2
                         //dgv.Rows[0].Cells[4].Value = "..";
 
 
-                        dgv.Rows[1].Cells[1].Value = "U/Case Ass'y";
-                        dgv.Rows[1].Cells[2].Value = "Balance";
+                        dgv.Rows[1].Cells[1].Value = "어퍼케이스 조립";
+                        dgv.Rows[1].Cells[2].Value = "발란스";
+                        dgv.Rows[1].Cells[3].Value = "성능검사";
+                        //dgv.Rows[1].Cells[4].Value = "BRKT 체결";
+
+                        for (int i = 0; i < 4; i++)
+                        {
+                            dgv.Rows[2 + i].Cells[1].Value = 0;
+                            dgv.Rows[2 + i].Cells[2].Value = 0;
+                            dgv.Rows[2 + i].Cells[3].Value = 0;
+                            //dgv.Rows[2 + i].Cells[4].Value = 0;
+                        }
+
+                        dgv.Rows[6].Cells[1].Value = "0%";
+                        dgv.Rows[6].Cells[2].Value = "0%";
+                        dgv.Rows[6].Cells[3].Value = "0%";
+                        //dgv.Rows[6].Cells[4].Value = "0%";
+
+                        dgv.Rows[0].Cells[1].Style.ForeColor = Color.Yellow;
+                        dgv.Rows[0].Cells[2].Style.ForeColor = Color.Yellow;
+                        dgv.Rows[0].Cells[3].Style.ForeColor = Color.Yellow;
+                        //dgv.Rows[0].Cells[4].Style.ForeColor = Color.Yellow;
+
+                        dgv.Rows[2].Cells[1].Style.ForeColor = Color.Cyan;
+                        dgv.Rows[2].Cells[2].Style.ForeColor = Color.Cyan;
+                        dgv.Rows[2].Cells[3].Style.ForeColor = Color.Cyan;
+                        //dgv.Rows[2].Cells[4].Style.ForeColor = Color.Cyan;
+
+                        dgv.Rows[3].Cells[1].Style.ForeColor = Color.Lime;
+                        dgv.Rows[3].Cells[2].Style.ForeColor = Color.Lime;
+                        dgv.Rows[3].Cells[3].Style.ForeColor = Color.Lime;
+                        //dgv.Rows[3].Cells[4].Style.ForeColor = Color.Lime;
+
+                        dgv.Rows[4].Cells[1].Style.ForeColor = Color.Red;
+                        dgv.Rows[4].Cells[2].Style.ForeColor = Color.Red;
+                        dgv.Rows[4].Cells[3].Style.ForeColor = Color.Red;
+                        //dgv.Rows[4].Cells[4].Style.ForeColor = Color.Red;
+
+                        //---------------↑ 사용자 데이터 추가 부분 ↑---------------┘
+
+
+                        //단어 갯수로 인해 글자 씹힘 때문에 자동 열 바꾸기 허용
+                        dgvD0.Columns[1].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+                        //---------------↓ 정렬 ↓---------------┐
+                        GridMaster.CenterAlign(dgv);
+                        //GridMaster.LeftAlign( dgv );
+                        //GridMaster.Align( dgv , 0 , DataGridViewContentAlignment.MiddleLeft );//단일 Column 정렬
+                        //---------------↑ 정렬 ↑---------------┘
+
+                        //---------------↓ 설정 ↓---------------┐
+                        dgv.ReadOnly = true;//읽기전용
+                        //dgv.Columns[ 0 ].ReadOnly = true;//읽기전용
+
+                        GridMaster.DisableSortColumn(dgv);//오름차순 내림차순 정렬 막기
+
+                        //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
+                        dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
+                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
+
+                        //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
+                        dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
+                        dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
+                        //dgv.DefaultCellStyle.SelectionBackColor = Color.Transparent;
+                        //dgv.DefaultCellStyle.SelectionForeColor = Color.Black;
+                        dgv.BackgroundColor = Color.Black;
+
+                        //---------------↑ 설정 ↑---------------┘
+
+
+
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                    break;
+
+                    //4라인
+                case "dgvD1":
+
+                    try
+                    {
+                        //---------------↓ 기본 ↓---------------┐
+                        DataGridView dgv = (DataGridView)Reflection_K.Get(this, name);//이름가져옴
+                        string DGV_name = dgv.Name;//적용
+                        int height = int.Parse(DataRW.Load_Simple(DGV_name + "H", "30"));//데이터가져옴
+                        int fontheader = int.Parse(DataRW.Load_Simple(DGV_name + "FH", "12"));//데이터가져옴
+                        int fontcell = int.Parse(DataRW.Load_Simple(DGV_name + "FC", "12"));//데이터가져옴
+                        GridMaster.FontSize2(dgv, fontheader, fontcell);//적용
+                        //GridMaster.FontSize2( dgv , "New Gulim" , fontheader , fontcell );//한자나 글자 깨질 때 이걸로 사용하세요.
+                        //---------------↑ 기본 ↑---------------┘
+
+                        //---------------↓ 생성 ↓---------------┐
+                        string[] ColumnsName = new string[] {
+                            "A","A","A","A"//,"A"
+                        };
+                        int rows = 7;//초기 생성 Row수
+
+                        GridMaster.Init3(dgv, true, height, rows, ColumnsName);
+                        //---------------↑ 생성 ↑---------------┘
+
+                        //---------------↓ 사용자 데이터 추가 부분 ↓---------------┐
+                        //GridMaster.LoadCSV_OnlyData( dgv , System.Windows.Forms.Application.StartupPath + "\\AAAA.csv" );//셀데이터로드
+                        //GridMaster.LoadCSV( dgvD0 , @"C:\Users\kclip3\Desktop\CR0.csv" );//셀데이터로드
+                        dgv.Rows[0].Cells[0].Value = "모델";
+                        dgv.Rows[1].Cells[0].Value = "공정";
+                        dgv.Rows[2].Cells[0].Value = "합계";
+                        dgv.Rows[3].Cells[0].Value = "OK";
+                        dgv.Rows[4].Cells[0].Value = "NG";
+                        dgv.Rows[5].Cells[0].Value = "목표수량";
+                        dgv.Rows[6].Cells[0].Value = "진도율";
+
+                        dgv.Rows[0].Cells[1].Value = "..";
+                        dgv.Rows[0].Cells[2].Value = "..";
+                        dgv.Rows[0].Cells[3].Value = "..";
+                        //dgv.Rows[0].Cells[4].Value = "..";
+
+
+                        dgv.Rows[1].Cells[1].Value = "어퍼케이스 조립";
+                        dgv.Rows[1].Cells[2].Value = "발란스";
                         dgv.Rows[1].Cells[3].Value = "성능검사";
                         //dgv.Rows[1].Cells[4].Value = "BRKT 체결";
 
@@ -285,6 +523,11 @@ namespace KB_Monitor_V2
                         //GridMaster.Align( dgv , 0 , DataGridViewContentAlignment.MiddleLeft );//단일 Column 정렬
                         //---------------↑ 정렬 ↑---------------┘
 
+
+                        //단어 갯수로 인해 글자 씹힘 때문에 자동 열 바꾸기 허용
+                        dgvD0.Columns[1].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+
                         //---------------↓ 설정 ↓---------------┐
                         dgv.ReadOnly = true;//읽기전용
                         //dgv.Columns[ 0 ].ReadOnly = true;//읽기전용
@@ -293,7 +536,9 @@ namespace KB_Monitor_V2
 
                         //dgv.AllowUserToResizeColumns = false;//컬럼폭 수정불가
                         dgv.ColumnHeadersVisible = false;//컬럼헤더 가리기                        
-                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd 
+                        //dgv.Columns[ 1 ].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm:ss";//표시형식
+
+                        //dgv.DefaultCellStyle.WrapMode = DataGridViewTriState.True;//스페이스 시 줄바꿈
                         dgv.DefaultCellStyle.BackColor = Color.Black;//색반전
                         dgv.DefaultCellStyle.ForeColor = Color.White;//색반전
                         //dgv.DefaultCellStyle.SelectionBackColor = Color.Transparent;
@@ -317,7 +562,7 @@ namespace KB_Monitor_V2
 
 
         }
-        
+             
 
         //ccccccccccccc
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -326,6 +571,8 @@ namespace KB_Monitor_V2
             try
             {
                 server1.Dispose();
+
+                server2.Dispose();
             }
             catch (Exception)
             {
@@ -341,7 +588,20 @@ namespace KB_Monitor_V2
             }));
         }
 
+        //3라인 컬럼수정
         private void dgvD0_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button.ToString().Equals("Right"))
+            {
+                DataGridView thisdgv = (DataGridView)sender;
+                dgvmanager = new Ken2.UIControl.dgvManager(thisdgv);
+                dgvmanager.Init += OnInit;
+                dgvmanager.Show();
+            }
+        }
+
+        //4라인 컬럼수정
+        private void dgvD1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e.Button.ToString().Equals("Right"))
             {
@@ -379,5 +639,7 @@ namespace KB_Monitor_V2
                 Location = new Point(Left - (mousePoint.X - e.X), Top - (mousePoint.Y - e.Y));
             }
         }
+
+        
     }
 }
