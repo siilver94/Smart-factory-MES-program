@@ -45,9 +45,13 @@ Mitsubishi PLC와 VISION 프로그램이 MELSEC 통신을 통해 통신을 하�
 
 <br/>
 - C#
+  <br/>
 - Mitsubishi PLC와 MELSEC 통신
+  <br/>
 - 제브라사의 라벨 프린트와 TCP/IP 통신
+  <br/>
 - 생산현황 모니터와, 두대의 DATAPC와 TCP/IP 통신
+  <br/>
 - MYSQL 데이터 베이스
 
 
