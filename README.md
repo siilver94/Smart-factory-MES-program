@@ -1,4 +1,4 @@
-# 스마트팩토리 MES 구축(Smart-factory-MES-program)
+# 스마트팩토리 MES 구축(Smart factory MES program)
 
 ![image](https://user-images.githubusercontent.com/57824945/236276192-f89f9061-f41e-4dbf-b845-72a2d8b9a64c.png)
 
