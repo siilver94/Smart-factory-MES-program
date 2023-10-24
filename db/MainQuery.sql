@@ -21,7 +21,7 @@ USE `db_이름`;
 
 DROP TABLE IF EXISTS `table1`;
 
-CREATE TABLE `table1` (
+CREATE TABLE `테이블_이름` (
   `idx` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `barcode1` varchar(30) DEFAULT NULL,
   `barcode2` varchar(30) DEFAULT NULL,
