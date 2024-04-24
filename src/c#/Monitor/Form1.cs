@@ -35,10 +35,10 @@ namespace KB_Monitor_V2
             string ip = "192.168.14.183";
  
 #else
-            //string ip = "192.168.56.1";여
+            
 
-            string ip1 = "192.168.14.173";    //3라인
-            string ip2 = "192.168.14.183";  //4라인
+            string ip1 = "192.168.14.173";    //3라인 ip
+            string ip2 = "192.168.14.183";  //4라인 ip
 
 #endif
             server1 = new TCPServer_K(ip1, 5000);
@@ -56,9 +56,7 @@ namespace KB_Monitor_V2
 
         }
 
-       
-
-
+    
         #region ////////////////// mainThread //////////////////
         private Thread mainThread;
         bool mainThreadFlag = false;
@@ -299,11 +297,9 @@ namespace KB_Monitor_V2
                             dgvD1.Rows[6].Cells[1 + i].Value = var[i] + "%";
                         }
 
-
                     }
                     catch (Exception)
                     {
-
                     }
 
                 }));
@@ -426,12 +422,9 @@ namespace KB_Monitor_V2
 
                         //---------------↑ 설정 ↑---------------┘
 
-
-
                     }
                     catch (Exception)
                     {
-
                     }
 
                     break;
@@ -542,8 +535,6 @@ namespace KB_Monitor_V2
 
                         //---------------↑ 설정 ↑---------------┘
 
-
-
                     }
                     catch (Exception)
                     {
@@ -555,10 +546,8 @@ namespace KB_Monitor_V2
 
             }
 
-
         }
              
-
         //ccccccccccccc
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -634,7 +623,6 @@ namespace KB_Monitor_V2
                 Location = new Point(Left - (mousePoint.X - e.X), Top - (mousePoint.Y - e.Y));
             }
         }
-
         
     }
 }
